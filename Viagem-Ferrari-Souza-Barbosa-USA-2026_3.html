@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viagem Ferrari, Souza, Barbosa e Correa · USA 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0b1020; --night2:#121a33; --ink:#0d1530;
+  --paper:#fbf7ef; --paper2:#f2ebdc;
+  --cream:#fffdf8;
+  --gold:#e7a13a; --gold-deep:#c47f1c;
+  --coral:#ff5c45; --teal:#15b3a4; --blue:#2f6df0; --violet:#7a55ec; --berry:#9c1b35;
+  --line:rgba(13,21,48,.12); --line-l:rgba(255,255,255,.14);
+  --green:#2faa5a; --amber:#e8920c; --red:#e2433a;
+  --shadow:0 26px 60px -32px rgba(8,14,33,.6);
+  --shadow-s:0 14px 30px -20px rgba(8,14,33,.55);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.serif{font-family:'Playfair Display',serif}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:.74rem;letter-spacing:.26em;text-transform:uppercase;font-weight:600}
+
+/* ===== TOP NAV ===== */
+nav.top{
+  position:sticky;top:0;z-index:80;backdrop-filter:blur(14px);
+  background:rgba(11,16,32,.82);border-bottom:1px solid var(--line-l);
+}
+nav.top .inner{max-width:1180px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:18px;justify-content:space-between}
+nav.top .brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;letter-spacing:.02em}
+nav.top .brand .seal{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 30% 25%,var(--gold),var(--gold-deep));display:grid;place-items:center;font-size:.9rem;box-shadow:0 0 0 3px rgba(231,161,58,.25)}
+nav.top .links{display:flex;gap:4px;flex-wrap:wrap}
+nav.top .links a{color:rgba(255,255,255,.72);text-decoration:none;font-size:.85rem;font-weight:500;padding:7px 12px;border-radius:100px;transition:.18s;white-space:nowrap}
+nav.top .links a:hover{color:#fff;background:rgba(255,255,255,.1)}
+@media(max-width:860px){nav.top .links{display:none}}
+
+/* ===== HERO ===== */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;color:#fff;overflow:hidden;isolation:isolate}
+.hero .bg{position:absolute;inset:0;z-index:-2;
+  background:
+    radial-gradient(ellipse at 78% 18%, rgba(231,161,58,.32), transparent 46%),
+    radial-gradient(ellipse at 12% 88%, rgba(47,109,240,.30), transparent 50%),
+    linear-gradient(150deg,#0a0f1f 0%, #131d3b 48%, #0b1226 100%);
+}
+.hero .stars{position:absolute;inset:0;z-index:-1;opacity:.5;
+  background-image:radial-gradient(1.4px 1.4px at 20% 30%,#fff,transparent),radial-gradient(1.6px 1.6px at 65% 15%,#fff,transparent),radial-gradient(1.2px 1.2px at 80% 60%,#fff,transparent),radial-gradient(1.5px 1.5px at 40% 75%,#fff,transparent),radial-gradient(1.1px 1.1px at 90% 40%,#fff,transparent),radial-gradient(1.3px 1.3px at 12% 60%,#fff,transparent);
+  background-repeat:repeat;background-size:520px 520px;animation:twinkle 7s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.28}to{opacity:.6}}
+.hero .inner{max-width:1180px;margin:0 auto;padding:80px 24px;width:100%}
+.hero .eyebrow{color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:11px}
+.hero .eyebrow .ln{height:1px;width:46px;background:linear-gradient(90deg,var(--gold),transparent)}
+.hero h1{font-size:clamp(3rem,9.5vw,7.4rem);line-height:.92;font-weight:800;letter-spacing:-.02em}
+.hero h1 .amp{font-style:italic;font-weight:500;color:var(--gold)}
+.hero h1 .yr{display:block;font-family:'Outfit';font-weight:300;font-size:clamp(1rem,3vw,1.7rem);letter-spacing:.5em;color:rgba(255,255,255,.7);margin-top:18px;padding-left:.5em}
+.hero .route{margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font-size:clamp(1rem,2.4vw,1.35rem);font-weight:600}
+.hero .route .city{position:relative}
+.hero .route .city::after{content:"✦";color:var(--gold);margin-left:14px;font-size:.7em;opacity:.8;vertical-align:middle}
+.hero .route .city:last-child::after{display:none}
+.hero .lede{margin-top:24px;max-width:560px;color:rgba(255,255,255,.78);font-size:1.06rem;line-height:1.6;font-weight:300}
+.hero .cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:600;font-size:.95rem;padding:13px 22px;border-radius:100px;transition:.2s;cursor:pointer;border:none;font-family:inherit}
+.btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1a1205;box-shadow:0 16px 34px -16px rgba(231,161,58,.7)}
+.btn.gold:hover{transform:translateY(-2px)}
+.btn.ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid var(--line-l)}
+.btn.ghost:hover{background:rgba(255,255,255,.16)}
+.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+
+/* ===== PADRE / CHAPLAIN STRIP ===== */
+.padre{background:linear-gradient(100deg,#13182b,#1d2540);color:#fff;position:relative;overflow:hidden}
+.padre::before{content:"✝";position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:18rem;line-height:1;color:rgba(231,161,58,.07);font-family:serif}
+.padre .inner{max-width:1180px;margin:0 auto;padding:30px 24px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;position:relative}
+.padre .halo{width:62px;height:62px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:1.7rem;background:radial-gradient(circle at 35% 30%,rgba(231,161,58,.4),rgba(231,161,58,.08));box-shadow:0 0 0 2px rgba(231,161,58,.4),0 0 36px rgba(231,161,58,.3)}
+.padre .txt{flex:1;min-width:240px}
+.padre .txt .lbl{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.padre .txt .big{font-family:'Playfair Display',serif;font-size:clamp(1.15rem,3vw,1.5rem);font-weight:700;margin-top:4px;font-style:italic}
+.padre .txt .sm{color:rgba(255,255,255,.66);font-size:.9rem;margin-top:5px;font-weight:300}
+
+/* ===== SECTION HEADERS ===== */
+section{position:relative}
+.sec{padding:78px 0 18px}
+.sec-head{margin-bottom:38px}
+.sec-head .eyebrow{color:var(--gold-deep)}
+.sec-head h2{font-size:clamp(2rem,5.2vw,3.4rem);font-weight:800;line-height:1.02;letter-spacing:-.02em;margin-top:10px}
+.sec-head p.intro{margin-top:14px;max-width:660px;color:#4a567a;font-size:1.04rem;line-height:1.6}
+
+/* ===== FLIGHTS ===== */
+.flights{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.flight{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow-s);position:relative;overflow:hidden}
+.flight .pin{position:absolute;top:18px;right:20px;font-size:1.4rem;opacity:.25}
+.flight .leg{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.18rem}
+.flight .leg .arr{color:var(--coral)}
+.flight .meta{margin-top:14px;display:flex;flex-direction:column;gap:5px;color:#4a567a;font-size:.95rem}
+.flight .meta b{color:var(--ink);font-weight:700}
+.flight .date-badge{display:inline-block;margin-top:14px;background:var(--ink);color:#fff;font-size:.8rem;font-weight:600;padding:6px 13px;border-radius:100px;letter-spacing:.02em}
+
+/* ===== TIMELINE ===== */
+.tl{position:relative;margin-top:8px}
+.tl::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--gold),var(--coral),var(--blue))}
+.tl-row{display:flex;gap:20px;padding:9px 0;align-items:flex-start}
+.tl-dot{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:700;font-size:.85rem;color:#fff;z-index:1;box-shadow:0 0 0 5px var(--paper)}
+.tl-body{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:13px 17px;flex:1;box-shadow:var(--shadow-s)}
+.tl-body .d{font-weight:700;font-size:.97rem}
+.tl-body .c{color:#566189;font-size:.9rem;margin-top:2px}
+.tl-leg{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--gold-deep);margin:24px 0 10px;display:flex;align-items:center;gap:9px;position:relative;z-index:2}
+.tl-leg span:first-child{background:var(--paper);padding:4px 12px 4px 50px;border-radius:100px;white-space:nowrap}
+.tl-leg .ln{flex:1;height:1px;background:var(--line)}
+
+/* ===== PARKS ===== */
+.parks-overview{display:flex;flex-direction:column;gap:18px}
+.po-card{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow-s);position:relative;overflow:hidden;transition:.2s}
+.po-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
+.po-head{display:flex;gap:16px;margin-bottom:16px}
+.po-ic{width:52px;height:52px;border-radius:14px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;font-size:1.1rem;font-family:'Playfair Display',serif;box-shadow:var(--shadow-s)}
+.po-body{min-width:0}
+.po-resort{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#566189}
+.po-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;line-height:1.05;letter-spacing:-.01em;margin-top:2px}
+.po-desc{color:#566189;font-size:.9rem;line-height:1.5;margin-top:8px}
+.po-warn{display:inline-block;margin-top:10px;background:rgba(226,67,58,.1);color:var(--red);font-size:.78rem;font-weight:700;padding:5px 11px;border-radius:100px}
+.povgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.povitem{display:flex;align-items:center;gap:9px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 11px;text-decoration:none;color:inherit;transition:.16s}
+.povitem:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:var(--shadow-s)}
+.povitem .pl{width:26px;height:26px;border-radius:7px;background:var(--accent);display:grid;place-items:center;flex:none}
+.povitem .pl svg{width:11px;height:11px;color:#fff}
+.povitem .pt{font-size:.82rem;font-weight:600;line-height:1.12;min-width:0}
+.povitem .pt small{display:block;font-weight:500;color:#566189;font-size:.7rem;margin-top:1px}
+.lvldot{width:8px;height:8px;border-radius:50%;flex:none;margin-left:auto}
+.lvldot.g{background:var(--green)}.lvldot.m{background:var(--amber)}.lvldot.r{background:var(--red)}.lvldot.show{background:var(--violet)}
+.po-guide{margin-top:14px;display:inline-flex;align-items:center;gap:7px;font-size:.82rem;font-weight:600;color:var(--blue);text-decoration:none}
+.po-guide:hover{text-decoration:underline}
+.parks-intro-card{background:linear-gradient(120deg,#fff,#fdf6e9);border:1px solid var(--line);border-radius:20px;padding:24px 26px;box-shadow:var(--shadow-s);margin-bottom:30px}
+.parks-intro-card p{color:#4a567a;line-height:1.6}
+.parks-intro-card b{color:var(--ink)}
+.filterbar{position:sticky;top:57px;z-index:60;background:rgba(251,247,239,.9);backdrop-filter:blur(10px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:30px}
+.filterbar .fb-in{max-width:1180px;margin:0 auto;padding:12px 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.fgroup{display:flex;gap:7px;flex-wrap:wrap}
+.fbtn{border:1px solid var(--line);background:var(--cream);color:#566189;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;padding:8px 14px;border-radius:100px;transition:.18s;display:inline-flex;align-items:center;gap:7px}
+.fbtn .sw{width:9px;height:9px;border-radius:50%}
+.fbtn:hover{transform:translateY(-1px)}
+.fbtn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.fcount{font-size:.8rem;color:#566189;font-weight:500}
+.fcount b{color:var(--coral);font-weight:800}
+
+.park{margin-bottom:46px;scroll-margin-top:120px}
+.park-banner{border-radius:22px 22px 0 0;padding:26px 26px 24px;color:#fff;position:relative;overflow:hidden}
+.park-banner::after{content:"";position:absolute;right:-30px;bottom:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.1)}
+.park-banner .resort{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;opacity:.85}
+.park-banner h3{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.7rem,4.4vw,2.5rem);line-height:1;margin-top:5px}
+.park-banner p{margin-top:11px;max-width:680px;font-size:.96rem;line-height:1.55;opacity:.92;font-weight:300}
+.park-banner .row{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.warn{display:inline-flex;align-items:center;gap:7px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.25);padding:6px 13px;border-radius:100px;font-size:.8rem;font-weight:600}
+.guide-link{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.16);color:#fff;text-decoration:none;padding:6px 13px;border-radius:100px;font-size:.8rem;font-weight:600;transition:.18s}
+.guide-link:hover{background:rgba(255,255,255,.3)}
+.ride-grid{background:var(--cream);border:1px solid var(--line);border-top:none;border-radius:0 0 22px 22px;padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;box-shadow:var(--shadow-s)}
+.ride{border:1px solid var(--line);border-radius:15px;padding:16px 16px 14px;background:var(--paper);position:relative;display:flex;flex-direction:column;transition:.2s;overflow:hidden}
+.ride::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
+.ride:hover{transform:translateY(-3px);box-shadow:var(--shadow-s)}
+.ride.hide{display:none}
+.ride-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:7px}
+.ride h4{font-size:1.04rem;font-weight:700;line-height:1.16;letter-spacing:-.01em}
+.lvl{font-size:.64rem;font-weight:800;padding:4px 8px;border-radius:100px;white-space:nowrap;text-transform:uppercase;letter-spacing:.04em;flex:none}
+.lvl.g{background:rgba(47,170,90,.15);color:var(--green)}
+.lvl.m{background:rgba(232,146,12,.16);color:var(--amber)}
+.lvl.r{background:rgba(226,67,58,.15);color:var(--red)}
+.lvl.show{background:rgba(122,85,236,.15);color:var(--violet)}
+.ride p{color:#566189;font-size:.86rem;line-height:1.45;margin-bottom:14px;flex:1}
+.pov{text-decoration:none;text-align:center;font-weight:700;font-size:.85rem;background:var(--ink);color:#fff;padding:10px;border-radius:10px;transition:.18s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.pov:hover{background:var(--accent)}
+.pov svg{width:13px;height:13px}
+
+/* ===== TICKETS ===== */
+.tix{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:920px){.tix{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.tix{grid-template-columns:1fr}}
+.tix-card{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:18px 16px;box-shadow:var(--shadow-s);position:relative;display:flex;flex-direction:column;transition:.2s}
+.tix-card.best{border:2px solid var(--gold);box-shadow:0 24px 50px -28px rgba(231,161,58,.6)}
+.tix-card:hover{transform:translateY(-3px)}
+.tix-card .flag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);white-space:nowrap;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1a1205;font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:100px;box-shadow:var(--shadow-s)}
+.tix-card .tt{font-weight:700;font-size:.98rem;color:#566189}
+.tix-card .price{font-family:'Playfair Display',serif;font-weight:800;font-size:1.95rem;margin:4px 0 14px;letter-spacing:-.02em}
+.tix-card .day{display:flex;gap:8px;align-items:flex-start;padding:9px 0;border-top:1px dashed var(--line)}
+.tix-card .day .n{font-size:.62rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--coral);background:rgba(255,92,69,.1);padding:4px 7px;border-radius:6px;flex:none;margin-top:1px}
+.tix-card .day .txt{font-size:.85rem;font-weight:500;line-height:1.3}
+.rec-note{margin-top:22px;background:linear-gradient(120deg,#fff,#fdf6e9);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:16px 20px;color:#4a567a;font-size:.95rem;line-height:1.55}
+.rec-note b{color:var(--ink)}
+
+/* ===== HOUSES ===== */
+.houses{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.house{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow-s);text-decoration:none;color:inherit;transition:.2s;display:flex;flex-direction:column;gap:10px}
+.house:hover{transform:translateY(-3px);border-color:var(--coral)}
+.house .ic{font-size:1.8rem}
+.house .ht{font-weight:700;font-size:1.05rem}
+.house .hs{color:#566189;font-size:.88rem}
+.house .go{margin-top:auto;color:var(--coral);font-weight:700;font-size:.86rem;display:inline-flex;align-items:center;gap:6px}
+
+/* ===== NEW YORK ===== */
+.ny{background:linear-gradient(180deg,#0a0f1f,#141d38);color:#fff;margin-top:60px;position:relative;overflow:hidden}
+.ny .snow{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(2px 2px at 15% 20%,#fff,transparent),radial-gradient(2px 2px at 45% 50%,#fff,transparent),radial-gradient(2px 2px at 75% 30%,#fff,transparent),radial-gradient(1.5px 1.5px at 85% 70%,#fff,transparent),radial-gradient(2px 2px at 30% 80%,#fff,transparent);background-size:300px 300px;animation:fall 9s linear infinite}
+@keyframes fall{from{background-position:0 0}to{background-position:0 300px}}
+.ny .sec-head h2{color:#fff}
+.ny .sec-head .eyebrow{color:var(--gold)}
+.ny .sec-head p.intro{color:rgba(255,255,255,.74)}
+.ny-days{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.nyd{background:rgba(255,255,255,.05);border:1px solid var(--line-l);border-radius:18px;padding:22px;backdrop-filter:blur(4px);transition:.2s}
+.nyd:hover{background:rgba(255,255,255,.09);transform:translateY(-3px)}
+.nyd .dn{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gold)}
+.nyd h4{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin:5px 0 13px;line-height:1.1}
+.nyd ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.nyd li{font-size:.9rem;color:rgba(255,255,255,.82);padding-left:20px;position:relative;line-height:1.35}
+.nyd li::before{content:"›";position:absolute;left:4px;color:var(--gold);font-weight:700}
+.nyd .tip{margin-top:13px;font-size:.82rem;color:var(--gold);background:rgba(231,161,58,.1);border:1px solid rgba(231,161,58,.25);border-radius:10px;padding:9px 12px}
+.ny-bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+@media(max-width:680px){.ny-bottom{grid-template-columns:1fr}}
+.ny-box{background:rgba(255,255,255,.05);border:1px solid var(--line-l);border-radius:18px;padding:22px}
+.ny-box h4{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:13px;display:flex;align-items:center;gap:9px}
+.ny-box ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ny-box li{font-size:.9rem;color:rgba(255,255,255,.82);padding-left:22px;position:relative}
+.ny-box.reserve li::before{content:"🎟️";position:absolute;left:0;font-size:.8rem}
+.ny-box.reserve li a{color:rgba(255,255,255,.88);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;transition:.16s}
+.ny-box.reserve li a:hover{color:#fff}
+.ny-box.reserve .rlink{font-size:.72rem;font-weight:700;color:var(--gold);background:rgba(231,161,58,.16);border:1px solid rgba(231,161,58,.3);padding:2px 9px;border-radius:100px;white-space:nowrap}
+.ny-box.pack li::before{content:"❄️";position:absolute;left:0;font-size:.8rem}
+.ny-houses-head{margin-top:26px}
+.ny-houses-head h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;display:flex;align-items:center;gap:9px}
+.ny-houses-head p{color:rgba(255,255,255,.72);font-size:.92rem;margin-top:6px}
+.ny-houses-head p b{color:#fff}
+.ny-houses{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.ny-house{background:rgba(255,255,255,.05);border:1px solid var(--line-l);border-radius:16px;padding:18px;text-decoration:none;color:#fff;transition:.2s;display:flex;flex-direction:column;gap:7px}
+.ny-house:hover{background:rgba(255,255,255,.1);transform:translateY(-3px)}
+.ny-house .ic{font-size:1.6rem}
+.ny-house .ht{font-weight:700;font-size:1.02rem}
+.ny-house .hs{color:rgba(255,255,255,.66);font-size:.84rem}
+.ny-house .go{margin-top:auto;color:var(--gold);font-weight:700;font-size:.84rem}
+
+/* ===== FOOTER ===== */
+footer{background:var(--night);color:rgba(255,255,255,.65);text-align:center;padding:54px 24px 60px}
+footer .blessing{font-family:'Playfair Display',serif;font-style:italic;font-size:1.25rem;color:#fff;max-width:560px;margin:0 auto 8px;line-height:1.5}
+footer .by{font-size:.82rem;margin-top:18px}
+footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold),var(--gold-deep));display:grid;place-items:center;font-size:1.3rem;margin:0 auto 20px;box-shadow:0 0 0 4px rgba(231,161,58,.2)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="inner">
+    <div class="brand"><span class="seal">✦</span> Ferrari <span style="opacity:.5;font-weight:300">·</span> Souza <span style="opacity:.5;font-weight:300">·</span> Barbosa <span style="opacity:.5;font-weight:300">·</span> Correa</div>
+    <div class="links">
+      <a href="#voos">Voos</a>
+      <a href="#roteiro">Roteiro</a>
+      <a href="#parques">Parques</a>
+      <a href="#ingressos">Ingressos</a>
+      <a href="#casas">Casas</a>
+      <a href="#newyork">Nova York</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bg"></div><div class="stars"></div>
+  <div class="inner">
+    <div class="eyebrow"><span class="ln"></span> A grande viagem da família</div>
+    <h1 class="serif">USA <span class="amp">&amp;</span> Família<span class="yr">2 0 2 6</span></h1>
+    <div class="route">
+      <span class="city">Miami</span><span class="city">Orlando</span><span class="city">Nova York</span><span class="city">Washington</span>
+    </div>
+    <p class="lede">De 22 de novembro a 07 de dezembro. Sol da Flórida, parques mágicos, Ação de Graças em família e Nova York vestida de Natal — a visão geral de toda a nossa viagem, num só lugar.</p>
+  </div>
+  <div class="scroll-cue">Role para começar<span>↓</span></div>
+</header>
+
+<div class="padre">
+  <div class="inner">
+    <div class="halo">⛪</div>
+    <div class="txt">
+      <div class="lbl">Capelão oficial da expedição</div>
+      <div class="big">“E o padre vai junto — abençoando cada montanha-russa.”</div>
+      <div class="sm">Toda viagem dessa família tem padre na bagagem. Bênção garantida do check-in ao último voo, com escala obrigatória em cada igreja, cada brinde e cada fila de parque. 🙏✈️</div>
+    </div>
+  </div>
+</div>
+
+<!-- VOOS -->
+<section id="voos" class="sec"><div class="wrap reveal">
+  <div class="sec-head">
+    <div class="eyebrow">01 · Logística</div>
+    <h2 class="serif">Datas e horários dos voos</h2>
+    <p class="intro">Os três trechos que costuram a viagem inteira. Anote, fotografe, deixe no print do celular.</p>
+  </div>
+  <div class="flights" id="flights"></div>
+</div></section>
+
+<!-- ROTEIRO -->
+<section id="roteiro" class="sec"><div class="wrap reveal">
+  <div class="sec-head">
+    <div class="eyebrow">02 · Visão geral</div>
+    <h2 class="serif">Resumo do roteiro</h2>
+    <p class="intro">15 dias, quatro cidades, um feriado de Ação de Graças e o Natal chegando em Nova York. Aqui está o esqueleto de tudo.</p>
+  </div>
+  <div class="tl" id="timeline"></div>
+</div></section>
+
+<!-- PARQUES (visão geral) -->
+<section id="parques" class="sec"><div class="wrap reveal">
+  <div class="sec-head">
+    <div class="eyebrow">03 · O grande dia (ou dois)</div>
+    <h2 class="serif">Parques em Orlando</h2>
+    <p class="intro">Temos apenas <b>2 dias de parque</b>, e como será na semana de Ação de Graças, escolhemos com cuidado. Cada atração tem o seu <b>POV</b> — toque para assistir ao vídeo no YouTube e decidir o que não pode faltar. (🟢 família · 🟡 médio · 🔴 radical)</p>
+  </div>
+  <div class="parks-overview" id="parksOverview"></div>
+</div></section>
+
+<!-- INGRESSOS -->
+<section id="ingressos" class="sec"><div class="wrap reveal">
+  <div class="sec-head">
+    <div class="eyebrow">04 · A decisão</div>
+    <h2 class="serif">Sugestões de ingressos</h2>
+    <p class="intro">Cinco combinações possíveis para os dois dias de parque. As marcadas em dourado são as nossas favoritas.</p>
+  </div>
+  <div class="tix" id="tix"></div>
+  <div class="rec-note">⭐ <b>Recomendação:</b> as opções <b>1 e 2</b> são as melhores — dá pra conhecer bem os parques sem enfrentar as filas de até <b>2 horas</b> do Magic Kingdom e do Epic em dias cheios de feriado.</div>
+</div></section>
+
+<!-- CASAS -->
+<section id="casas" class="sec"><div class="wrap reveal">
+  <div class="sec-head">
+    <div class="eyebrow">05 · Onde ficar</div>
+    <h2 class="serif">Opções de casa em Orlando</h2>
+    <p class="intro">Três casas no Airbnb para 8 pessoas, de 23 a 26 de novembro. Clique para abrir cada anúncio.</p>
+  </div>
+  <div class="houses" id="houses"></div>
+</div></section>
+
+<!-- NEW YORK -->
+<section id="newyork" class="ny sec"><div class="snow"></div><div class="wrap reveal" style="position:relative">
+  <div class="sec-head">
+    <div class="eyebrow">06 · Grand finale</div>
+    <h2 class="serif">🎄 Nova York no Natal — 4 dias</h2>
+    <p class="intro">A cidade inteira virada em luzes, vitrines e árvores gigantes. Quatro dias pensados para entrar no clima sem correria.</p>
+  </div>
+  <div class="ny-days" id="nyDays"></div>
+  <div class="ny-bottom">
+    <div class="ny-box reserve">
+      <h4>🎟️ Reservar antes</h4>
+      <ul>
+        <li><a href="https://www.statuecitycruises.com" target="_blank" rel="noopener">Estátua da Liberdade <span class="rlink">reservar ↗</span></a></li>
+        <li><a href="https://www.rockefellercenter.com/buy-tickets" target="_blank" rel="noopener">Top of the Rock <span class="rlink">reservar ↗</span></a></li>
+        <li><a href="https://www.playbill.com/shows" target="_blank" rel="noopener">Broadway <span class="rlink">reservar ↗</span></a></li>
+        <li><a href="https://www.dykerheightschristmaslights.com/book-now.php" target="_blank" rel="noopener">Dyker Heights tour (opcional) <span class="rlink">reservar ↗</span></a></li>
+      </ul>
+    </div>
+    <div class="ny-box pack">
+      <h4>❄️ Dicas &amp; o que levar</h4>
+      <ul>
+        <li>Escurece cedo (~16h30)</li>
+        <li>Faz bastante frio e vento</li>
+        <li>Segunda pele, luva, gorro e cachecol</li>
+        <li>Casaco quente e bota confortável</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ny-houses-head">
+    <h3>🏡 Opções de casa</h3>
+    <p>Todas em <b>New Jersey</b>, devido aos custos de estadia em Nova York. Para 8 pessoas · 01–05 dez.</p>
+  </div>
+  <div class="ny-houses" id="nyHouses"></div>
+</div></section>
+
+<footer>
+  <div class="seal2">✦</div>
+  <div class="blessing">“Que a viagem seja abençoada, as filas curtas, o dólar camarada e a família sempre junta.”</div>
+  <div class="by">Feito com carinho para a <b style="color:#fff">Viagem Ferrari, Souza, Barbosa e Correa</b> · USA 2026<br>
+  Roteiro original de uma esposa muito caprichosa 💛 — agora em forma de site, com padre e tudo.</div>
+</footer>
+
+<script>
+const DATA = {"parks": [{"id": "usf", "resort": "Universal", "name": "Universal Studios", "color": "#2c6df0", "desc": "O parque mais “cinematográfico” da Universal em Orlando, com foco em simuladores, atrações indoor e experiências imersivas.", "guide": "https://guia.melhoresdestinos.com.br/universal-studios-florida-orlando.html", "rides": [{"n": "Harry Potter and the Escape from Gringotts", "d": "Mistura simulador com montanha-russa indoor em cenários incríveis do banco Gringotts. A fila já vale a experiência.", "l": "m", "u": "https://www.youtube.com/watch?v=N8FSuOjoy8w"}, {"n": "Revenge of the Mummy", "d": "Montanha-russa indoor no escuro com acelerações fortes, fogo, sustos e efeitos especiais.", "l": "r", "u": "https://www.youtube.com/watch?v=WYI4ljAx4lk"}, {"n": "Transformers – The Ride 3D", "d": "Simulador 3D super imersivo estilo Homem-Aranha, com batalhas gigantes entre Autobots e Decepticons.", "l": "m", "u": "https://www.youtube.com/watch?v=vgqWr5gYb4Y"}, {"n": "Men in Black – Alien Attack", "d": "Atração interativa onde você atira em aliens e compete por pontos durante o percurso.", "l": "g", "u": "https://www.youtube.com/watch?v=5vh9TZEyc0U"}, {"n": "E.T. Adventure", "d": "Um passeio tranquilo e encantador inspirado no filme E.T.", "l": "g", "u": "https://www.youtube.com/watch?v=xEfK7bqBjXI"}, {"n": "The Simpsons Ride", "d": "Simulador divertido ambientado em Springfield com muito humor. Pode dar um pouco de enjoo em algumas pessoas.", "l": "m", "u": "https://www.youtube.com/watch?v=ztsvpOouuqA"}, {"n": "Despicable Me Minion Mayhem", "d": "Simulador divertido dos Minions, ótimo para famílias e bem popular.", "l": "g", "u": "https://www.youtube.com/watch?v=-h4HcUh8Jbs"}, {"n": "The Bourne Stuntacular", "d": "Show impressionante com telas gigantes, perseguições, explosões e dublês ao vivo. Um dos melhores shows da Universal.", "l": "g", "u": "https://www.youtube.com/watch?v=F4XX9Z4KVEY", "show": true}]}, {"id": "ioa", "resort": "Universal", "name": "Islands of Adventure", "color": "#1fb3a6", "desc": "O parque mais radical da Universal. Mistura montanhas-russas fortes, atrações aquáticas e cenários gigantescos.", "guide": "https://guia.melhoresdestinos.com.br/islands-of-adventure-orlando.html", "rides": [{"n": "Jurassic World VelociCoaster", "d": "A montanha-russa mais radical da Universal Orlando! Acelerações MUITO fortes, inversões e uma parte externa incrível sobre a água. Uma das melhores do mundo.", "l": "r", "u": "https://www.youtube.com/watch?v=lYRxkCrDFIo"}, {"n": "Harry Potter and the Forbidden Journey", "d": "Atração dentro do castelo de Hogwarts que mistura simulador, cenários reais e movimento robótico. A fila é uma atração à parte.", "l": "m", "u": "https://www.youtube.com/watch?v=2O2_0W4Q4mA"}, {"n": "Hagrid’s Magical Creatures Motorbike Adventure", "d": "Montanha-russa super imersiva na floresta proibida com vários lançamentos, cenários incríveis e surpresas.", "l": "r", "u": "https://www.youtube.com/watch?v=TdGbsggU2dg"}, {"n": "The Amazing Adventures of Spider-Man", "d": "Simulador 3D clássico que mistura telas e cenários físicos. Até hoje uma das melhores atrações do parque.", "l": "m", "u": "https://www.youtube.com/watch?v=cH27SL9zO1Y"}, {"n": "The Incredible Hulk Coaster", "d": "Montanha-russa intensa com lançamento logo no começo e várias inversões. Famosa pelo percurso forte e barulhento.", "l": "r", "u": "https://www.youtube.com/watch?v=fax6tQOvIkw"}, {"n": "Jurassic Park River Adventure", "d": "Passeio aquático pelos dinossauros com uma queda final clássica. Prepare-se para se molhar.", "l": "m", "u": "https://www.youtube.com/watch?v=CHvejAdOGe8"}, {"n": "Dudley Do-Right’s Ripsaw Falls", "d": "Uma das atrações que mais molham em Orlando. Várias quedas e clima divertido de desenho animado.", "l": "m", "u": "https://www.youtube.com/watch?v=q4yztgolbqQ"}, {"n": "Popeye & Bluto’s Bilge-Rat Barges", "d": "Rafting circular MUITO molhado e caótico. Quase impossível sair seco.", "l": "m", "u": "https://www.youtube.com/watch?v=sLTOd3Hzteo"}]}, {"id": "epic", "resort": "Universal", "name": "Epic Universe", "color": "#6b4ce6", "desc": "O parque mais novo e tecnológico da Universal Orlando. Cada área parece um “mundo separado”, com entradas gigantescas em formato de portais.", "guide": "https://guia.melhoresdestinos.com.br/epic-universe.html", "warn": "Não indicado para esta viagem — super lotação no feriado.", "rides": [{"n": "Stardust Racers", "d": "Montanha-russa de lançamento duplo com dois trilhos que “correm” lado a lado. Muito rápida e suave. A principal do parque.", "l": "r", "u": "https://www.youtube.com/watch?v=QPESCxfb1LM"}, {"n": "Harry Potter and the Battle at the Ministry", "d": "Ambientada no Ministério da Magia de Paris. Mistura elevadores, simulador, cenários gigantes e tecnologia nova.", "l": "m", "u": "https://www.youtube.com/watch?v=K_RtbRljPZc"}, {"n": "Mario Kart: Bowser’s Challenge", "d": "Atração interativa com realidade aumentada no Super Nintendo World. Você corre no Mario Kart usando visor especial.", "l": "g", "u": "https://www.youtube.com/watch?v=Z2P0xpUVzv0"}, {"n": "Hiccup’s Wing Gliders", "d": "Montanha-russa familiar inspirada em Como Treinar o Seu Dragão, com voos suaves sobre a ilha de Berk.", "l": "m", "u": "https://www.youtube.com/watch?v=yV4MMXqete0"}, {"n": "Fyre Drill", "d": "Atração aquática interativa em barcos onde os visitantes “disputam” usando canhões de água.", "l": "g", "u": "https://www.youtube.com/watch?v=rq_0t8jSrpg"}, {"n": "Monsters Unchained: The Frankenstein Experiment", "d": "Dark ride tecnológica com animatrônicos gigantes dos monstros clássicos. Uma das mais elogiadas do parque.", "l": "m", "u": "https://www.youtube.com/watch?v=7AbnllQNN4o"}, {"n": "Curse of the Werewolf", "d": "Montanha-russa giratória inspirada em lobisomens. Mais curta e menos intensa que Stardust Racers.", "l": "m", "u": "https://www.youtube.com/watch?v=WYkaAV7ae6g"}]}, {"id": "epcot", "resort": "Disney", "name": "EPCOT", "color": "#e8a02c", "desc": "O parque mais “adulto” e diferente da Disney. Mistura tecnologia, atrações modernas, culturas do mundo e comidas incríveis. Menos personagens, mais experiências e inovação.", "guide": "https://guia.melhoresdestinos.com.br/epcot-orlando.html", "rides": [{"n": "Guardians of the Galaxy – Cosmic Rewind", "d": "Montanha-russa indoor super tecnológica com rotação dos carrinhos, música e lançamentos.", "l": "r", "u": "https://www.youtube.com/watch?v=oYhjmoP51AE"}, {"n": "Soarin’ Around the World", "d": "Simulador tranquilo onde você “voa” sobre lugares famosos do mundo. Uma das mais relaxantes e bonitas da Disney.", "l": "g", "u": "https://www.youtube.com/watch?v=8Q4VdM9jK8E"}, {"n": "Frozen Ever After", "d": "Passeio de barco inspirado em Frozen dentro do pavilhão da Noruega. Muito popular entre famílias.", "l": "g", "u": "https://www.youtube.com/watch?v=X9m4P2kV7cQ"}, {"n": "Remy’s Ratatouille Adventure", "d": "Atração 4D onde você é “encolhido” ao tamanho do Remy dentro de uma cozinha gigante em Paris.", "l": "g", "u": "https://www.youtube.com/watch?v=n5R8pQ2K4vM"}, {"n": "Test Track", "d": "Você monta e testa um carro virtual antes de entrar em uma pista de alta velocidade.", "l": "m", "u": "https://www.youtube.com/watch?v=y7M2Q6pK1nA"}, {"n": "Spaceship Earth", "d": "Passeio clássico dentro da bola gigante do EPCOT mostrando a evolução da comunicação e da humanidade.", "l": "g", "u": "https://www.youtube.com/watch?v=V6kQ3mP8r2E"}, {"n": "The Seas with Nemo & Friends", "d": "Passeio leve inspirado em Procurando Nemo com acesso ao enorme aquário do EPCOT.", "l": "g", "u": "https://www.youtube.com/watch?v=J4pQ9mN6k3V"}, {"n": "Luminous – The Symphony of Us", "d": "Show noturno no lago do EPCOT com fogos, luzes, música e drones.", "l": "g", "u": "https://www.youtube.com/watch?v=W2kP8mQ5r1A", "show": true}]}, {"id": "mk", "resort": "Disney", "name": "Magic Kingdom", "color": "#ff5a47", "desc": "O parque do castelo da Cinderela, o que mais lembra os filmes e personagens tradicionais. Atrações históricas, brinquedos de família e experiências super nostálgicas.", "guide": "https://guia.melhoresdestinos.com.br/magic-kingdom-orlando.html", "warn": "Não indicado para esta viagem — super lotação no feriado (até 2h de fila).", "rides": [{"n": "TRON Lightcycle / Run", "d": "Montanha-russa futurista inspirada no filme TRON. Motos de luz em alta velocidade dentro e fora de uma estrutura iluminada.", "l": "r", "u": "https://www.youtube.com/watch?v=kcxdAZa__2A"}, {"n": "Seven Dwarfs Mine Train", "d": "Montanha-russa familiar da Branca de Neve com carrinhos que balançam. Uma das filas mais disputadas.", "l": "m", "u": "https://www.youtube.com/watch?v=dL3gs_xLiKM"}, {"n": "Space Mountain", "d": "Clássica montanha-russa indoor no escuro com tema espacial. Antiga, mas continua entre as mais populares.", "l": "r", "u": "https://www.youtube.com/watch?v=em7z1NbhFOo"}, {"n": "Haunted Mansion", "d": "Passeio clássico pelos fantasmas da mansão assombrada. Mistura humor e clima sombrio de forma divertida.", "l": "g", "u": "https://www.youtube.com/watch?v=HEgtMAnIum4"}, {"n": "Pirates of the Caribbean", "d": "Passeio de barco pelos cenários dos piratas que inspiraram os filmes do Jack Sparrow.", "l": "g", "u": "https://www.youtube.com/watch?v=52qlNIKvy3A"}, {"n": "Big Thunder Mountain Railroad", "d": "Montanha-russa temática de mina no velho oeste. Mais divertida do que radical.", "l": "m", "u": "https://www.youtube.com/watch?v=hEnqi9QTZvQ"}, {"n": "Peter Pan’s Flight", "d": "Passeio suspenso super clássico onde você “voa” sobre Londres e a Terra do Nunca.", "l": "g", "u": "https://www.youtube.com/watch?v=ycEy6FXOmQ8"}, {"n": "Happily Ever After", "d": "Show noturno no Castelo da Cinderela com fogos, projeções e músicas clássicas. Um dos melhores shows da Disney.", "l": "g", "u": "https://www.youtube.com/watch?v=Si_l4-RKQVU", "show": true}]}, {"id": "hs", "resort": "Disney", "name": "Hollywood Studios", "color": "#990011", "desc": "O parque mais “radical” da Disney e o mais focado em filmes, ação e tecnologia. Simuladores modernos, coasters intensas e áreas imersivas como Star Wars e Toy Story.", "guide": "https://guia.melhoresdestinos.com.br/disneys-hollywood-studios-orlando.html", "rides": [{"n": "Star Wars: Rise of the Resistance", "d": "Mistura dark ride, simulador, cenários gigantes, personagens e efeitos especiais no universo Star Wars.", "l": "m", "u": "https://www.youtube.com/watch?v=V_BRrTa1WYc"}, {"n": "Slinky Dog Dash", "d": "Montanha-russa familiar do Toy Story Land com percurso divertido e visual lindo, principalmente à noite.", "l": "m", "u": "https://www.youtube.com/watch?v=gyz64uxR1Aw"}, {"n": "Rock ‘n’ Roller Coaster", "d": "Montanha-russa indoor com lançamento super rápido (0 a ~90 km/h em segundos). Em 2026 foi retematizada com os Muppets no lugar do Aerosmith.", "l": "r", "u": "https://www.youtube.com/watch?v=BzxbJX5qJZU"}, {"n": "The Twilight Zone Tower of Terror", "d": "Elevador assombrado com quedas inesperadas e uma das tematizações mais icônicas da Disney.", "l": "r", "u": "https://www.youtube.com/watch?v=r1Ptp72Vey4"}, {"n": "Mickey & Minnie’s Runaway Railway", "d": "Dark ride moderna e divertida com o Mickey e a Minnie e efeitos visuais muito criativos.", "l": "g", "u": "https://www.youtube.com/watch?v=SvfypxnHD-o"}, {"n": "Millennium Falcon: Smugglers Run", "d": "Simulador interativo onde os visitantes pilotam a Millennium Falcon em uma missão Star Wars.", "l": "m", "u": "https://www.youtube.com/watch?v=cBoXXEQobYY"}, {"n": "Toy Story Mania!", "d": "Atração interativa 4D onde você compete por pontos em jogos inspirados em Toy Story.", "l": "g", "u": "https://www.youtube.com/watch?v=ohk7G6dAOpM"}, {"n": "Alien Swirling Saucers", "d": "Atração giratória inspirada nos aliens do Toy Story. Mais tranquila e divertida para famílias.", "l": "g", "u": "https://www.youtube.com/watch?v=Lf5fLEqTVkc"}, {"n": "Fantasmic!", "d": "Show noturno com água, fogos, projeções e vários personagens estrelado pelo Mickey.", "l": "g", "u": "https://www.youtube.com/watch?v=0V34o4m_2T0", "show": true}]}], "ticketOptions": [{"t": "Opção 1", "price": "US$ 600", "best": true, "d1": "Universal Studios + Islands of Adventure (park to park)", "d2": "Hollywood Studios — Disney"}, {"t": "Opção 2", "price": "US$ 400", "best": true, "d1": "Universal Studios", "d2": "Islands of Adventure"}, {"t": "Opção 3", "price": "US$ 600", "best": false, "d1": "Universal Studios + Islands of Adventure (park to park)", "d2": "EPCOT — Disney"}, {"t": "Opção 4", "price": "US$ 504", "best": false, "d1": "Universal Studios + Islands of Adventure (park to park)", "d2": "Epic Universe"}, {"t": "Opção 5", "price": "US$ 600", "best": false, "d1": "Universal Studios + Islands of Adventure", "d2": "Magic Kingdom — Disney"}], "houses": ["https://www.airbnb.com.br/rooms/51419807?check_in=2026-11-23&check_out=2026-11-26&guests=1&adults=8&s=67&unique_share_id=39a55979-2d1e-4784-ac44-02d84e8488d3", "https://www.airbnb.com.br/rooms/44065313?check_in=2026-11-23&check_out=2026-11-26&guests=1&adults=8&s=67&unique_share_id=aa3f8ee1-5215-473e-a528-d66130ee0a86", "https://www.airbnb.com.br/rooms/667466148015124733?check_in=2026-11-23&check_out=2026-11-26&guests=1&adults=8&s=67&unique_share_id=4e556065-d60c-4368-975b-098fde990e8c"], "housesNY": ["https://www.airbnb.com.br/rooms/1576411109802220001?check_in=2026-12-01&check_out=2026-12-05&guests=1&adults=8&s=67&unique_share_id=45551fb5-082d-4901-afb7-9d6b924c7c89", "https://www.airbnb.com.br/rooms/1589147171215157546?check_in=2026-12-01&check_out=2026-12-05&guests=1&adults=8&s=67&unique_share_id=acf5a18e-3860-44fb-82fa-8a0051a235eb", "https://www.airbnb.com.br/rooms/1607696451058250242?check_in=2026-12-01&check_out=2026-12-05&guests=1&adults=8&s=67&unique_share_id=1c44a178-0862-4427-8e4e-30e5e55cc4d5"]};
+
+/* ---- VOOS ---- */
+const flights = [
+  {leg:["São Paulo","Miami"], date:"22 / NOV", time:"23:50h", voo:"906", pin:"🌴"},
+  {leg:["Miami","Nova York (JFK)"], date:"01 / DEZ", time:"07:31h", voo:"3060", pin:"🗽"},
+  {leg:["Nova York (JFK)","São Paulo"], date:"07 / DEZ", time:"18:35h", voo:"951", pin:"🏠"},
+];
+document.getElementById('flights').innerHTML = flights.map(f=>`
+  <div class="flight">
+    <span class="pin">${f.pin}</span>
+    <div class="leg"><span>${f.leg[0]}</span> <span class="arr">→</span> <span>${f.leg[1]}</span></div>
+    <div class="meta"><span>Partida às <b>${f.time}</b></span><span>Voo <b>${f.voo}</b></span></div>
+    <span class="date-badge">${f.date} · 2026</span>
+  </div>`).join('');
+
+/* ---- TIMELINE ---- */
+const trip = [
+  {leg:"Flórida · Orlando & Miami", color:"var(--gold)"},
+  {d:"Dia 23", c:"Chegada em Miami e ida para Orlando — dia de compras"},
+  {d:"Dia 24", c:"Dia de parque"},
+  {d:"Dia 25", c:"Dia de parque, ou conhecer Orlando e fazer compras"},
+  {d:"Dia 26", c:"Volta para Miami · Ação de Graças — festa na casa do Will 🦃"},
+  {d:"Dia 27", c:"Black Friday — passeio + compras 🛍️"},
+  {d:"Dia 28", c:"Conhecer a região (Fort Lauderdale / Palm Beach ou Key West)"},
+  {d:"Dia 29", c:"Retorno para Miami e passeio pela cidade"},
+  {d:"Dia 30", c:"Passeio por Miami 🌴"},
+  {leg:"Nova York · Natal", color:"var(--blue)"},
+  {d:"Dia 01", c:"Ida para Nova York e passeio por Midtown"},
+  {d:"Dia 02", c:"Estátua da Liberdade + Brooklyn"},
+  {d:"Dia 03", c:"Central Park, mirante e Broadway 🎭"},
+  {d:"Dia 04", c:"Parques, bibliotecas e Dyker Heights 🎄"},
+  {leg:"Capital & Filadélfia", color:"var(--coral)"},
+  {d:"Dia 05", c:"Ida para Washington + passeios"},
+  {d:"Dia 06", c:"Ida para Philadelphia + passeio"},
+  {d:"Dia 07", c:"Retorno para Nova York + voo de volta ✈️"},
+];
+document.getElementById('timeline').innerHTML = trip.map(r=>{
+  if(r.leg) return `<div class="tl-leg" style="color:${r.color}"><span>${r.leg}</span><span class="ln"></span></div>`;
+  const num = r.d.replace('Dia ','');
+  return `<div class="tl-row"><div class="tl-dot" style="background:var(--ink)">${num}</div><div class="tl-body"><div class="d">${r.d}</div><div class="c">${r.c}</div></div></div>`;
+}).join('');
+
+/* ---- PARKS (com POVs) ---- */
+function shade(hex,p){
+  const n=parseInt(hex.slice(1),16);let r=(n>>16)+p,g=((n>>8)&255)+p,b=(n&255)+p;
+  r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b));
+  return '#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);
+}
+const LVL={g:"Família",m:"Médio",r:"Radical"};
+document.getElementById('parksOverview').innerHTML = DATA.parks.map(p=>{
+  const ic = p.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const povs = p.rides.map(r=>{
+    const lv = r.show ? 'show' : r.l;
+    const sub = r.show ? 'Show' : LVL[r.l];
+    return `<a class="povitem" href="${r.u}" target="_blank" rel="noopener" style="--accent:${p.color}">
+      <span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+      <span class="pt">${r.n}<small>${sub}</small></span>
+      <span class="lvldot ${lv}"></span>
+    </a>`;
+  }).join('');
+  return `<div class="po-card" style="--accent:${p.color}">
+    <div class="po-head">
+      <div class="po-ic" style="background:linear-gradient(135deg,${p.color},${shade(p.color,-26)})">${ic}</div>
+      <div class="po-body">
+        <div class="po-resort">${p.resort}</div>
+        <div class="po-name">${p.name}</div>
+        <p class="po-desc">${p.desc}</p>
+        ${p.warn?`<span class="po-warn">⚠️ ${p.warn}</span>`:''}
+      </div>
+    </div>
+    <div class="povgrid">${povs}</div>
+    <a class="po-guide" href="${p.guide}" target="_blank" rel="noopener">📚 Guia completo do parque ↗</a>
+  </div>`;
+}).join('');
+
+/* ---- TICKETS ---- */
+document.getElementById('tix').innerHTML=DATA.ticketOptions.map(o=>`
+  <div class="tix-card ${o.best?'best':''}">
+    ${o.best?'<span class="flag">★ Recomendado</span>':''}
+    <div class="tt">${o.t}</div>
+    <div class="price">${o.price}</div>
+    <div class="day"><span class="n">Dia 1</span><span class="txt">${o.d1}</span></div>
+    <div class="day"><span class="n">Dia 2</span><span class="txt">${o.d2}</span></div>
+  </div>`).join('');
+
+/* ---- HOUSES ---- */
+const houseIcons=["🏡","🏘️","🏠"];
+document.getElementById('houses').innerHTML=DATA.houses.map((h,i)=>`
+  <a class="house" href="${h}" target="_blank" rel="noopener">
+    <span class="ic">${houseIcons[i]}</span>
+    <span class="ht">Opção ${i+1}</span>
+    <span class="hs">Casa para 8 pessoas · 23–26 nov</span>
+    <span class="go">Abrir no Airbnb ↗</span>
+  </a>`).join('');
+
+/* ---- HOUSES NY ---- */
+if(DATA.housesNY){
+  document.getElementById('nyHouses').innerHTML=DATA.housesNY.map((h,i)=>`
+    <a class="ny-house" href="${h}" target="_blank" rel="noopener">
+      <span class="ic">${houseIcons[i]}</span>
+      <span class="ht">Opção ${i+1}</span>
+      <span class="hs">New Jersey · 8 pessoas · 01–05 dez</span>
+      <span class="go">Abrir no Airbnb ↗</span>
+    </a>`).join('');
+}
+
+/* ---- NEW YORK ---- */
+const nyDays=[
+  {dn:"Dia 1", h:"Midtown natalina, sem correria", items:["Check-in","Times Square","Caminhar pela Fifth Avenue","Vitrines de Natal: Saks Fifth Avenue & Macy's Herald Square","Noite no Rockefeller Center 🎄"], tip:"Dia mais leve para entrar no clima da cidade."},
+  {dn:"Dia 2", h:"Liberdade + Downtown + Brooklyn", items:["Ferry para Statue of Liberty & Ellis Island","Wall Street + Charging Bull","9/11 Memorial","DUMBO + Brooklyn Heights Promenade","Atravessar a Brooklyn Bridge iluminada ✨"], tip:"🍴 Almoço no Katz's Delicatessen — pastrami clássico de NY."},
+  {dn:"Dia 3", h:"Central Park + Mirante + Broadway", items:["Central Park: Bethesda Terrace, Bow Bridge, Strawberry Fields","Plaza Hotel + chocolate quente ☕","Top of the Rock no pôr do sol ✨","Roosevelt Island Tramway à noite","Broadway 🎭"], tip:"🎭 Musical: Wicked ou The Lion King (checar datas e ingressos)."},
+  {dn:"Dia 4", h:"Bryant Park + Bibliotecas + Dyker Heights", items:["Bryant Park Winter Village 🎄","New York Public Library","The Morgan Library & Museum","Greenwich & West Village","Friends Apartment Building ☕","Washington Square Park","Dyker Heights à noite 🎄✨"], tip:"As casas de Dyker Heights no Natal são imperdíveis."},
+];
+document.getElementById('nyDays').innerHTML=nyDays.map(d=>`
+  <div class="nyd">
+    <div class="dn">${d.dn}</div>
+    <h4>${d.h}</h4>
+    <ul>${d.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    <div class="tip">${d.tip}</div>
+  </div>`).join('');
+
+/* ---- REVEAL ON SCROLL ---- */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
