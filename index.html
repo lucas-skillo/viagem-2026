@@ -75,7 +75,10 @@ nav.top .links a:hover{color:#fff;background:rgba(255,255,255,.1)}
 
 /* ===== PADRE / CHAPLAIN STRIP ===== */
 .padre{background:linear-gradient(100deg,#13182b,#1d2540);color:#fff;position:relative;overflow:hidden}
-.padre::before{content:"✝";position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:18rem;line-height:1;color:rgba(231,161,58,.07);font-family:serif}
+.padre::before{content:"";position:absolute;right:36px;top:50%;width:90px;height:120px;transform:translateY(-50%);opacity:.06;
+  background:
+    linear-gradient(var(--gold),var(--gold)) 50% 0/18px 100% no-repeat,
+    linear-gradient(var(--gold),var(--gold)) 0 32px/100% 18px no-repeat;}
 .padre .inner{max-width:1180px;margin:0 auto;padding:30px 24px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;position:relative}
 .padre .halo{width:62px;height:62px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:1.7rem;background:radial-gradient(circle at 35% 30%,rgba(231,161,58,.4),rgba(231,161,58,.08));box-shadow:0 0 0 2px rgba(231,161,58,.4),0 0 36px rgba(231,161,58,.3)}
 .padre .txt{flex:1;min-width:240px}
@@ -83,7 +86,7 @@ nav.top .links a:hover{color:#fff;background:rgba(255,255,255,.1)}
 .padre .txt .big{font-family:'Playfair Display',serif;font-size:clamp(1.15rem,3vw,1.5rem);font-weight:700;margin-top:4px;font-style:italic}
 .padre .txt .sm{color:rgba(255,255,255,.66);font-size:.9rem;margin-top:5px;font-weight:300}
 @media(max-width:600px){
-  .padre::before{font-size:11rem;right:auto;left:50%;top:18px;transform:translateX(-50%);opacity:.6}
+  .padre::before{display:none}
   .padre .inner{flex-direction:column;text-align:center;gap:14px;padding:26px 22px}
   .padre .halo{width:54px;height:54px;font-size:1.5rem}
   .padre .txt{min-width:0}
