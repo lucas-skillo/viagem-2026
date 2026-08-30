@@ -22,6 +22,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.modal-open{overflow:hidden}
 .serif{font-family:'Playfair Display',serif}
 img{display:block;max-width:100%}
 a{color:inherit}
@@ -31,15 +32,28 @@ a{color:inherit}
 /* ===== TOP NAV ===== */
 nav.top{
   position:sticky;top:0;z-index:80;backdrop-filter:blur(14px);
-  background:rgba(11,16,32,.82);border-bottom:1px solid var(--line-l);
+  background:rgba(11,16,32,.86);border-bottom:1px solid var(--line-l);
 }
-nav.top .inner{max-width:1180px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:18px;justify-content:space-between}
-nav.top .brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;letter-spacing:.02em}
-nav.top .brand .seal{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 30% 25%,var(--gold),var(--gold-deep));display:grid;place-items:center;font-size:.9rem;box-shadow:0 0 0 3px rgba(231,161,58,.25)}
-nav.top .links{display:flex;gap:4px;flex-wrap:wrap}
-nav.top .links a{color:rgba(255,255,255,.72);text-decoration:none;font-size:.85rem;font-weight:500;padding:7px 12px;border-radius:100px;transition:.18s;white-space:nowrap}
+nav.top .inner{max-width:1180px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+nav.top .brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;letter-spacing:.02em;white-space:nowrap;min-width:0}
+nav.top .brand .names{overflow:hidden;text-overflow:ellipsis}
+nav.top .brand .seal{width:30px;height:30px;border-radius:50%;flex:none;background:radial-gradient(circle at 30% 25%,var(--gold),var(--gold-deep));display:grid;place-items:center;font-size:.9rem;box-shadow:0 0 0 3px rgba(231,161,58,.25)}
+nav.top .links{display:flex;gap:2px;flex-wrap:wrap}
+nav.top .links a{color:rgba(255,255,255,.72);text-decoration:none;font-size:.83rem;font-weight:500;padding:7px 10px;border-radius:100px;transition:.18s;white-space:nowrap}
 nav.top .links a:hover{color:#fff;background:rgba(255,255,255,.1)}
-@media(max-width:860px){nav.top .links{display:none}}
+@media(max-width:1120px){nav.top .links{display:none}}
+@media(max-width:560px){nav.top .brand .names{display:none}}
+
+/* ===== LANGUAGE TOGGLE ===== */
+.langtoggle{position:relative;flex:none;display:flex;align-items:center;padding:3px;border-radius:100px;background:rgba(255,255,255,.09);border:1px solid var(--line-l);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.langtoggle .thumb{position:absolute;top:3px;left:3px;width:calc(50% - 3px);height:calc(100% - 6px);border-radius:100px;background:linear-gradient(135deg,var(--gold),var(--gold-deep));box-shadow:0 6px 16px -8px rgba(231,161,58,.9);transition:transform .28s cubic-bezier(.4,1.3,.5,1)}
+.langtoggle[data-active="en"] .thumb{transform:translateX(100%)}
+.langtoggle button{position:relative;z-index:1;border:none;background:none;cursor:pointer;font-family:inherit;font-size:.78rem;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.66);padding:7px 14px;border-radius:100px;transition:color .22s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.langtoggle button .fl{font-size:.95rem;line-height:1}
+.langtoggle button:hover{color:rgba(255,255,255,.9)}
+.langtoggle[data-active="pt"] button[data-lang="pt"],
+.langtoggle[data-active="en"] button[data-lang="en"]{color:#1a1205}
+.langtoggle button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
 /* ===== HERO ===== */
 .hero{position:relative;min-height:92vh;display:flex;align-items:center;color:#fff;overflow:hidden;isolation:isolate}
@@ -55,7 +69,7 @@ nav.top .links a:hover{color:#fff;background:rgba(255,255,255,.1)}
 @keyframes twinkle{from{opacity:.28}to{opacity:.6}}
 .hero .inner{max-width:1180px;margin:0 auto;padding:80px 24px;width:100%}
 .hero .eyebrow{color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:11px}
-.hero .eyebrow .ln{height:1px;width:46px;background:linear-gradient(90deg,var(--gold),transparent)}
+.hero .eyebrow .ln{height:1px;width:46px;background:linear-gradient(90deg,var(--gold),transparent);flex:none}
 .hero h1{font-size:clamp(3rem,9.5vw,7.4rem);line-height:.92;font-weight:800;letter-spacing:-.02em}
 .hero h1 .amp{font-style:italic;font-weight:500;color:var(--gold)}
 .hero h1 .yr{display:block;font-family:'Outfit';font-weight:300;font-size:clamp(1rem,3vw,1.7rem);letter-spacing:.5em;color:rgba(255,255,255,.7);margin-top:18px;padding-left:.5em}
@@ -63,14 +77,8 @@ nav.top .links a:hover{color:#fff;background:rgba(255,255,255,.1)}
 .hero .route .city{position:relative}
 .hero .route .city::after{content:"✦";color:var(--gold);margin-left:14px;font-size:.7em;opacity:.8;vertical-align:middle}
 .hero .route .city:last-child::after{display:none}
-.hero .lede{margin-top:24px;max-width:560px;color:rgba(255,255,255,.78);font-size:1.06rem;line-height:1.6;font-weight:300}
-.hero .cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:600;font-size:.95rem;padding:13px 22px;border-radius:100px;transition:.2s;cursor:pointer;border:none;font-family:inherit}
-.btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1a1205;box-shadow:0 16px 34px -16px rgba(231,161,58,.7)}
-.btn.gold:hover{transform:translateY(-2px)}
-.btn.ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid var(--line-l)}
-.btn.ghost:hover{background:rgba(255,255,255,.16)}
-.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;animation:bob 2.2s ease-in-out infinite}
+.hero .lede{margin-top:24px;max-width:580px;color:rgba(255,255,255,.78);font-size:1.06rem;line-height:1.6;font-weight:300}
+.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;animation:bob 2.2s ease-in-out infinite;text-align:center}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
 
 /* ===== PADRE / CHAPLAIN STRIP ===== */
@@ -98,16 +106,18 @@ nav.top .links a:hover{color:#fff;background:rgba(255,255,255,.1)}
 /* ===== SECTION HEADERS ===== */
 section{position:relative}
 .sec{padding:78px 0 18px}
+section[id]{scroll-margin-top:96px}
 .sec-head{margin-bottom:38px}
 .sec-head .eyebrow{color:var(--gold-deep)}
 .sec-head h2{font-size:clamp(2rem,5.2vw,3.4rem);font-weight:800;line-height:1.02;letter-spacing:-.02em;margin-top:10px}
-.sec-head p.intro{margin-top:14px;max-width:660px;color:#4a567a;font-size:1.04rem;line-height:1.6}
+.sec-head p.intro{margin-top:14px;max-width:680px;color:#4a567a;font-size:1.04rem;line-height:1.6}
+.sec-head p.intro b{color:var(--ink)}
 
 /* ===== FLIGHTS ===== */
-.flights{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.flights{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:16px}
 .flight{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow-s);position:relative;overflow:hidden}
 .flight .pin{position:absolute;top:18px;right:20px;font-size:1.4rem;opacity:.25}
-.flight .leg{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.18rem}
+.flight .leg{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.18rem;flex-wrap:wrap}
 .flight .leg .arr{color:var(--coral)}
 .flight .meta{margin-top:14px;display:flex;flex-direction:column;gap:5px;color:#4a567a;font-size:.95rem}
 .flight .meta b{color:var(--ink);font-weight:700}
@@ -115,165 +125,168 @@ section{position:relative}
 
 /* ===== TIMELINE ===== */
 .tl{position:relative;margin-top:8px}
-.tl::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--gold),var(--coral),var(--blue))}
+.tl::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--teal),var(--coral),var(--blue),var(--violet))}
 .tl-row{display:flex;gap:20px;padding:9px 0;align-items:flex-start}
-.tl-dot{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:700;font-size:.85rem;color:#fff;z-index:1;box-shadow:0 0 0 5px var(--paper)}
-.tl-body{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:13px 17px;flex:1;box-shadow:var(--shadow-s)}
+.tl-dot{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:700;font-size:.85rem;color:#fff;z-index:1;box-shadow:0 0 0 5px var(--paper);background:var(--ink)}
+.tl-row.hi .tl-dot{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1a1205;box-shadow:0 0 0 5px var(--paper),0 0 0 7px rgba(231,161,58,.35)}
+.tl-row.hi .tl-body{border-color:rgba(231,161,58,.55);background:linear-gradient(120deg,#fff,#fdf3e2)}
+.tl-body{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:13px 17px;flex:1;box-shadow:var(--shadow-s);min-width:0}
 .tl-body .d{font-weight:700;font-size:.97rem}
 .tl-body .c{color:#566189;font-size:.9rem;margin-top:2px}
-.tl-leg{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--gold-deep);margin:24px 0 10px;display:flex;align-items:center;gap:9px;position:relative;z-index:2}
+.tl-leg{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin:24px 0 10px;display:flex;align-items:center;gap:9px;position:relative;z-index:2}
 .tl-leg span:first-child{background:var(--paper);padding:4px 12px 4px 50px;border-radius:100px;white-space:nowrap}
 .tl-leg .ln{flex:1;height:1px;background:var(--line)}
 
-/* ===== PARKS ===== */
-.parks-overview{display:flex;flex-direction:column;gap:18px}
-.po-card{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow-s);position:relative;overflow:hidden;transition:.2s}
-.po-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
-.po-head{display:flex;gap:16px;margin-bottom:16px}
-.po-ic{width:52px;height:52px;border-radius:14px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;font-size:1.1rem;font-family:'Playfair Display',serif;box-shadow:var(--shadow-s)}
-.po-body{min-width:0}
-.po-resort{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#566189}
-.po-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;line-height:1.05;letter-spacing:-.01em;margin-top:2px}
-.po-desc{color:#566189;font-size:.9rem;line-height:1.5;margin-top:8px}
-.po-warn{display:inline-block;margin-top:10px;background:rgba(226,67,58,.1);color:var(--red);font-size:.78rem;font-weight:700;padding:5px 11px;border-radius:100px}
-.povgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
-.povitem{display:flex;align-items:center;gap:9px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 11px;text-decoration:none;color:inherit;transition:.16s}
-.povitem:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:var(--shadow-s)}
-.povitem .pl{width:26px;height:26px;border-radius:7px;background:var(--accent);display:grid;place-items:center;flex:none}
-.povitem .pl svg{width:11px;height:11px;color:#fff}
-.povitem .pt{font-size:.82rem;font-weight:600;line-height:1.12;min-width:0}
-.povitem .pt small{display:block;font-weight:500;color:#566189;font-size:.7rem;margin-top:1px}
-.lvldot{width:8px;height:8px;border-radius:50%;flex:none;margin-left:auto}
-.lvldot.g{background:var(--green)}.lvldot.m{background:var(--amber)}.lvldot.r{background:var(--red)}.lvldot.show{background:var(--violet)}
-.po-guide{margin-top:14px;display:inline-flex;align-items:center;gap:7px;font-size:.82rem;font-weight:600;color:var(--blue);text-decoration:none}
-.po-guide:hover{text-decoration:underline}
-.parks-intro-card{background:linear-gradient(120deg,#fff,#fdf6e9);border:1px solid var(--line);border-radius:20px;padding:24px 26px;box-shadow:var(--shadow-s);margin-bottom:30px}
-.parks-intro-card p{color:#4a567a;line-height:1.6}
-.parks-intro-card b{color:var(--ink)}
-.filterbar{position:sticky;top:57px;z-index:60;background:rgba(251,247,239,.9);backdrop-filter:blur(10px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:30px}
-.filterbar .fb-in{max-width:1180px;margin:0 auto;padding:12px 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-.fgroup{display:flex;gap:7px;flex-wrap:wrap}
-.fbtn{border:1px solid var(--line);background:var(--cream);color:#566189;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;padding:8px 14px;border-radius:100px;transition:.18s;display:inline-flex;align-items:center;gap:7px}
-.fbtn .sw{width:9px;height:9px;border-radius:50%}
-.fbtn:hover{transform:translateY(-1px)}
-.fbtn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-.fcount{font-size:.8rem;color:#566189;font-weight:500}
-.fcount b{color:var(--coral);font-weight:800}
-
-.park{margin-bottom:46px;scroll-margin-top:120px}
-.park-banner{border-radius:22px 22px 0 0;padding:26px 26px 24px;color:#fff;position:relative;overflow:hidden}
-.park-banner::after{content:"";position:absolute;right:-30px;bottom:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.1)}
-.park-banner .resort{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;opacity:.85}
-.park-banner h3{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.7rem,4.4vw,2.5rem);line-height:1;margin-top:5px}
-.park-banner p{margin-top:11px;max-width:680px;font-size:.96rem;line-height:1.55;opacity:.92;font-weight:300}
-.park-banner .row{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.warn{display:inline-flex;align-items:center;gap:7px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.25);padding:6px 13px;border-radius:100px;font-size:.8rem;font-weight:600}
-.guide-link{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.16);color:#fff;text-decoration:none;padding:6px 13px;border-radius:100px;font-size:.8rem;font-weight:600;transition:.18s}
-.guide-link:hover{background:rgba(255,255,255,.3)}
-.ride-grid{background:var(--cream);border:1px solid var(--line);border-top:none;border-radius:0 0 22px 22px;padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;box-shadow:var(--shadow-s)}
-.ride{border:1px solid var(--line);border-radius:15px;padding:16px 16px 14px;background:var(--paper);position:relative;display:flex;flex-direction:column;transition:.2s;overflow:hidden}
-.ride::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
-.ride:hover{transform:translateY(-3px);box-shadow:var(--shadow-s)}
-.ride.hide{display:none}
-.ride-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:7px}
-.ride h4{font-size:1.04rem;font-weight:700;line-height:1.16;letter-spacing:-.01em}
-.lvl{font-size:.64rem;font-weight:800;padding:4px 8px;border-radius:100px;white-space:nowrap;text-transform:uppercase;letter-spacing:.04em;flex:none}
-.lvl.g{background:rgba(47,170,90,.15);color:var(--green)}
-.lvl.m{background:rgba(232,146,12,.16);color:var(--amber)}
-.lvl.r{background:rgba(226,67,58,.15);color:var(--red)}
-.lvl.show{background:rgba(122,85,236,.15);color:var(--violet)}
-.ride p{color:#566189;font-size:.86rem;line-height:1.45;margin-bottom:14px;flex:1}
-.pov{text-decoration:none;text-align:center;font-weight:700;font-size:.85rem;background:var(--ink);color:#fff;padding:10px;border-radius:10px;transition:.18s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.pov:hover{background:var(--accent)}
-.pov svg{width:13px;height:13px}
-
-/* ===== TICKETS ===== */
-.tix{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-@media(max-width:920px){.tix{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.tix{grid-template-columns:1fr}}
-.tix-card{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:18px 16px;box-shadow:var(--shadow-s);position:relative;display:flex;flex-direction:column;transition:.2s}
-.tix-card.best{border:2px solid var(--gold);box-shadow:0 24px 50px -28px rgba(231,161,58,.6)}
-.tix-card:hover{transform:translateY(-3px)}
-.tix-card .flag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);white-space:nowrap;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1a1205;font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:100px;box-shadow:var(--shadow-s)}
-.tix-card .tt{font-weight:700;font-size:.98rem;color:#566189}
-.tix-card .price{font-family:'Playfair Display',serif;font-weight:800;font-size:1.95rem;margin:4px 0 14px;letter-spacing:-.02em}
-.tix-card .day{display:flex;gap:8px;align-items:flex-start;padding:9px 0;border-top:1px dashed var(--line)}
-.tix-card .day .n{font-size:.62rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--coral);background:rgba(255,92,69,.1);padding:4px 7px;border-radius:6px;flex:none;margin-top:1px}
-.tix-card .day .txt{font-size:.85rem;font-weight:500;line-height:1.3}
-.rec-note{margin-top:22px;background:linear-gradient(120deg,#fff,#fdf6e9);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:16px 20px;color:#4a567a;font-size:.95rem;line-height:1.55}
-.rec-note b{color:var(--ink)}
-
-/* ===== HOUSES ===== */
-.houses{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.house{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow-s);text-decoration:none;color:inherit;transition:.2s;display:flex;flex-direction:column;gap:10px}
-.house:hover{transform:translateY(-3px);border-color:var(--coral)}
-.house .ic{font-size:1.8rem}
-.house .ht{font-weight:700;font-size:1.05rem}
-.house .hs{color:#566189;font-size:.88rem}
-.house .go{margin-top:auto;color:var(--coral);font-weight:700;font-size:.86rem;display:inline-flex;align-items:center;gap:6px}
-
-/* ===== NEW YORK ===== */
-.ny{background:linear-gradient(180deg,#0a0f1f,#141d38);color:#fff;margin-top:60px;position:relative;overflow:hidden}
-.ny .snow{position:absolute;inset:0;pointer-events:none;opacity:.5;
+/* ===== CITY BANDS ===== */
+.city{color:#fff;position:relative;overflow:hidden;padding:78px 0 88px;background:linear-gradient(180deg,var(--band-a),var(--band-b))}
+.city .sec-head h2{color:#fff}
+.city .sec-head .eyebrow{color:var(--accent)}
+.city .sec-head p.intro{color:rgba(255,255,255,.76)}
+.city .sec-head p.intro b{color:#fff}
+.city-orlando{--band-a:#052e2a;--band-b:#0c4a43;--accent:#4fd6c6}
+.city-miami{--band-a:#2a1038;--band-b:#6d2446;--accent:#ff9d7d}
+.city-ny{--band-a:#0a0f1f;--band-b:#141d38;--accent:#e7a13a}
+.city-washington{--band-a:#101a2c;--band-b:#2b2444;--accent:#b6a5ff}
+.amb{position:absolute;inset:0;pointer-events:none}
+.amb-sun{background:radial-gradient(circle at 84% 10%,rgba(255,216,128,.30),transparent 44%),radial-gradient(circle at 8% 92%,rgba(31,179,166,.28),transparent 52%)}
+.amb-sunset{background:radial-gradient(ellipse at 50% 110%,rgba(255,140,94,.42),transparent 56%),radial-gradient(circle at 88% 6%,rgba(122,85,236,.34),transparent 46%)}
+.amb-snow{opacity:.5;
   background-image:radial-gradient(2px 2px at 15% 20%,#fff,transparent),radial-gradient(2px 2px at 45% 50%,#fff,transparent),radial-gradient(2px 2px at 75% 30%,#fff,transparent),radial-gradient(1.5px 1.5px at 85% 70%,#fff,transparent),radial-gradient(2px 2px at 30% 80%,#fff,transparent);background-size:300px 300px;animation:fall 9s linear infinite}
 @keyframes fall{from{background-position:0 0}to{background-position:0 300px}}
-.ny .sec-head h2{color:#fff}
-.ny .sec-head .eyebrow{color:var(--gold)}
-.ny .sec-head p.intro{color:rgba(255,255,255,.74)}
-.ny-days{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
-.nyd{background:rgba(255,255,255,.05);border:1px solid var(--line-l);border-radius:18px;padding:22px;backdrop-filter:blur(4px);transition:.2s}
-.nyd:hover{background:rgba(255,255,255,.09);transform:translateY(-3px)}
-.nyd .dn{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--gold)}
-.nyd h4{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin:5px 0 13px;line-height:1.1}
-.nyd ul{list-style:none;display:flex;flex-direction:column;gap:7px}
-.nyd li{font-size:.9rem;color:rgba(255,255,255,.82);padding-left:20px;position:relative;line-height:1.35}
-.nyd li::before{content:"›";position:absolute;left:4px;color:var(--gold);font-weight:700}
-.nyd .tip{margin-top:13px;font-size:.82rem;color:var(--gold);background:rgba(231,161,58,.1);border:1px solid rgba(231,161,58,.25);border-radius:10px;padding:9px 12px}
+.amb-marble{background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 2px,transparent 2px 54px),radial-gradient(circle at 80% 12%,rgba(182,165,255,.24),transparent 46%)}
+
+.city-days{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(262px,100%),1fr));gap:16px}
+.dcard{background:rgba(255,255,255,.055);border:1px solid var(--line-l);border-radius:18px;padding:20px;backdrop-filter:blur(4px);transition:.2s;display:flex;flex-direction:column}
+.dcard:hover{background:rgba(255,255,255,.1);transform:translateY(-3px)}
+.dcard.tbd{border-style:dashed;background:rgba(255,255,255,.032)}
+.dcard .dn{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--accent)}
+.dcard .dn .dd{color:rgba(255,255,255,.55);font-weight:600;letter-spacing:.08em}
+.dcard .tbdbadge{align-self:flex-start;margin-top:9px;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.78);background:rgba(255,255,255,.1);border:1px solid var(--line-l);padding:3px 9px;border-radius:100px}
+.dcard h4{font-family:'Playfair Display',serif;font-size:1.28rem;font-weight:700;margin:7px 0 13px;line-height:1.12}
+.dcard ul{list-style:none;display:flex;flex-direction:column;gap:7px;flex:1}
+.dcard li{font-size:.9rem;color:rgba(255,255,255,.85);padding-left:20px;position:relative;line-height:1.38}
+.dcard li::before{content:"›";position:absolute;left:4px;color:var(--accent);font-weight:700}
+.dcard .tip{margin-top:13px;font-size:.82rem;color:var(--accent);background:rgba(255,255,255,.06);border:1px solid var(--line-l);border-radius:10px;padding:9px 12px;line-height:1.4}
+.parkbtn{margin-top:14px;width:100%;border:none;cursor:pointer;font-family:inherit;font-size:.88rem;font-weight:700;padding:12px 16px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1a1205;box-shadow:0 14px 28px -16px rgba(231,161,58,.85);transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:9px}
+.parkbtn:hover{transform:translateY(-2px)}
+.parkbtn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
 .ny-bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
 @media(max-width:680px){.ny-bottom{grid-template-columns:1fr}}
 .ny-box{background:rgba(255,255,255,.05);border:1px solid var(--line-l);border-radius:18px;padding:22px}
 .ny-box h4{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:13px;display:flex;align-items:center;gap:9px}
 .ny-box ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-.ny-box li{font-size:.9rem;color:rgba(255,255,255,.82);padding-left:22px;position:relative}
+.ny-box li{font-size:.9rem;color:rgba(255,255,255,.84);padding-left:22px;position:relative}
 .ny-box.reserve li::before{content:"🎟️";position:absolute;left:0;font-size:.8rem}
-.ny-box.reserve li a{color:rgba(255,255,255,.88);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;transition:.16s}
+.ny-box.reserve li a{color:rgba(255,255,255,.9);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;transition:.16s}
 .ny-box.reserve li a:hover{color:#fff}
-.ny-box.reserve .rlink{font-size:.72rem;font-weight:700;color:var(--gold);background:rgba(231,161,58,.16);border:1px solid rgba(231,161,58,.3);padding:2px 9px;border-radius:100px;white-space:nowrap}
+.ny-box.reserve .rlink{font-size:.72rem;font-weight:700;color:var(--accent);background:rgba(231,161,58,.16);border:1px solid rgba(231,161,58,.3);padding:2px 9px;border-radius:100px;white-space:nowrap}
 .ny-box.pack li::before{content:"❄️";position:absolute;left:0;font-size:.8rem}
-.ny-houses-head{margin-top:26px}
-.ny-houses-head h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;display:flex;align-items:center;gap:9px}
-.ny-houses-head p{color:rgba(255,255,255,.72);font-size:.92rem;margin-top:6px}
-.ny-houses-head p b{color:#fff}
-.ny-houses{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
-.ny-house{background:rgba(255,255,255,.05);border:1px solid var(--line-l);border-radius:16px;padding:18px;text-decoration:none;color:#fff;transition:.2s;display:flex;flex-direction:column;gap:7px}
-.ny-house:hover{background:rgba(255,255,255,.1);transform:translateY(-3px)}
-.ny-house .ic{font-size:1.6rem}
-.ny-house .ht{font-weight:700;font-size:1.02rem}
-.ny-house .hs{color:rgba(255,255,255,.66);font-size:.84rem}
-.ny-house .go{margin-top:auto;color:var(--gold);font-weight:700;font-size:.84rem}
+
+/* ===== MODAL DO PARQUE ===== */
+.modal-backdrop{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:18px;background:rgba(5,9,20,.74);backdrop-filter:blur(7px);opacity:0;visibility:hidden;transition:opacity .26s ease,visibility .26s ease}
+.modal-backdrop.is-open{opacity:1;visibility:visible}
+.modal{width:100%;max-width:1040px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;background:var(--paper);border-radius:22px;box-shadow:0 40px 90px -40px rgba(0,0,0,.8);position:relative;padding:0 0 26px;transform:translateY(16px) scale(.985);transition:transform .3s cubic-bezier(.3,1.15,.5,1)}
+.modal-backdrop.is-open .modal{transform:none}
+.modal-x{position:absolute;top:14px;right:14px;z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.32);color:#fff;font-size:1rem;line-height:1;cursor:pointer;font-family:inherit;transition:.18s;display:grid;place-items:center}
+.modal-x:hover{background:rgba(0,0,0,.55);transform:rotate(90deg)}
+.modal-x:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.modal .park-banner{border-radius:22px 22px 0 0}
+.modal .park-tip,.modal .modal-ticket{margin:18px 22px 0}
+@media(max-width:560px){.modal .park-tip,.modal .modal-ticket{margin:16px 14px 0}.modal-backdrop{padding:10px}}
+
+/* ===== PARK ===== */
+.park-banner{padding:28px 26px 26px;color:#fff;position:relative;overflow:hidden;
+  background:linear-gradient(125deg,#0f8f85 0%,#1fb3a6 55%,#2a7f9e 100%)}
+.park-banner::after{content:"";position:absolute;right:-30px;bottom:-50px;width:210px;height:210px;border-radius:50%;background:rgba(255,255,255,.1)}
+.park-banner .resort{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;opacity:.85}
+.park-banner h3{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.8rem,4.8vw,2.7rem);line-height:1;margin-top:5px;padding-right:44px}
+.park-banner p{margin-top:12px;max-width:700px;font-size:.96rem;line-height:1.55;opacity:.93;font-weight:300;position:relative}
+.park-banner .row{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:relative}
+.park-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#0c6a62;font-size:.82rem;font-weight:800;padding:8px 15px;border-radius:100px;box-shadow:0 10px 24px -14px rgba(0,0,0,.6);letter-spacing:.02em}
+.guide-link{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:7px 14px;border-radius:100px;font-size:.82rem;font-weight:600;transition:.18s}
+.guide-link:hover{background:rgba(255,255,255,.3)}
+.ride-grid{background:var(--cream);border-top:none;padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:14px}
+.ride{border:1px solid var(--line);border-radius:15px;padding:16px 16px 14px;background:var(--paper);position:relative;display:flex;flex-direction:column;transition:.2s;overflow:hidden}
+.ride::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal)}
+.ride:hover{transform:translateY(-3px);box-shadow:var(--shadow-s)}
+.ride-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:7px}
+.ride h4{font-size:1.04rem;font-weight:700;line-height:1.16;letter-spacing:-.01em}
+.lvl{font-size:.64rem;font-weight:800;padding:4px 8px;border-radius:100px;white-space:nowrap;text-transform:uppercase;letter-spacing:.04em;flex:none}
+.lvl.g{background:rgba(47,170,90,.15);color:#1c6d38}
+.lvl.m{background:rgba(232,146,12,.16);color:#8a5407}
+.lvl.r{background:rgba(226,67,58,.15);color:#b02b23}
+.ride p{color:#566189;font-size:.86rem;line-height:1.45;margin-bottom:14px;flex:1}
+.pov{text-decoration:none;text-align:center;font-weight:700;font-size:.85rem;background:var(--ink);color:#fff;padding:10px;border-radius:10px;transition:.18s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.pov:hover{background:var(--teal)}
+.pov svg{width:13px;height:13px;flex:none}
+.park-tip{background:linear-gradient(120deg,#fff,#fdf6e9);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:16px 20px;color:#4a567a;font-size:.95rem;line-height:1.55}
+.park-tip b{color:var(--ink)}
+
+/* ===== TICKET ===== */
+.ticket{position:relative;background:var(--cream);border:2px solid var(--gold);border-radius:20px;padding:30px 26px 26px;box-shadow:0 26px 54px -30px rgba(231,161,58,.65);text-align:center}
+.ticket .flag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);white-space:nowrap;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1a1205;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:100px;box-shadow:var(--shadow-s)}
+.ticket .tt{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#566189}
+.ticket .tk-name{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.4rem,4.2vw,1.9rem);letter-spacing:-.02em;margin-top:6px;line-height:1.05}
+.ticket .tk-date{display:inline-block;margin-top:12px;background:var(--ink);color:#fff;font-size:.8rem;font-weight:600;padding:6px 14px;border-radius:100px}
+.ticket ul{list-style:none;margin:20px auto 22px;display:flex;flex-direction:column;gap:10px;text-align:left;max-width:520px}
+.ticket li{font-size:.9rem;color:#4a567a;line-height:1.45;padding-left:24px;position:relative}
+.ticket li::before{content:"✦";position:absolute;left:4px;top:0;color:var(--gold-deep);font-size:.8rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;font-weight:700;font-size:.95rem;padding:13px 24px;border-radius:100px;transition:.2s;cursor:pointer;border:none;font-family:inherit}
+.btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1a1205;box-shadow:0 16px 34px -16px rgba(231,161,58,.7);max-width:520px;width:100%}
+.btn.gold:hover{transform:translateY(-2px)}
+.ticket .note{margin-top:20px;max-width:560px;margin-left:auto;margin-right:auto;color:#4a567a;font-size:.9rem;line-height:1.5;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:13px 16px}
+.ticket .note b{color:var(--ink)}
+
+/* ===== HOUSES ===== */
+.houses{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:16px}
+.house{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow-s);text-decoration:none;color:inherit;transition:.2s;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden}
+.house::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
+.house:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:var(--shadow)}
+.house .ic{font-size:1.8rem;line-height:1}
+.house .hbadge{align-self:flex-start;font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:100px;background:rgba(47,170,90,.14);color:#1c6d38}
+.house .hbadge.gift{background:linear-gradient(135deg,rgba(231,161,58,.22),rgba(255,92,69,.18));color:#8a5407}
+.house .ht{font-family:'Playfair Display',serif;font-weight:700;font-size:1.35rem;letter-spacing:-.01em;line-height:1.05}
+.house .hd{font-size:.84rem;font-weight:700;color:var(--accent-ink,var(--accent))}
+.house .hs{color:#566189;font-size:.88rem;line-height:1.45}
+.house .go{margin-top:auto;padding-top:6px;color:var(--ink);font-weight:700;font-size:.86rem;display:inline-flex;align-items:center;gap:6px}
 
 /* ===== FOOTER ===== */
 footer{background:var(--night);color:rgba(255,255,255,.65);text-align:center;padding:54px 24px 60px}
 footer .blessing{font-family:'Playfair Display',serif;font-style:italic;font-size:1.25rem;color:#fff;max-width:560px;margin:0 auto 8px;line-height:1.5}
-footer .by{font-size:.82rem;margin-top:18px}
+footer .by{font-size:.82rem;margin-top:18px;line-height:1.6}
 footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold),var(--gold-deep));display:grid;place-items:center;font-size:1.3rem;margin:0 auto 20px;box-shadow:0 0 0 4px rgba(231,161,58,.2)}
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .hero .stars,.amb-snow,.scroll-cue{animation:none}
+  .langtoggle .thumb,.modal,.modal-backdrop{transition:none}
+}
 </style>
 </head>
 <body>
 
 <nav class="top">
   <div class="inner">
-    <div class="brand"><span class="seal">✦</span> Ferrari <span style="opacity:.5;font-weight:300">·</span> Souza <span style="opacity:.5;font-weight:300">·</span> Barbosa <span style="opacity:.5;font-weight:300">·</span> Correa</div>
+    <div class="brand">
+      <span class="seal">✦</span>
+      <span class="names">Ferrari <span style="opacity:.5;font-weight:300">·</span> Souza <span style="opacity:.5;font-weight:300">·</span> Barbosa <span style="opacity:.5;font-weight:300">·</span> Correa</span>
+    </div>
     <div class="links">
-      <a href="#voos">Voos</a>
-      <a href="#roteiro">Roteiro</a>
-      <a href="#parques">Parques</a>
-      <a href="#ingressos">Ingressos</a>
-      <a href="#casas">Casas</a>
-      <a href="#newyork">Nova York</a>
+      <a href="#voos" data-i18n="nav.voos">Voos</a>
+      <a href="#roteiro" data-i18n="nav.roteiro">Roteiro</a>
+      <a href="#orlando" data-i18n="nav.orlando">Orlando</a>
+      <a href="#miami" data-i18n="nav.miami">Miami</a>
+      <a href="#newyork" data-i18n="nav.ny">Nova York</a>
+      <a href="#washington" data-i18n="nav.washington">Washington</a>
+      <a href="#casas" data-i18n="nav.casas">Casas</a>
+    </div>
+    <div class="langtoggle" id="langToggle" data-active="pt" role="group" aria-label="Idioma / Language">
+      <span class="thumb" aria-hidden="true"></span>
+      <button type="button" data-lang="pt" aria-pressed="true"><span class="fl">🇧🇷</span>PT</button>
+      <button type="button" data-lang="en" aria-pressed="false"><span class="fl">🇺🇸</span>EN</button>
     </div>
   </div>
 </nav>
@@ -281,23 +294,21 @@ footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradien
 <header class="hero">
   <div class="bg"></div><div class="stars"></div>
   <div class="inner">
-    <div class="eyebrow"><span class="ln"></span> A grande viagem da família</div>
-    <h1 class="serif">USA <span class="amp">&amp;</span> Família<span class="yr">2 0 2 6</span></h1>
-    <div class="route">
-      <span class="city">Miami</span><span class="city">Orlando</span><span class="city">Nova York</span><span class="city">Washington</span>
-    </div>
-    <p class="lede">De 22 de novembro a 07 de dezembro. Sol da Flórida, parques mágicos, Ação de Graças em família e Nova York vestida de Natal — a visão geral de toda a nossa viagem, num só lugar.</p>
+    <div class="eyebrow"><span class="ln"></span> <span data-i18n="hero.eyebrow">A grande viagem da família</span></div>
+    <h1 class="serif"><span data-i18n="hero.titleA">USA</span> <span class="amp">&amp;</span> <span data-i18n="hero.titleB">Família</span><span class="yr">2 0 2 6</span></h1>
+    <div class="route" id="routeCities"></div>
+    <p class="lede" data-i18n="hero.lede"></p>
   </div>
-  <div class="scroll-cue">Role para começar<span>↓</span></div>
+  <div class="scroll-cue"><span data-i18n="hero.cue">Role para começar</span><span>↓</span></div>
 </header>
 
 <div class="padre">
   <div class="inner">
     <div class="halo">⛪</div>
     <div class="txt">
-      <div class="lbl">Capelão oficial da expedição</div>
-      <div class="big">“E o padre vai junto — abençoando cada montanha-russa.”</div>
-      <div class="sm">Toda viagem dessa família tem padre na bagagem. Bênção garantida do check-in ao último voo, com escala obrigatória em cada igreja, cada brinde e cada fila de parque. 🙏✈️</div>
+      <div class="lbl" data-i18n="padre.lbl"></div>
+      <div class="big" data-i18n="padre.big"></div>
+      <div class="sm" data-i18n="padre.sm"></div>
     </div>
   </div>
 </div>
@@ -305,9 +316,9 @@ footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradien
 <!-- VOOS -->
 <section id="voos" class="sec"><div class="wrap reveal">
   <div class="sec-head">
-    <div class="eyebrow">01 · Logística</div>
-    <h2 class="serif">Datas e horários dos voos</h2>
-    <p class="intro">Os três trechos que costuram a viagem inteira. Anote, fotografe, deixe no print do celular.</p>
+    <div class="eyebrow" data-i18n="sections.voos.eyebrow"></div>
+    <h2 class="serif" data-i18n="sections.voos.h2"></h2>
+    <p class="intro" data-i18n="sections.voos.intro"></p>
   </div>
   <div class="flights" id="flights"></div>
 </div></section>
@@ -315,212 +326,919 @@ footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradien
 <!-- ROTEIRO -->
 <section id="roteiro" class="sec"><div class="wrap reveal">
   <div class="sec-head">
-    <div class="eyebrow">02 · Visão geral</div>
-    <h2 class="serif">Resumo do roteiro</h2>
-    <p class="intro">15 dias, quatro cidades, um feriado de Ação de Graças e o Natal chegando em Nova York. Aqui está o esqueleto de tudo.</p>
+    <div class="eyebrow" data-i18n="sections.roteiro.eyebrow"></div>
+    <h2 class="serif" data-i18n="sections.roteiro.h2"></h2>
+    <p class="intro" data-i18n="sections.roteiro.intro"></p>
   </div>
   <div class="tl" id="timeline"></div>
 </div></section>
 
-<!-- PARQUES (visão geral) -->
-<section id="parques" class="sec"><div class="wrap reveal">
-  <div class="sec-head">
-    <div class="eyebrow">03 · O grande dia (ou dois)</div>
-    <h2 class="serif">Parques em Orlando</h2>
-    <p class="intro">Temos apenas <b>2 dias de parque</b>, e como será na semana de Ação de Graças, escolhemos com cuidado. Cada atração tem o seu <b>POV</b> — toque para assistir ao vídeo no YouTube e decidir o que não pode faltar. (🟢 família · 🟡 médio · 🔴 radical)</p>
+<!-- ORLANDO -->
+<section id="orlando" class="city city-orlando"><div class="amb amb-sun"></div>
+  <div class="wrap reveal" style="position:relative">
+    <div class="sec-head">
+      <div class="eyebrow" data-i18n="cities.orlando.eyebrow"></div>
+      <h2 class="serif" data-i18n="cities.orlando.h2"></h2>
+      <p class="intro" data-i18n="cities.orlando.intro"></p>
+    </div>
+    <div class="city-days" id="days-orlando"></div>
   </div>
-  <div class="parks-overview" id="parksOverview"></div>
-</div></section>
+</section>
 
-<!-- INGRESSOS -->
-<section id="ingressos" class="sec"><div class="wrap reveal">
-  <div class="sec-head">
-    <div class="eyebrow">04 · A decisão</div>
-    <h2 class="serif">Sugestões de ingressos</h2>
-    <p class="intro">Cinco combinações possíveis para os dois dias de parque. As marcadas em dourado são as nossas favoritas.</p>
+<!-- MIAMI -->
+<section id="miami" class="city city-miami"><div class="amb amb-sunset"></div>
+  <div class="wrap reveal" style="position:relative">
+    <div class="sec-head">
+      <div class="eyebrow" data-i18n="cities.miami.eyebrow"></div>
+      <h2 class="serif" data-i18n="cities.miami.h2"></h2>
+      <p class="intro" data-i18n="cities.miami.intro"></p>
+    </div>
+    <div class="city-days" id="days-miami"></div>
   </div>
-  <div class="tix" id="tix"></div>
-  <div class="rec-note">⭐ <b>Recomendação:</b> as opções <b>1 e 2</b> são as melhores — dá pra conhecer bem os parques sem enfrentar as filas de até <b>2 horas</b> do Magic Kingdom e do Epic em dias cheios de feriado.</div>
-</div></section>
+</section>
 
-<!-- CASAS -->
+<!-- NOVA YORK -->
+<section id="newyork" class="city city-ny"><div class="amb amb-snow"></div>
+  <div class="wrap reveal" style="position:relative">
+    <div class="sec-head">
+      <div class="eyebrow" data-i18n="cities.ny.eyebrow"></div>
+      <h2 class="serif" data-i18n="cities.ny.h2"></h2>
+      <p class="intro" data-i18n="cities.ny.intro"></p>
+    </div>
+    <div class="city-days" id="days-ny"></div>
+    <div class="ny-bottom">
+      <div class="ny-box reserve">
+        <h4 data-i18n="cities.ny.reserveTitle"></h4>
+        <ul id="nyReserve"></ul>
+      </div>
+      <div class="ny-box pack">
+        <h4 data-i18n="cities.ny.packTitle"></h4>
+        <ul id="nyPack"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WASHINGTON -->
+<section id="washington" class="city city-washington"><div class="amb amb-marble"></div>
+  <div class="wrap reveal" style="position:relative">
+    <div class="sec-head">
+      <div class="eyebrow" data-i18n="cities.washington.eyebrow"></div>
+      <h2 class="serif" data-i18n="cities.washington.h2"></h2>
+      <p class="intro" data-i18n="cities.washington.intro"></p>
+    </div>
+    <div class="city-days" id="days-washington"></div>
+  </div>
+</section>
+
+<!-- HOSPEDAGEM -->
 <section id="casas" class="sec"><div class="wrap reveal">
   <div class="sec-head">
-    <div class="eyebrow">05 · Onde ficar</div>
-    <h2 class="serif">Opções de casa em Orlando</h2>
-    <p class="intro">Três casas no Airbnb para 8 pessoas, de 23 a 26 de novembro. Clique para abrir cada anúncio.</p>
+    <div class="eyebrow" data-i18n="sections.casas.eyebrow"></div>
+    <h2 class="serif" data-i18n="sections.casas.h2"></h2>
+    <p class="intro" data-i18n="sections.casas.intro"></p>
   </div>
   <div class="houses" id="houses"></div>
 </div></section>
 
-<!-- NEW YORK -->
-<section id="newyork" class="ny sec"><div class="snow"></div><div class="wrap reveal" style="position:relative">
-  <div class="sec-head">
-    <div class="eyebrow">06 · Grand finale</div>
-    <h2 class="serif">🎄 Nova York no Natal — 4 dias</h2>
-    <p class="intro">A cidade inteira virada em luzes, vitrines e árvores gigantes. Quatro dias pensados para entrar no clima sem correria.</p>
-  </div>
-  <div class="ny-days" id="nyDays"></div>
-  <div class="ny-bottom">
-    <div class="ny-box reserve">
-      <h4>🎟️ Reservar antes</h4>
-      <ul>
-        <li><a href="https://www.statuecitycruises.com" target="_blank" rel="noopener">Estátua da Liberdade <span class="rlink">reservar ↗</span></a></li>
-        <li><a href="https://www.rockefellercenter.com/buy-tickets" target="_blank" rel="noopener">Top of the Rock <span class="rlink">reservar ↗</span></a></li>
-        <li><a href="https://www.playbill.com/shows" target="_blank" rel="noopener">Broadway <span class="rlink">reservar ↗</span></a></li>
-        <li><a href="https://www.dykerheightschristmaslights.com/book-now.php" target="_blank" rel="noopener">Dyker Heights tour (opcional) <span class="rlink">reservar ↗</span></a></li>
-      </ul>
-    </div>
-    <div class="ny-box pack">
-      <h4>❄️ Dicas &amp; o que levar</h4>
-      <ul>
-        <li>Escurece cedo (~16h30)</li>
-        <li>Faz bastante frio e vento</li>
-        <li>Segunda pele, luva, gorro e cachecol</li>
-        <li>Casaco quente e bota confortável</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="ny-houses-head">
-    <h3>🏡 Opções de casa</h3>
-    <p>Todas em <b>New Jersey</b>, devido aos custos de estadia em Nova York. Para 8 pessoas · 01–05 dez.</p>
-  </div>
-  <div class="ny-houses" id="nyHouses"></div>
-</div></section>
-
 <footer>
   <div class="seal2">✦</div>
-  <div class="blessing">“Que a viagem seja abençoada, as filas curtas, o dólar camarada e a família sempre junta.”</div>
-  <div class="by">Feito com carinho para a <b style="color:#fff">Viagem Ferrari, Souza, Barbosa e Correa</b> · USA 2026<br>
-  Roteiro original de uma esposa muito caprichosa 💛 — agora em forma de site, com padre e tudo.</div>
+  <div class="blessing" data-i18n="footer.blessing"></div>
+  <div class="by">
+    <span data-i18n="footer.by1"></span> <b style="color:#fff" data-i18n="footer.byBold"></b><br>
+    <span data-i18n="footer.by2"></span>
+  </div>
 </footer>
 
-<script>
-const DATA = {"parks": [{"id": "usf", "resort": "Universal", "name": "Universal Studios", "color": "#2c6df0", "desc": "O parque mais “cinematográfico” da Universal em Orlando, com foco em simuladores, atrações indoor e experiências imersivas.", "guide": "https://guia.melhoresdestinos.com.br/universal-studios-florida-orlando.html", "rides": [{"n": "Harry Potter and the Escape from Gringotts", "d": "Mistura simulador com montanha-russa indoor em cenários incríveis do banco Gringotts. A fila já vale a experiência.", "l": "m", "u": "https://www.youtube.com/watch?v=N8FSuOjoy8w"}, {"n": "Revenge of the Mummy", "d": "Montanha-russa indoor no escuro com acelerações fortes, fogo, sustos e efeitos especiais.", "l": "r", "u": "https://www.youtube.com/watch?v=WYI4ljAx4lk"}, {"n": "Transformers – The Ride 3D", "d": "Simulador 3D super imersivo estilo Homem-Aranha, com batalhas gigantes entre Autobots e Decepticons.", "l": "m", "u": "https://www.youtube.com/watch?v=vgqWr5gYb4Y"}, {"n": "Men in Black – Alien Attack", "d": "Atração interativa onde você atira em aliens e compete por pontos durante o percurso.", "l": "g", "u": "https://www.youtube.com/watch?v=5vh9TZEyc0U"}, {"n": "E.T. Adventure", "d": "Um passeio tranquilo e encantador inspirado no filme E.T.", "l": "g", "u": "https://www.youtube.com/watch?v=xEfK7bqBjXI"}, {"n": "The Simpsons Ride", "d": "Simulador divertido ambientado em Springfield com muito humor. Pode dar um pouco de enjoo em algumas pessoas.", "l": "m", "u": "https://www.youtube.com/watch?v=ztsvpOouuqA"}, {"n": "Despicable Me Minion Mayhem", "d": "Simulador divertido dos Minions, ótimo para famílias e bem popular.", "l": "g", "u": "https://www.youtube.com/watch?v=-h4HcUh8Jbs"}, {"n": "The Bourne Stuntacular", "d": "Show impressionante com telas gigantes, perseguições, explosões e dublês ao vivo. Um dos melhores shows da Universal.", "l": "g", "u": "https://www.youtube.com/watch?v=F4XX9Z4KVEY", "show": true}]}, {"id": "ioa", "resort": "Universal", "name": "Islands of Adventure", "color": "#1fb3a6", "desc": "O parque mais radical da Universal. Mistura montanhas-russas fortes, atrações aquáticas e cenários gigantescos.", "guide": "https://guia.melhoresdestinos.com.br/islands-of-adventure-orlando.html", "rides": [{"n": "Jurassic World VelociCoaster", "d": "A montanha-russa mais radical da Universal Orlando! Acelerações MUITO fortes, inversões e uma parte externa incrível sobre a água. Uma das melhores do mundo.", "l": "r", "u": "https://www.youtube.com/watch?v=lYRxkCrDFIo"}, {"n": "Harry Potter and the Forbidden Journey", "d": "Atração dentro do castelo de Hogwarts que mistura simulador, cenários reais e movimento robótico. A fila é uma atração à parte.", "l": "m", "u": "https://www.youtube.com/watch?v=2O2_0W4Q4mA"}, {"n": "Hagrid’s Magical Creatures Motorbike Adventure", "d": "Montanha-russa super imersiva na floresta proibida com vários lançamentos, cenários incríveis e surpresas.", "l": "r", "u": "https://www.youtube.com/watch?v=TdGbsggU2dg"}, {"n": "The Amazing Adventures of Spider-Man", "d": "Simulador 3D clássico que mistura telas e cenários físicos. Até hoje uma das melhores atrações do parque.", "l": "m", "u": "https://www.youtube.com/watch?v=cH27SL9zO1Y"}, {"n": "The Incredible Hulk Coaster", "d": "Montanha-russa intensa com lançamento logo no começo e várias inversões. Famosa pelo percurso forte e barulhento.", "l": "r", "u": "https://www.youtube.com/watch?v=fax6tQOvIkw"}, {"n": "Jurassic Park River Adventure", "d": "Passeio aquático pelos dinossauros com uma queda final clássica. Prepare-se para se molhar.", "l": "m", "u": "https://www.youtube.com/watch?v=CHvejAdOGe8"}, {"n": "Dudley Do-Right’s Ripsaw Falls", "d": "Uma das atrações que mais molham em Orlando. Várias quedas e clima divertido de desenho animado.", "l": "m", "u": "https://www.youtube.com/watch?v=q4yztgolbqQ"}, {"n": "Popeye & Bluto’s Bilge-Rat Barges", "d": "Rafting circular MUITO molhado e caótico. Quase impossível sair seco.", "l": "m", "u": "https://www.youtube.com/watch?v=sLTOd3Hzteo"}]}, {"id": "epic", "resort": "Universal", "name": "Epic Universe", "color": "#6b4ce6", "desc": "O parque mais novo e tecnológico da Universal Orlando. Cada área parece um “mundo separado”, com entradas gigantescas em formato de portais.", "guide": "https://guia.melhoresdestinos.com.br/epic-universe.html", "warn": "Não indicado para esta viagem — super lotação no feriado.", "rides": [{"n": "Stardust Racers", "d": "Montanha-russa de lançamento duplo com dois trilhos que “correm” lado a lado. Muito rápida e suave. A principal do parque.", "l": "r", "u": "https://www.youtube.com/watch?v=QPESCxfb1LM"}, {"n": "Harry Potter and the Battle at the Ministry", "d": "Ambientada no Ministério da Magia de Paris. Mistura elevadores, simulador, cenários gigantes e tecnologia nova.", "l": "m", "u": "https://www.youtube.com/watch?v=K_RtbRljPZc"}, {"n": "Mario Kart: Bowser’s Challenge", "d": "Atração interativa com realidade aumentada no Super Nintendo World. Você corre no Mario Kart usando visor especial.", "l": "g", "u": "https://www.youtube.com/watch?v=Z2P0xpUVzv0"}, {"n": "Hiccup’s Wing Gliders", "d": "Montanha-russa familiar inspirada em Como Treinar o Seu Dragão, com voos suaves sobre a ilha de Berk.", "l": "m", "u": "https://www.youtube.com/watch?v=yV4MMXqete0"}, {"n": "Fyre Drill", "d": "Atração aquática interativa em barcos onde os visitantes “disputam” usando canhões de água.", "l": "g", "u": "https://www.youtube.com/watch?v=rq_0t8jSrpg"}, {"n": "Monsters Unchained: The Frankenstein Experiment", "d": "Dark ride tecnológica com animatrônicos gigantes dos monstros clássicos. Uma das mais elogiadas do parque.", "l": "m", "u": "https://www.youtube.com/watch?v=7AbnllQNN4o"}, {"n": "Curse of the Werewolf", "d": "Montanha-russa giratória inspirada em lobisomens. Mais curta e menos intensa que Stardust Racers.", "l": "m", "u": "https://www.youtube.com/watch?v=WYkaAV7ae6g"}]}, {"id": "epcot", "resort": "Disney", "name": "EPCOT", "color": "#e8a02c", "desc": "O parque mais “adulto” e diferente da Disney. Mistura tecnologia, atrações modernas, culturas do mundo e comidas incríveis. Menos personagens, mais experiências e inovação.", "guide": "https://guia.melhoresdestinos.com.br/epcot-orlando.html", "rides": [{"n": "Guardians of the Galaxy – Cosmic Rewind", "d": "Montanha-russa indoor super tecnológica com rotação dos carrinhos, música e lançamentos.", "l": "r", "u": "https://www.youtube.com/watch?v=oYhjmoP51AE"}, {"n": "Soarin’ Around the World", "d": "Simulador tranquilo onde você “voa” sobre lugares famosos do mundo. Uma das mais relaxantes e bonitas da Disney.", "l": "g", "u": "https://www.youtube.com/watch?v=8Q4VdM9jK8E"}, {"n": "Frozen Ever After", "d": "Passeio de barco inspirado em Frozen dentro do pavilhão da Noruega. Muito popular entre famílias.", "l": "g", "u": "https://www.youtube.com/watch?v=X9m4P2kV7cQ"}, {"n": "Remy’s Ratatouille Adventure", "d": "Atração 4D onde você é “encolhido” ao tamanho do Remy dentro de uma cozinha gigante em Paris.", "l": "g", "u": "https://www.youtube.com/watch?v=n5R8pQ2K4vM"}, {"n": "Test Track", "d": "Você monta e testa um carro virtual antes de entrar em uma pista de alta velocidade.", "l": "m", "u": "https://www.youtube.com/watch?v=y7M2Q6pK1nA"}, {"n": "Spaceship Earth", "d": "Passeio clássico dentro da bola gigante do EPCOT mostrando a evolução da comunicação e da humanidade.", "l": "g", "u": "https://www.youtube.com/watch?v=V6kQ3mP8r2E"}, {"n": "The Seas with Nemo & Friends", "d": "Passeio leve inspirado em Procurando Nemo com acesso ao enorme aquário do EPCOT.", "l": "g", "u": "https://www.youtube.com/watch?v=J4pQ9mN6k3V"}, {"n": "Luminous – The Symphony of Us", "d": "Show noturno no lago do EPCOT com fogos, luzes, música e drones.", "l": "g", "u": "https://www.youtube.com/watch?v=W2kP8mQ5r1A", "show": true}]}, {"id": "mk", "resort": "Disney", "name": "Magic Kingdom", "color": "#ff5a47", "desc": "O parque do castelo da Cinderela, o que mais lembra os filmes e personagens tradicionais. Atrações históricas, brinquedos de família e experiências super nostálgicas.", "guide": "https://guia.melhoresdestinos.com.br/magic-kingdom-orlando.html", "warn": "Não indicado para esta viagem — super lotação no feriado (até 2h de fila).", "rides": [{"n": "TRON Lightcycle / Run", "d": "Montanha-russa futurista inspirada no filme TRON. Motos de luz em alta velocidade dentro e fora de uma estrutura iluminada.", "l": "r", "u": "https://www.youtube.com/watch?v=kcxdAZa__2A"}, {"n": "Seven Dwarfs Mine Train", "d": "Montanha-russa familiar da Branca de Neve com carrinhos que balançam. Uma das filas mais disputadas.", "l": "m", "u": "https://www.youtube.com/watch?v=dL3gs_xLiKM"}, {"n": "Space Mountain", "d": "Clássica montanha-russa indoor no escuro com tema espacial. Antiga, mas continua entre as mais populares.", "l": "r", "u": "https://www.youtube.com/watch?v=em7z1NbhFOo"}, {"n": "Haunted Mansion", "d": "Passeio clássico pelos fantasmas da mansão assombrada. Mistura humor e clima sombrio de forma divertida.", "l": "g", "u": "https://www.youtube.com/watch?v=HEgtMAnIum4"}, {"n": "Pirates of the Caribbean", "d": "Passeio de barco pelos cenários dos piratas que inspiraram os filmes do Jack Sparrow.", "l": "g", "u": "https://www.youtube.com/watch?v=52qlNIKvy3A"}, {"n": "Big Thunder Mountain Railroad", "d": "Montanha-russa temática de mina no velho oeste. Mais divertida do que radical.", "l": "m", "u": "https://www.youtube.com/watch?v=hEnqi9QTZvQ"}, {"n": "Peter Pan’s Flight", "d": "Passeio suspenso super clássico onde você “voa” sobre Londres e a Terra do Nunca.", "l": "g", "u": "https://www.youtube.com/watch?v=ycEy6FXOmQ8"}, {"n": "Happily Ever After", "d": "Show noturno no Castelo da Cinderela com fogos, projeções e músicas clássicas. Um dos melhores shows da Disney.", "l": "g", "u": "https://www.youtube.com/watch?v=Si_l4-RKQVU", "show": true}]}, {"id": "hs", "resort": "Disney", "name": "Hollywood Studios", "color": "#990011", "desc": "O parque mais “radical” da Disney e o mais focado em filmes, ação e tecnologia. Simuladores modernos, coasters intensas e áreas imersivas como Star Wars e Toy Story.", "guide": "https://guia.melhoresdestinos.com.br/disneys-hollywood-studios-orlando.html", "rides": [{"n": "Star Wars: Rise of the Resistance", "d": "Mistura dark ride, simulador, cenários gigantes, personagens e efeitos especiais no universo Star Wars.", "l": "m", "u": "https://www.youtube.com/watch?v=V_BRrTa1WYc"}, {"n": "Slinky Dog Dash", "d": "Montanha-russa familiar do Toy Story Land com percurso divertido e visual lindo, principalmente à noite.", "l": "m", "u": "https://www.youtube.com/watch?v=gyz64uxR1Aw"}, {"n": "Rock ‘n’ Roller Coaster", "d": "Montanha-russa indoor com lançamento super rápido (0 a ~90 km/h em segundos). Em 2026 foi retematizada com os Muppets no lugar do Aerosmith.", "l": "r", "u": "https://www.youtube.com/watch?v=BzxbJX5qJZU"}, {"n": "The Twilight Zone Tower of Terror", "d": "Elevador assombrado com quedas inesperadas e uma das tematizações mais icônicas da Disney.", "l": "r", "u": "https://www.youtube.com/watch?v=r1Ptp72Vey4"}, {"n": "Mickey & Minnie’s Runaway Railway", "d": "Dark ride moderna e divertida com o Mickey e a Minnie e efeitos visuais muito criativos.", "l": "g", "u": "https://www.youtube.com/watch?v=SvfypxnHD-o"}, {"n": "Millennium Falcon: Smugglers Run", "d": "Simulador interativo onde os visitantes pilotam a Millennium Falcon em uma missão Star Wars.", "l": "m", "u": "https://www.youtube.com/watch?v=cBoXXEQobYY"}, {"n": "Toy Story Mania!", "d": "Atração interativa 4D onde você compete por pontos em jogos inspirados em Toy Story.", "l": "g", "u": "https://www.youtube.com/watch?v=ohk7G6dAOpM"}, {"n": "Alien Swirling Saucers", "d": "Atração giratória inspirada nos aliens do Toy Story. Mais tranquila e divertida para famílias.", "l": "g", "u": "https://www.youtube.com/watch?v=Lf5fLEqTVkc"}, {"n": "Fantasmic!", "d": "Show noturno com água, fogos, projeções e vários personagens estrelado pelo Mickey.", "l": "g", "u": "https://www.youtube.com/watch?v=0V34o4m_2T0", "show": true}]}], "ticketOptions": [{"t": "Opção 1", "price": "US$ 600", "best": true, "d1": "Universal Studios + Islands of Adventure (park to park)", "d2": "Hollywood Studios — Disney"}, {"t": "Opção 2", "price": "US$ 400", "best": true, "d1": "Universal Studios", "d2": "Islands of Adventure"}, {"t": "Opção 3", "price": "US$ 600", "best": false, "d1": "Universal Studios + Islands of Adventure (park to park)", "d2": "EPCOT — Disney"}, {"t": "Opção 4", "price": "US$ 504", "best": false, "d1": "Universal Studios + Islands of Adventure (park to park)", "d2": "Epic Universe"}, {"t": "Opção 5", "price": "US$ 600", "best": false, "d1": "Universal Studios + Islands of Adventure", "d2": "Magic Kingdom — Disney"}], "houses": ["https://www.airbnb.com.br/rooms/51419807?check_in=2026-11-23&check_out=2026-11-26&guests=1&adults=8&s=67&unique_share_id=39a55979-2d1e-4784-ac44-02d84e8488d3", "https://www.airbnb.com.br/rooms/44065313?check_in=2026-11-23&check_out=2026-11-26&guests=1&adults=8&s=67&unique_share_id=aa3f8ee1-5215-473e-a528-d66130ee0a86", "https://www.airbnb.com.br/rooms/667466148015124733?check_in=2026-11-23&check_out=2026-11-26&guests=1&adults=8&s=67&unique_share_id=4e556065-d60c-4368-975b-098fde990e8c"], "housesNY": ["https://www.airbnb.com.br/rooms/1576411109802220001?check_in=2026-12-01&check_out=2026-12-05&guests=1&adults=8&s=67&unique_share_id=45551fb5-082d-4901-afb7-9d6b924c7c89", "https://www.airbnb.com.br/rooms/1589147171215157546?check_in=2026-12-01&check_out=2026-12-05&guests=1&adults=8&s=67&unique_share_id=acf5a18e-3860-44fb-82fa-8a0051a235eb", "https://www.airbnb.com.br/rooms/1607696451058250242?check_in=2026-12-01&check_out=2026-12-05&guests=1&adults=8&s=67&unique_share_id=1c44a178-0862-4427-8e4e-30e5e55cc4d5"]};
-
-/* ---- VOOS ---- */
-const flights = [
-  {leg:["São Paulo","Miami"], date:"22 / NOV", time:"23:50h", voo:"906", pin:"🌴"},
-  {leg:["Miami","Nova York (JFK)"], date:"01 / DEZ", time:"07:31h", voo:"3060", pin:"🗽"},
-  {leg:["Nova York (JFK)","São Paulo"], date:"07 / DEZ", time:"18:35h", voo:"951", pin:"🏠"},
-];
-document.getElementById('flights').innerHTML = flights.map(f=>`
-  <div class="flight">
-    <span class="pin">${f.pin}</span>
-    <div class="leg"><span>${f.leg[0]}</span> <span class="arr">→</span> <span>${f.leg[1]}</span></div>
-    <div class="meta"><span>Partida às <b>${f.time}</b></span><span>Voo <b>${f.voo}</b></span></div>
-    <span class="date-badge">${f.date} · 2026</span>
-  </div>`).join('');
-
-/* ---- TIMELINE ---- */
-const trip = [
-  {leg:"Flórida · Orlando & Miami", color:"var(--gold)"},
-  {d:"Dia 23", c:"Chegada em Miami e ida para Orlando — dia de compras"},
-  {d:"Dia 24", c:"Dia de parque"},
-  {d:"Dia 25", c:"Dia de parque, ou conhecer Orlando e fazer compras"},
-  {d:"Dia 26", c:"Volta para Miami · Ação de Graças — festa na casa do Will 🦃"},
-  {d:"Dia 27", c:"Black Friday — passeio + compras 🛍️"},
-  {d:"Dia 28", c:"Conhecer a região (Fort Lauderdale / Palm Beach ou Key West)"},
-  {d:"Dia 29", c:"Retorno para Miami e passeio pela cidade"},
-  {d:"Dia 30", c:"Passeio por Miami 🌴"},
-  {leg:"Nova York · Natal", color:"var(--blue)"},
-  {d:"Dia 01", c:"Ida para Nova York e passeio por Midtown"},
-  {d:"Dia 02", c:"Estátua da Liberdade + Brooklyn"},
-  {d:"Dia 03", c:"Central Park, mirante e Broadway 🎭"},
-  {d:"Dia 04", c:"Parques, bibliotecas e Dyker Heights 🎄"},
-  {leg:"Capital & Filadélfia", color:"var(--coral)"},
-  {d:"Dia 05", c:"Ida para Washington + passeios"},
-  {d:"Dia 06", c:"Ida para Philadelphia + passeio"},
-  {d:"Dia 07", c:"Retorno para Nova York + voo de volta ✈️"},
-];
-document.getElementById('timeline').innerHTML = trip.map(r=>{
-  if(r.leg) return `<div class="tl-leg" style="color:${r.color}"><span>${r.leg}</span><span class="ln"></span></div>`;
-  const num = r.d.replace('Dia ','');
-  return `<div class="tl-row"><div class="tl-dot" style="background:var(--ink)">${num}</div><div class="tl-body"><div class="d">${r.d}</div><div class="c">${r.c}</div></div></div>`;
-}).join('');
-
-/* ---- PARKS (com POVs) ---- */
-function shade(hex,p){
-  const n=parseInt(hex.slice(1),16);let r=(n>>16)+p,g=((n>>8)&255)+p,b=(n&255)+p;
-  r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b));
-  return '#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);
-}
-const LVL={g:"Família",m:"Médio",r:"Radical"};
-document.getElementById('parksOverview').innerHTML = DATA.parks.map(p=>{
-  const ic = p.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  const povs = p.rides.map(r=>{
-    const lv = r.show ? 'show' : r.l;
-    const sub = r.show ? 'Show' : LVL[r.l];
-    return `<a class="povitem" href="${r.u}" target="_blank" rel="noopener" style="--accent:${p.color}">
-      <span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-      <span class="pt">${r.n}<small>${sub}</small></span>
-      <span class="lvldot ${lv}"></span>
-    </a>`;
-  }).join('');
-  return `<div class="po-card" style="--accent:${p.color}">
-    <div class="po-head">
-      <div class="po-ic" style="background:linear-gradient(135deg,${p.color},${shade(p.color,-26)})">${ic}</div>
-      <div class="po-body">
-        <div class="po-resort">${p.resort}</div>
-        <div class="po-name">${p.name}</div>
-        <p class="po-desc">${p.desc}</p>
-        ${p.warn?`<span class="po-warn">⚠️ ${p.warn}</span>`:''}
+<!-- MODAL DO PARQUE -->
+<div class="modal-backdrop" id="parkModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="parkModalTitle">
+    <button type="button" class="modal-x" id="parkModalClose" data-i18n-aria="ui.closeModal" aria-label="Fechar">✕</button>
+    <div class="park-banner">
+      <div class="resort" data-i18n="park.resort"></div>
+      <h3 id="parkModalTitle" class="serif">Islands of Adventure</h3>
+      <p data-i18n="park.desc"></p>
+      <div class="row">
+        <span class="park-badge">✅ <span data-i18n="park.badge"></span></span>
+        <a class="guide-link" href="https://guia.melhoresdestinos.com.br/islands-of-adventure-orlando.html" target="_blank" rel="noopener" data-i18n="ui.fullGuide"></a>
       </div>
     </div>
-    <div class="povgrid">${povs}</div>
-    <a class="po-guide" href="${p.guide}" target="_blank" rel="noopener">📚 Guia completo do parque ↗</a>
-  </div>`;
-}).join('');
+    <div class="ride-grid" id="rideGrid"></div>
+    <div class="park-tip" data-i18n="park.tip"></div>
+    <div class="modal-ticket">
+      <div class="ticket">
+        <span class="flag" data-i18n="ticket.flag"></span>
+        <div class="tt" data-i18n="ticket.tt"></div>
+        <div class="tk-name" data-i18n="ticket.name"></div>
+        <div class="tk-date" data-i18n="ticket.date"></div>
+        <ul id="ticketLines"></ul>
+        <a class="btn gold" href="https://www.universalorlando.com/web/en/us/tickets-packages" target="_blank" rel="noopener" data-i18n="ticket.cta"></a>
+        <div class="note" data-i18n="ticket.note"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-/* ---- TICKETS ---- */
-document.getElementById('tix').innerHTML=DATA.ticketOptions.map(o=>`
-  <div class="tix-card ${o.best?'best':''}">
-    ${o.best?'<span class="flag">★ Recomendado</span>':''}
-    <div class="tt">${o.t}</div>
-    <div class="price">${o.price}</div>
-    <div class="day"><span class="n">Dia 1</span><span class="txt">${o.d1}</span></div>
-    <div class="day"><span class="n">Dia 2</span><span class="txt">${o.d2}</span></div>
-  </div>`).join('');
+<script>
+/* =====================================================================
+   DADOS QUE NÃO MUDAM COM O IDIOMA (links, cores, números de voo, POVs)
+   ===================================================================== */
+const STATIC = {
+  flightMeta: [
+    {voo:"906",  pin:"🌴"},
+    {voo:"3060", pin:"🗽"},
+    {voo:"951",  pin:"🏠"}
+  ],
+  /* leg: índice do cabeçalho de trecho · n: número do dia · i: índice do texto */
+  timeline: [
+    {leg:0, color:"var(--teal)"},
+    {n:"23", i:0}, {n:"24", i:1, hi:true}, {n:"25", i:2},
+    {leg:1, color:"var(--coral)"},
+    {n:"26", i:3, hi:true}, {n:"27", i:4}, {n:"28", i:5}, {n:"29", i:6}, {n:"30", i:7},
+    {leg:2, color:"var(--blue)"},
+    {n:"01", i:8}, {n:"02", i:9}, {n:"03", i:10}, {n:"04", i:11},
+    {leg:3, color:"var(--violet)"},
+    {n:"05", i:12}, {n:"06", i:13}, {n:"07", i:14}
+  ],
+  /* flags por dia de cada cidade: "park" abre o modal, "tbd" = ainda a definir */
+  cities: [
+    {key:"orlando",    flags:[null, "park", null, null]},
+    {key:"miami",      flags:[null, null, "tbd", null, "tbd", null]},
+    {key:"ny",         flags:[null, null, null, null]},
+    {key:"washington", flags:["tbd", "tbd", null]}
+  ],
+  rides: [
+    {l:"r", u:"https://www.youtube.com/watch?v=lYRxkCrDFIo"},
+    {l:"m", u:"https://www.youtube.com/watch?v=2O2_0W4Q4mA"},
+    {l:"r", u:"https://www.youtube.com/watch?v=TdGbsggU2dg"},
+    {l:"m", u:"https://www.youtube.com/watch?v=cH27SL9zO1Y"},
+    {l:"r", u:"https://www.youtube.com/watch?v=fax6tQOvIkw"},
+    {l:"m", u:"https://www.youtube.com/watch?v=CHvejAdOGe8"},
+    {l:"m", u:"https://www.youtube.com/watch?v=q4yztgolbqQ"},
+    {l:"m", u:"https://www.youtube.com/watch?v=sLTOd3Hzteo"}
+  ],
+  houses: [
+    {icon:"🌴", accent:"var(--coral)",  ink:"#bd2f1c", gift:true,  url:"https://www.airbnb.com.br/rooms/1752280890137588856?unique_share_id=543ee611-d11b-4d89-8a2b-dd4deaeeae7c&viralityEntryPoint=1&s=76"},
+    {icon:"🏡", accent:"var(--teal)",   ink:"#0c7a70", gift:false, url:"https://www.airbnb.com.br/rooms/1356733219221971236?unique_share_id=cd069367-8fa9-4bdf-af12-30053c19f04f&viralityEntryPoint=1&s=76"},
+    {icon:"🗽", accent:"var(--blue)",   ink:"#2559cc", gift:false, url:"https://www.airbnb.com.br/rooms/1643167310291938218?unique_share_id=2b9e41cc-b1b8-4030-956d-5facc8d50e5c&viralityEntryPoint=1&s=76"},
+    {icon:"🏛️", accent:"var(--violet)", ink:"#5c3ad0", gift:false, url:"https://www.airbnb.com.br/rooms/1333663888263924236?unique_share_id=05995aac-9e0b-4daf-9147-8949d2f95d3b&viralityEntryPoint=1&s=76"}
+  ],
+  nyReserve: [
+    "https://www.statuecitycruises.com",
+    "https://www.rockefellercenter.com/buy-tickets",
+    "https://www.playbill.com/shows",
+    "https://www.dykerheightschristmaslights.com/book-now.php"
+  ]
+};
 
-/* ---- HOUSES ---- */
-const houseIcons=["🏡","🏘️","🏠"];
-document.getElementById('houses').innerHTML=DATA.houses.map((h,i)=>`
-  <a class="house" href="${h}" target="_blank" rel="noopener">
-    <span class="ic">${houseIcons[i]}</span>
-    <span class="ht">Opção ${i+1}</span>
-    <span class="hs">Casa para 8 pessoas · 23–26 nov</span>
-    <span class="go">Abrir no Airbnb ↗</span>
-  </a>`).join('');
+/* =====================================================================
+   TEXTOS · PT-BR
+   ===================================================================== */
+const PT_I18N = {
+  title: "Viagem Ferrari, Souza, Barbosa e Correa · USA 2026",
+  nav: {voos:"Voos", roteiro:"Roteiro", orlando:"Orlando", miami:"Miami", ny:"Nova York", washington:"Washington", casas:"Casas"},
+  hero: {
+    eyebrow: "A grande viagem da família",
+    titleA: "USA",
+    titleB: "Família",
+    cities: ["Miami","Orlando","Nova York","Washington"],
+    lede: "De 22 de novembro a 07 de dezembro. Sol da Flórida, o nosso dia de parque, Ação de Graças em família e Nova York vestida de Natal — a visão geral de toda a viagem, num só lugar.",
+    cue: "Role para começar"
+  },
+  padre: {
+    lbl: "Capelão oficial da expedição",
+    big: "“E o padre vai junto — abençoando cada montanha-russa.”",
+    sm: "Toda viagem dessa família tem padre na bagagem. Bênção garantida do check-in ao último voo, com escala obrigatória em cada igreja, cada brinde e cada fila de parque. 🙏✈️"
+  },
+  footer: {
+    blessing: "“Que a viagem seja abençoada, as filas curtas, o dólar camarada e a família sempre junta.”",
+    by1: "Feito com carinho para a",
+    byBold: "Viagem Ferrari, Souza, Barbosa e Correa · USA 2026",
+    by2: "Roteiro original de uma esposa muito caprichosa 💛 — agora em forma de site, com padre e tudo."
+  },
+  ui: {
+    day: "Dia",
+    departure: "Partida às",
+    flight: "Voo",
+    openAirbnb: "Abrir no Airbnb ↗",
+    confirmed: "Confirmado",
+    fullGuide: "📚 Guia completo do parque ↗",
+    openPark: "Ver o parque e o ingresso",
+    closeModal: "Fechar",
+    tbd: "A definir",
+    levelG: "Família",
+    levelM: "Médio",
+    levelR: "Radical"
+  },
+  sections: {
+    voos: {eyebrow:"01 · Logística", h2:"Datas e horários dos voos", intro:"Os três trechos que costuram a viagem inteira. Anote, fotografe, deixe no print do celular."},
+    roteiro: {eyebrow:"02 · Visão geral", h2:"Resumo do roteiro", intro:"15 dias, quatro cidades, uma Ação de Graças em família e o Natal chegando em Nova York. Aqui está o esqueleto de tudo."},
+    casas: {eyebrow:"07 · Onde ficar", h2:"Hospedagem confirmada", intro:"As quatro casas já estão fechadas. Toque em cada uma para abrir o anúncio no Airbnb."}
+  },
+  flights: [
+    {from:"São Paulo", to:"Miami", date:"22 / NOV", time:"23:50h"},
+    {from:"Miami", to:"Nova York (JFK)", date:"01 / DEZ", time:"07:31h"},
+    {from:"Nova York (JFK)", to:"São Paulo", date:"07 / DEZ", time:"18:35h"}
+  ],
+  legs: ["Orlando · Chegada e parque", "Miami · Ação de Graças", "Nova York · Natal", "Washington · Reta final"],
+  days: [
+    "Chegada em Miami, estrada até Orlando — Walmart e Disney Springs",
+    "🎢 Islands of Adventure — o nosso dia de parque",
+    "Dia de compras — Ross, Marshalls e os outlets 🛍️",
+    "Volta bem cedo para Miami · Ação de Graças 🦃",
+    "Black Friday e conhecer a cidade 🛍️",
+    "Analisar o roteiro com o Will e a Reg",
+    "Churrasco em família — Brasil e USA 🔥",
+    "Analisar o roteiro com o Will e a Reg",
+    "Ida para Nova York e passeio por Midtown",
+    "Estátua da Liberdade + Brooklyn",
+    "Central Park, mirante e Broadway 🎭",
+    "Parques, bibliotecas e Dyker Heights 🎄",
+    "Trem para Washington e montar o roteiro 🚆",
+    "Montar o roteiro — bate-volta a Philadelphia a definir",
+    "Retorno para Nova York + voo de volta ✈️"
+  ],
+  cities: {
+    orlando: {
+      eyebrow: "03 · Primeira parada",
+      h2: "Orlando — 4 dias",
+      intro: "Chegada, o nosso único dia de parque e um dia inteiro de compras antes de descer para Miami.",
+      days: [
+        {d:"23 nov", h:"Chegada e o primeiro gostinho", items:["Chegada em Miami e estrada até Orlando","Walmart — abastecer a casa 🛒","Disney Springs à noite ✨"], tip:"Dia de pousar, pegar o carro e entrar no ritmo. Nada de correria."},
+        {d:"24 nov", h:"O grande dia de parque", items:["Islands of Adventure o dia inteiro 🎢","Jantar no CityWalk","Tentar o Hard Rock Cafe 🎸"], tip:"Toque no botão para ver as atrações, os POVs e o ingresso."},
+        {d:"25 nov", h:"Dia de compras", items:["Ross e Marshalls primeiro 🛍️","Depois o Outlet Marketplace","E fechar no Premium Outlets"], tip:"Ross e Marshalls rendem mais logo cedo, com as araras ainda arrumadas."},
+        {d:"26 nov", h:"Volta para Miami bem cedo", items:["Saída de Orlando bem cedo 🌅","Cerca de 4h de estrada até Miami","Ajudar o Will e a Reg nos preparos do Thanksgiving 🦃"], tip:"Quanto mais cedo sair, mais tempo sobra para ajudar na cozinha."}
+      ]
+    },
+    miami: {
+      eyebrow: "04 · Ação de Graças",
+      h2: "Miami — 6 dias",
+      intro: "A casa do Will e da Reg, o feriado americano em família, a Black Friday e o churrasco Brasil × USA.",
+      days: [
+        {d:"26 nov", h:"Thanksgiving 🦃", items:["Preparos do almoço com a família","Ação de Graças na casa do Will e da Reg","O primeiro feriado americano da turma"], tip:"O dia mais esperado de toda a parte da Flórida."},
+        {d:"27 nov", h:"Black Friday e a cidade", items:["Black Friday — as compras do ano 🛍️","Conhecer Miami com calma"], tip:"Sair cedo: as melhores ofertas somem antes do meio-dia."},
+        {d:"28 nov", h:"Roteiro com o Will e a Reg", items:["Sentar com o Will e a Reg","Analisar e ajustar o roteiro","Definir os passeios de Miami"], tip:"Dia em aberto — o que a turma decidir aqui entra no roteiro."},
+        {d:"29 nov", h:"Churrasco em família 🔥", items:["Churrasco Brasil × USA","Dia de casa, de conversa e de gente"], tip:"O churrasco brasileiro em solo americano — o teste final."},
+        {d:"30 nov", h:"Roteiro com o Will e a Reg", items:["Fechar o roteiro com o Will e a Reg","Últimos ajustes antes de Nova York"], tip:"Último dia em Miami — bom momento para arrumar as malas."},
+        {d:"01 dez", h:"Ida para Nova York", items:["Voo MIA → JFK às 07:31h ✈️","Chegada e primeiro passeio por Midtown"], tip:"Voo cedo: dormir com a mala pronta."}
+      ]
+    },
+    ny: {
+      eyebrow: "05 · Natal",
+      h2: "🎄 Nova York — 4 dias",
+      intro: "A cidade inteira virada em luzes, vitrines e árvores gigantes. Quatro dias pensados para entrar no clima sem correria.",
+      days: [
+        {d:"01 dez", h:"Midtown natalina, sem correria", items:["Check-in","Times Square","Caminhar pela Fifth Avenue","Vitrines de Natal: Saks Fifth Avenue & Macy's Herald Square","Noite no Rockefeller Center 🎄"], tip:"Dia mais leve para entrar no clima da cidade."},
+        {d:"02 dez", h:"Liberdade + Downtown + Brooklyn", items:["Ferry para Statue of Liberty & Ellis Island","Wall Street + Charging Bull","9/11 Memorial","DUMBO + Brooklyn Heights Promenade","Atravessar a Brooklyn Bridge iluminada ✨"], tip:"🍴 Almoço no Katz's Delicatessen — pastrami clássico de NY."},
+        {d:"03 dez", h:"Central Park + Mirante + Broadway", items:["Central Park: Bethesda Terrace, Bow Bridge, Strawberry Fields","Plaza Hotel + chocolate quente ☕","Top of the Rock no pôr do sol ✨","Roosevelt Island Tramway à noite","Broadway 🎭"], tip:"🎭 Musical: Wicked ou The Lion King (checar datas e ingressos)."},
+        {d:"04 dez", h:"Bryant Park + Bibliotecas + Dyker Heights", items:["Bryant Park Winter Village 🎄","New York Public Library","The Morgan Library & Museum","Greenwich & West Village","Friends Apartment Building ☕","Washington Square Park","Dyker Heights à noite 🎄✨"], tip:"As casas de Dyker Heights no Natal são imperdíveis."}
+      ],
+      reserveTitle: "🎟️ Reservar antes",
+      reserve: ["Estátua da Liberdade","Top of the Rock","Broadway","Dyker Heights tour (opcional)"],
+      reserveCta: "reservar ↗",
+      packTitle: "❄️ Dicas & o que levar",
+      pack: ["Escurece cedo (~16h30)","Faz bastante frio e vento","Segunda pele, luva, gorro e cachecol","Casaco quente e bota confortável"]
+    },
+    washington: {
+      eyebrow: "06 · Reta final",
+      h2: "Washington — 3 dias",
+      intro: "Três dias na capital, chegando de trem de Nova York. O roteiro do que fazer por lá a gente monta na hora.",
+      days: [
+        {d:"05 dez", h:"Chegada de trem e montar o roteiro", items:["Trem de Nova York para Washington 🚆","Check-in na casa","Montar o roteiro dos próximos dias"], tip:"O roteiro da capital ainda está em aberto — decidir com calma na chegada."},
+        {d:"06 dez", h:"Montar o roteiro", items:["Definir os passeios da capital","Bate-volta a Philadelphia — a definir"], tip:"Philadelphia fica no caminho entre Washington e Nova York — dá para encaixar."},
+        {d:"07 dez", h:"Retorno para Nova York", items:["Volta para Nova York","Voo JFK → São Paulo às 18:35h ✈️"], tip:"Fim de viagem — e já batendo a saudade."}
+      ]
+    }
+  },
+  park: {
+    resort: "Universal Orlando",
+    badge: "Confirmado · 24 / NOV",
+    desc: "O parque mais radical da Universal. Mistura montanhas-russas fortes, atrações aquáticas e cenários gigantescos — do Hogsmeade do Harry Potter à ilha dos dinossauros do Jurassic World.",
+    tip: "💡 <b>Dica:</b> chegue cedo — VelociCoaster e Hagrid's formam as maiores filas do parque logo na abertura. E leve capa de chuva ou saco plástico para o celular: as atrações aquáticas molham de verdade.",
+    rides: [
+      {n:"Jurassic World VelociCoaster", d:"A montanha-russa mais radical da Universal Orlando! Acelerações MUITO fortes, inversões e uma parte externa incrível sobre a água. Uma das melhores do mundo."},
+      {n:"Harry Potter and the Forbidden Journey", d:"Atração dentro do castelo de Hogwarts que mistura simulador, cenários reais e movimento robótico. A fila é uma atração à parte."},
+      {n:"Hagrid’s Magical Creatures Motorbike Adventure", d:"Montanha-russa super imersiva na floresta proibida com vários lançamentos, cenários incríveis e surpresas."},
+      {n:"The Amazing Adventures of Spider-Man", d:"Simulador 3D clássico que mistura telas e cenários físicos. Até hoje uma das melhores atrações do parque."},
+      {n:"The Incredible Hulk Coaster", d:"Montanha-russa intensa com lançamento logo no começo e várias inversões. Famosa pelo percurso forte e barulhento."},
+      {n:"Jurassic Park River Adventure", d:"Passeio aquático pelos dinossauros com uma queda final clássica. Prepare-se para se molhar."},
+      {n:"Dudley Do-Right’s Ripsaw Falls", d:"Uma das atrações que mais molham em Orlando. Várias quedas e clima divertido de desenho animado."},
+      {n:"Popeye & Bluto’s Bilge-Rat Barges", d:"Rafting circular MUITO molhado e caótico. Quase impossível sair seco."}
+    ]
+  },
+  ticket: {
+    flag: "★ Escolhido",
+    tt: "1 dia · 1 parque",
+    name: "Islands of Adventure",
+    date: "24 de novembro de 2026",
+    lines: [
+      "Ingresso de 1 dia, 1 parque — não precisa de park-to-park.",
+      "Compre online e com antecedência: sai mais barato que na bilheteria.",
+      "Semana de Ação de Graças — considere o Express Pass se as filas estiverem longas."
+    ],
+    cta: "Comprar na Universal ↗",
+    note: "💡 <b>Dica:</b> baixe o app <b>Universal Orlando Resort</b> antes de viajar — ele mostra o tempo de fila de cada atração em tempo real e ajuda a montar a ordem do dia."
+  },
+  houses: [
+    {city:"Miami", tag:"Presente do Will e Reg 🎁", dates:"26 nov – 01 dez", note:"Seis dias em Miami — Thanksgiving, Black Friday e o churrasco em família."},
+    {city:"Orlando", tag:"Fechada", dates:"23 – 26 nov", note:"Quatro dias: a chegada, o dia de parque e o dia de compras."},
+    {city:"Nova York", tag:"Fechada", dates:"01 – 05 dez", note:"Quatro noites com a cidade toda enfeitada para o Natal."},
+    {city:"Washington", tag:"Fechada", dates:"05 – 07 dez", note:"Base para a capital — e para o bate-volta a Philadelphia, se rolar."}
+  ]
+};
 
-/* ---- HOUSES NY ---- */
-if(DATA.housesNY){
-  document.getElementById('nyHouses').innerHTML=DATA.housesNY.map((h,i)=>`
-    <a class="ny-house" href="${h}" target="_blank" rel="noopener">
-      <span class="ic">${houseIcons[i]}</span>
-      <span class="ht">Opção ${i+1}</span>
-      <span class="hs">New Jersey · 8 pessoas · 01–05 dez</span>
-      <span class="go">Abrir no Airbnb ↗</span>
-    </a>`).join('');
+/* =====================================================================
+   TEXTOS · ENGLISH
+   ===================================================================== */
+const EN_I18N = {
+  "title": "Ferrari, Souza, Barbosa & Correa Trip · USA 2026",
+  "nav": {
+    "voos": "Flights",
+    "roteiro": "Itinerary",
+    "orlando": "Orlando",
+    "miami": "Miami",
+    "ny": "New York",
+    "washington": "Washington",
+    "casas": "Stays"
+  },
+  "hero": {
+    "eyebrow": "The family’s big trip",
+    "titleA": "USA",
+    "titleB": "Family",
+    "cities": [
+      "Miami",
+      "Orlando",
+      "New York",
+      "Washington"
+    ],
+    "lede": "From November 22 to December 7. Florida sun, our day at the park, Thanksgiving with the family, and New York dressed up for Christmas — our whole trip at a glance, all in one place.",
+    "cue": "Scroll to begin"
+  },
+  "padre": {
+    "lbl": "Official chaplain of the expedition",
+    "big": "“And the priest comes along — blessing every roller coaster.”",
+    "sm": "Every trip this family takes comes with a priest in the luggage. Blessings guaranteed from check-in to the last flight, with a mandatory layover at every church, every toast, and every park line. 🙏✈️"
+  },
+  "footer": {
+    "blessing": "“May the trip be blessed, the lines short, the dollar friendly, and the family always together.”",
+    "by1": "Made with love for the",
+    "byBold": "Ferrari, Souza, Barbosa & Correa Trip · USA 2026",
+    "by2": "Original itinerary by one lovingly meticulous wife 💛 — now in website form, priest and all."
+  },
+  "ui": {
+    "day": "Day",
+    "departure": "Departs at",
+    "flight": "Flight",
+    "openAirbnb": "Open in Airbnb ↗",
+    "confirmed": "Confirmed",
+    "fullGuide": "📚 Full park guide ↗",
+    "openPark": "See the park and ticket",
+    "closeModal": "Close",
+    "tbd": "TBD",
+    "levelG": "Family",
+    "levelM": "Moderate",
+    "levelR": "Thrill"
+  },
+  "sections": {
+    "voos": {
+      "eyebrow": "01 · Logistics",
+      "h2": "Flight dates and times",
+      "intro": "The three flights that stitch the whole trip together. Write them down, snap a photo, keep a screenshot on your phone."
+    },
+    "roteiro": {
+      "eyebrow": "02 · Overview",
+      "h2": "Itinerary at a glance",
+      "intro": "15 days, four cities, one family Thanksgiving, and Christmas landing in New York. Here’s the backbone of it all."
+    },
+    "casas": {
+      "eyebrow": "07 · Where to stay",
+      "h2": "Every stay booked",
+      "intro": "All four houses are booked. Tap any one to open its Airbnb listing."
+    }
+  },
+  "flights": [
+    {
+      "from": "São Paulo",
+      "to": "Miami",
+      "date": "NOV / 22",
+      "time": "11:50 PM"
+    },
+    {
+      "from": "Miami",
+      "to": "New York (JFK)",
+      "date": "DEC / 1",
+      "time": "7:31 AM"
+    },
+    {
+      "from": "New York (JFK)",
+      "to": "São Paulo",
+      "date": "DEC / 7",
+      "time": "6:35 PM"
+    }
+  ],
+  "legs": [
+    "Orlando · Arrival and park day",
+    "Miami · Thanksgiving",
+    "New York · Christmas",
+    "Washington · Home stretch"
+  ],
+  "days": [
+    "Landing in Miami, then the drive to Orlando — Walmart and Disney Springs",
+    "🎢 Islands of Adventure — our one and only park day",
+    "Shopping day — Ross, Marshalls, and the outlets 🛍️",
+    "Back to Miami bright and early · Thanksgiving 🦃",
+    "Black Friday and getting to know the city 🛍️",
+    "Going over the itinerary with Will and Reg",
+    "Family barbecue — Brazil meets USA 🔥",
+    "Going over the itinerary with Will and Reg",
+    "Off to New York and a walk through Midtown",
+    "Statue of Liberty + Brooklyn",
+    "Central Park, an observation deck, and Broadway 🎭",
+    "Parks, libraries, and Dyker Heights 🎄",
+    "Train to Washington and mapping out the itinerary 🚆",
+    "Mapping out the itinerary — a Philadelphia day trip, TBD",
+    "Back to New York + our flight home ✈️"
+  ],
+  "cities": {
+    "orlando": {
+      "eyebrow": "03 · First stop",
+      "h2": "Orlando — 4 days",
+      "intro": "Landing, our one and only park day, and a whole day of shopping before we head down to Miami.",
+      "days": [
+        {
+          "d": "Nov 23",
+          "h": "Arrival and the first taste of it all",
+          "items": [
+            "Land in Miami, then drive up to Orlando",
+            "Walmart — stock the house 🛒",
+            "Disney Springs at night ✨"
+          ],
+          "tip": "A day to land, grab the car, and ease into the rhythm. No rushing."
+        },
+        {
+          "d": "Nov 24",
+          "h": "The big park day",
+          "items": [
+            "Islands of Adventure all day long 🎢",
+            "Dinner at CityWalk",
+            "Try to hit the Hard Rock Cafe 🎸"
+          ],
+          "tip": "Tap the button to see the rides, the POVs, and the ticket."
+        },
+        {
+          "d": "Nov 25",
+          "h": "Shopping day",
+          "items": [
+            "Ross and Marshalls first 🛍️",
+            "Then the Outlet Marketplace",
+            "And finish at the Premium Outlets"
+          ],
+          "tip": "Ross and Marshalls are best early, while the racks are still tidy."
+        },
+        {
+          "d": "Nov 26",
+          "h": "Back to Miami bright and early",
+          "items": [
+            "Out of Orlando at first light 🌅",
+            "About 4 hours on the road to Miami",
+            "Help Will and Reg get ready for Thanksgiving 🦃"
+          ],
+          "tip": "The earlier we leave, the more time we have to help in the kitchen."
+        }
+      ]
+    },
+    "miami": {
+      "eyebrow": "04 · Thanksgiving",
+      "h2": "Miami — 6 days",
+      "intro": "Will and Reg’s house, the American holiday with family, Black Friday, and the Brazil × USA barbecue.",
+      "days": [
+        {
+          "d": "Nov 26",
+          "h": "Thanksgiving 🦃",
+          "items": [
+            "Lunch prep with the family",
+            "Thanksgiving at Will and Reg’s house",
+            "The crew’s first American holiday"
+          ],
+          "tip": "The most anticipated day of the whole Florida stretch."
+        },
+        {
+          "d": "Nov 27",
+          "h": "Black Friday and the city",
+          "items": [
+            "Black Friday — the shopping spree of the year 🛍️",
+            "Getting to know Miami at an easy pace"
+          ],
+          "tip": "Head out early: the best deals vanish before noon."
+        },
+        {
+          "d": "Nov 28",
+          "h": "Itinerary with Will and Reg",
+          "items": [
+            "Sit down with Will and Reg",
+            "Go over the itinerary and adjust it",
+            "Settle on the Miami outings"
+          ],
+          "tip": "An open day — whatever the crew decides here goes into the itinerary."
+        },
+        {
+          "d": "Nov 29",
+          "h": "Family barbecue 🔥",
+          "items": [
+            "Brazil × USA barbecue",
+            "A day of home, of good talk, and of good company"
+          ],
+          "tip": "Brazilian barbecue on American soil — the final test."
+        },
+        {
+          "d": "Nov 30",
+          "h": "Itinerary with Will and Reg",
+          "items": [
+            "Wrap up the itinerary with Will and Reg",
+            "Last tweaks before New York"
+          ],
+          "tip": "Last day in Miami — a good time to pack the bags."
+        },
+        {
+          "d": "Dec 1",
+          "h": "Off to New York",
+          "items": [
+            "MIA → JFK flight at 7:31 AM ✈️",
+            "Arrival and a first wander through Midtown"
+          ],
+          "tip": "Early flight: go to bed with the bags packed."
+        }
+      ]
+    },
+    "ny": {
+      "eyebrow": "05 · Christmas",
+      "h2": "🎄 New York — 4 days",
+      "intro": "The whole city dressed up in lights, window displays, and giant trees. Four days planned to get into the spirit, no rush.",
+      "days": [
+        {
+          "d": "Dec 1",
+          "h": "Christmassy Midtown, no rush",
+          "items": [
+            "Check-in",
+            "Times Square",
+            "Stroll down Fifth Avenue",
+            "Christmas window displays: Saks Fifth Avenue & Macy’s Herald Square",
+            "Evening at Rockefeller Center 🎄"
+          ],
+          "tip": "A lighter day, just to get into the spirit of the city."
+        },
+        {
+          "d": "Dec 2",
+          "h": "Liberty + Downtown + Brooklyn",
+          "items": [
+            "Ferry to Statue of Liberty & Ellis Island",
+            "Wall Street + Charging Bull",
+            "9/11 Memorial",
+            "DUMBO + Brooklyn Heights Promenade",
+            "Walk across the Brooklyn Bridge, all lit up ✨"
+          ],
+          "tip": "🍴 Lunch at Katz’s Delicatessen — classic NY pastrami."
+        },
+        {
+          "d": "Dec 3",
+          "h": "Central Park + Observation Deck + Broadway",
+          "items": [
+            "Central Park: Bethesda Terrace, Bow Bridge, Strawberry Fields",
+            "Plaza Hotel + hot chocolate ☕",
+            "Top of the Rock at sunset ✨",
+            "Roosevelt Island Tramway at night",
+            "Broadway 🎭"
+          ],
+          "tip": "🎭 Musical: Wicked or The Lion King (check dates and tickets)."
+        },
+        {
+          "d": "Dec 4",
+          "h": "Bryant Park + Libraries + Dyker Heights",
+          "items": [
+            "Bryant Park Winter Village 🎄",
+            "New York Public Library",
+            "The Morgan Library & Museum",
+            "Greenwich & West Village",
+            "Friends Apartment Building ☕",
+            "Washington Square Park",
+            "Dyker Heights at night 🎄✨"
+          ],
+          "tip": "The Dyker Heights houses at Christmas are a must-see."
+        }
+      ],
+      "reserveTitle": "🎟️ Book ahead",
+      "reserve": [
+        "Statue of Liberty",
+        "Top of the Rock",
+        "Broadway",
+        "Dyker Heights tour (optional)"
+      ],
+      "reserveCta": "book ↗",
+      "packTitle": "❄️ Tips & what to pack",
+      "pack": [
+        "Gets dark early (~4:30 PM)",
+        "Pretty cold and windy",
+        "Base layer, gloves, beanie, and scarf",
+        "Warm coat and comfy boots"
+      ]
+    },
+    "washington": {
+      "eyebrow": "06 · Home stretch",
+      "h2": "Washington — 3 days",
+      "intro": "Three days in the capital, arriving by train from New York. We’ll map out what to do there as we go.",
+      "days": [
+        {
+          "d": "Dec 5",
+          "h": "Arrive by train and map out the itinerary",
+          "items": [
+            "Train from New York to Washington 🚆",
+            "Check-in at the house",
+            "Map out the itinerary for the next few days"
+          ],
+          "tip": "The capital’s itinerary is still wide open — we’ll decide at our own pace once we get there."
+        },
+        {
+          "d": "Dec 6",
+          "h": "Map out the itinerary",
+          "items": [
+            "Settle on what to do in the capital",
+            "Day trip to Philadelphia — TBD"
+          ],
+          "tip": "Philadelphia is right on the way between Washington and New York — easy to fit in."
+        },
+        {
+          "d": "Dec 7",
+          "h": "Heading back to New York",
+          "items": [
+            "Back to New York",
+            "JFK → São Paulo flight at 6:35 PM ✈️"
+          ],
+          "tip": "End of the trip — and already missing it."
+        }
+      ]
+    }
+  },
+  "park": {
+    "resort": "Universal Orlando",
+    "badge": "Confirmed · NOV / 24",
+    "desc": "Universal’s most thrilling park. It mixes intense roller coasters, water rides, and enormous sets — from Harry Potter’s Hogsmeade to Jurassic World’s dinosaur island.",
+    "tip": "💡 <b>Tip:</b> get there early — VelociCoaster and Hagrid’s draw the longest lines in the park right at opening. Bring a rain poncho or a plastic bag for your phone — the water rides really do soak you.",
+    "rides": [
+      {
+        "n": "Jurassic World VelociCoaster",
+        "d": "The most thrilling coaster at Universal Orlando! VERY strong acceleration, inversions, and an incredible outdoor stretch over the water. One of the best in the world."
+      },
+      {
+        "n": "Harry Potter and the Forbidden Journey",
+        "d": "A ride inside Hogwarts castle that blends a motion simulator, real sets, and robotic movement. The line is an attraction in its own right."
+      },
+      {
+        "n": "Hagrid’s Magical Creatures Motorbike Adventure",
+        "d": "Super immersive coaster through the Forbidden Forest with several launches, incredible scenery, and a few surprises."
+      },
+      {
+        "n": "The Amazing Adventures of Spider-Man",
+        "d": "Classic 3D simulator that mixes screens with physical sets. Still one of the best rides in the park."
+      },
+      {
+        "n": "The Incredible Hulk Coaster",
+        "d": "Intense coaster with a launch right at the start and several inversions. Famous for its forceful, roaring track."
+      },
+      {
+        "n": "Jurassic Park River Adventure",
+        "d": "Water ride past the dinosaurs with a classic drop at the end. Get ready to get wet."
+      },
+      {
+        "n": "Dudley Do-Right’s Ripsaw Falls",
+        "d": "One of the wettest rides in Orlando. Several drops and a fun cartoon vibe."
+      },
+      {
+        "n": "Popeye & Bluto’s Bilge-Rat Barges",
+        "d": "A VERY wet, chaotic round-raft ride. Almost impossible to come out dry."
+      }
+    ]
+  },
+  "ticket": {
+    "flag": "★ Our pick",
+    "tt": "1 day · 1 park",
+    "name": "Islands of Adventure",
+    "date": "November 24, 2026",
+    "lines": [
+      "1-day, 1-park ticket — no park-to-park needed.",
+      "Buy online and ahead of time: it’s cheaper than at the gate.",
+      "Thanksgiving week — consider the Express Pass if the lines get long."
+    ],
+    "cta": "Buy at Universal ↗",
+    "note": "💡 <b>Tip:</b> download the <b>Universal Orlando Resort</b> app before you travel — it shows the wait time for every ride in real time and helps you map out the day."
+  },
+  "houses": [
+    {
+      "city": "Miami",
+      "tag": "A gift from Will and Reg 🎁",
+      "dates": "Nov 26 – Dec 1",
+      "note": "Six days in Miami — Thanksgiving, Black Friday, and the family barbecue."
+    },
+    {
+      "city": "Orlando",
+      "tag": "Booked",
+      "dates": "Nov 23 – 26",
+      "note": "Four days: arrival day, park day, and shopping day."
+    },
+    {
+      "city": "New York",
+      "tag": "Booked",
+      "dates": "Dec 1 – 5",
+      "note": "Four nights with the whole city dressed up for Christmas."
+    },
+    {
+      "city": "Washington",
+      "tag": "Booked",
+      "dates": "Dec 5 – 7",
+      "note": "Home base for the capital — and for the day trip to Philadelphia, if we can swing it."
+    }
+  ]
+};
+
+const I18N = {pt: PT_I18N, en: EN_I18N || PT_I18N};
+
+/* =====================================================================
+   RENDER
+   ===================================================================== */
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function pick(obj, path){
+  return path.split('.').reduce((o,k)=> (o && o[k] !== undefined) ? o[k] : undefined, obj);
 }
 
-/* ---- NEW YORK ---- */
-const nyDays=[
-  {dn:"Dia 1", h:"Midtown natalina, sem correria", items:["Check-in","Times Square","Caminhar pela Fifth Avenue","Vitrines de Natal: Saks Fifth Avenue & Macy's Herald Square","Noite no Rockefeller Center 🎄"], tip:"Dia mais leve para entrar no clima da cidade."},
-  {dn:"Dia 2", h:"Liberdade + Downtown + Brooklyn", items:["Ferry para Statue of Liberty & Ellis Island","Wall Street + Charging Bull","9/11 Memorial","DUMBO + Brooklyn Heights Promenade","Atravessar a Brooklyn Bridge iluminada ✨"], tip:"🍴 Almoço no Katz's Delicatessen — pastrami clássico de NY."},
-  {dn:"Dia 3", h:"Central Park + Mirante + Broadway", items:["Central Park: Bethesda Terrace, Bow Bridge, Strawberry Fields","Plaza Hotel + chocolate quente ☕","Top of the Rock no pôr do sol ✨","Roosevelt Island Tramway à noite","Broadway 🎭"], tip:"🎭 Musical: Wicked ou The Lion King (checar datas e ingressos)."},
-  {dn:"Dia 4", h:"Bryant Park + Bibliotecas + Dyker Heights", items:["Bryant Park Winter Village 🎄","New York Public Library","The Morgan Library & Museum","Greenwich & West Village","Friends Apartment Building ☕","Washington Square Park","Dyker Heights à noite 🎄✨"], tip:"As casas de Dyker Heights no Natal são imperdíveis."},
-];
-document.getElementById('nyDays').innerHTML=nyDays.map(d=>`
-  <div class="nyd">
-    <div class="dn">${d.dn}</div>
-    <h4>${d.h}</h4>
-    <ul>${d.items.map(i=>`<li>${i}</li>`).join('')}</ul>
-    <div class="tip">${d.tip}</div>
-  </div>`).join('');
+const PLAY_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+
+function renderFlights(t){
+  $('flights').innerHTML = t.flights.map((f,i)=>{
+    const m = STATIC.flightMeta[i];
+    return '<div class="flight">' +
+      '<span class="pin">' + m.pin + '</span>' +
+      '<div class="leg"><span>' + esc(f.from) + '</span> <span class="arr">→</span> <span>' + esc(f.to) + '</span></div>' +
+      '<div class="meta"><span>' + esc(t.ui.departure) + ' <b>' + esc(f.time) + '</b></span>' +
+      '<span>' + esc(t.ui.flight) + ' <b>' + m.voo + '</b></span></div>' +
+      '<span class="date-badge">' + esc(f.date) + ' · 2026</span>' +
+    '</div>';
+  }).join('');
+}
+
+function renderTimeline(t){
+  $('timeline').innerHTML = STATIC.timeline.map(r=>{
+    if(r.leg !== undefined){
+      return '<div class="tl-leg" style="color:' + r.color + '"><span>' + esc(t.legs[r.leg]) + '</span><span class="ln"></span></div>';
+    }
+    return '<div class="tl-row' + (r.hi ? ' hi' : '') + '">' +
+      '<div class="tl-dot">' + r.n + '</div>' +
+      '<div class="tl-body"><div class="d">' + esc(t.ui.day) + ' ' + r.n + '</div>' +
+      '<div class="c">' + t.days[r.i] + '</div></div></div>';
+  }).join('');
+}
+
+function renderCities(t){
+  STATIC.cities.forEach(c=>{
+    const ct = t.cities[c.key];
+    $('days-' + c.key).innerHTML = ct.days.map((d,i)=>{
+      const flag = c.flags[i];
+      return '<div class="dcard' + (flag === 'tbd' ? ' tbd' : '') + '">' +
+        '<div class="dn">' + esc(t.ui.day) + ' ' + (i+1) + ' <span class="dd">· ' + esc(d.d) + '</span></div>' +
+        (flag === 'tbd' ? '<span class="tbdbadge">' + esc(t.ui.tbd) + '</span>' : '') +
+        '<h4>' + esc(d.h) + '</h4>' +
+        '<ul>' + d.items.map(x=>'<li>' + esc(x) + '</li>').join('') + '</ul>' +
+        (flag === 'park' ? '<button type="button" class="parkbtn" data-open-park>🎢 ' + esc(t.ui.openPark) + '</button>' : '') +
+        (d.tip ? '<div class="tip">' + esc(d.tip) + '</div>' : '') +
+      '</div>';
+    }).join('');
+  });
+
+  $('nyReserve').innerHTML = t.cities.ny.reserve.map((r,i)=>
+    '<li><a href="' + STATIC.nyReserve[i] + '" target="_blank" rel="noopener">' + esc(r) +
+    ' <span class="rlink">' + esc(t.cities.ny.reserveCta) + '</span></a></li>').join('');
+
+  $('nyPack').innerHTML = t.cities.ny.pack.map(p=>'<li>' + esc(p) + '</li>').join('');
+}
+
+function renderRides(t){
+  const LVL = {g:t.ui.levelG, m:t.ui.levelM, r:t.ui.levelR};
+  $('rideGrid').innerHTML = t.park.rides.map((ride,i)=>{
+    const s = STATIC.rides[i];
+    return '<div class="ride">' +
+      '<div class="ride-top"><h4>' + esc(ride.n) + '</h4>' +
+      '<span class="lvl ' + s.l + '">' + esc(LVL[s.l]) + '</span></div>' +
+      '<p>' + esc(ride.d) + '</p>' +
+      '<a class="pov" href="' + s.u + '" target="_blank" rel="noopener">' + PLAY_ICON + 'POV</a>' +
+    '</div>';
+  }).join('');
+}
+
+function renderTicket(t){
+  $('ticketLines').innerHTML = t.ticket.lines.map(l=>'<li>' + l + '</li>').join('');
+}
+
+function renderHouses(t){
+  $('houses').innerHTML = t.houses.map((h,i)=>{
+    const s = STATIC.houses[i];
+    return '<a class="house" style="--accent:' + s.accent + ';--accent-ink:' + s.ink + '" href="' + s.url + '" target="_blank" rel="noopener">' +
+      '<span class="ic">' + s.icon + '</span>' +
+      '<span class="hbadge' + (s.gift ? ' gift' : '') + '">' + esc(h.tag) + '</span>' +
+      '<span class="ht">' + esc(h.city) + '</span>' +
+      '<span class="hd">' + esc(h.dates) + '</span>' +
+      '<span class="hs">' + esc(h.note) + '</span>' +
+      '<span class="go">' + esc(t.ui.openAirbnb) + '</span>' +
+    '</a>';
+  }).join('');
+}
+
+function render(lang){
+  const t = I18N[lang] || I18N.pt;
+
+  document.documentElement.lang = (lang === 'en') ? 'en' : 'pt-BR';
+  document.title = t.title;
+
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const v = pick(t, el.getAttribute('data-i18n'));
+    if(typeof v === 'string') el.innerHTML = v;
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
+    const v = pick(t, el.getAttribute('data-i18n-aria'));
+    if(typeof v === 'string') el.setAttribute('aria-label', v);
+  });
+
+  $('routeCities').innerHTML = t.hero.cities.map(c=>'<span class="city">' + esc(c) + '</span>').join('');
+
+  renderFlights(t);
+  renderTimeline(t);
+  renderCities(t);
+  renderRides(t);
+  renderTicket(t);
+  renderHouses(t);
+
+  const tg = $('langToggle');
+  tg.dataset.active = lang;
+  tg.querySelectorAll('button').forEach(b=>{
+    b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+  });
+  try { localStorage.setItem('viagem2026:lang', lang); } catch(e) {}
+}
+
+/* idioma inicial: o que o visitante escolheu da última vez, senão PT */
+let saved = null;
+try { saved = localStorage.getItem('viagem2026:lang'); } catch(e) {}
+render(saved === 'en' ? 'en' : 'pt');
+
+$('langToggle').addEventListener('click', (e)=>{
+  const btn = e.target.closest('button[data-lang]');
+  if(btn) render(btn.dataset.lang);
+});
+
+/* =====================================================================
+   MODAL DO PARQUE
+   ===================================================================== */
+const parkModal = $('parkModal');
+let modalOpener = null;
+
+function openPark(trigger){
+  modalOpener = trigger || null;
+  parkModal.classList.add('is-open');
+  parkModal.setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-open');
+  $('parkModalClose').focus();
+}
+function closePark(){
+  if(!parkModal.classList.contains('is-open')) return;
+  parkModal.classList.remove('is-open');
+  parkModal.setAttribute('aria-hidden','true');
+  document.body.classList.remove('modal-open');
+  if(modalOpener && typeof modalOpener.focus === 'function') modalOpener.focus();
+  modalOpener = null;
+}
+
+document.addEventListener('click', (e)=>{
+  const opener = e.target.closest('[data-open-park]');
+  if(opener){ e.preventDefault(); openPark(opener); return; }
+  if(e.target === parkModal || e.target.closest('#parkModalClose')) closePark();
+});
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape') closePark();
+});
+
+/* prende o Tab dentro do modal enquanto ele estiver aberto */
+parkModal.addEventListener('keydown', (e)=>{
+  if(e.key !== 'Tab') return;
+  const f = parkModal.querySelectorAll('a[href], button:not([disabled])');
+  if(!f.length) return;
+  const first = f[0], last = f[f.length - 1];
+  if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+});
 
 /* ---- REVEAL ON SCROLL ---- */
-const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.08});
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+}, {threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
