@@ -42,6 +42,16 @@ nav.top .links{display:flex;gap:2px;flex-wrap:wrap}
 nav.top .links a{color:rgba(255,255,255,.72);text-decoration:none;font-size:.83rem;font-weight:500;padding:7px 10px;border-radius:100px;transition:.18s;white-space:nowrap}
 nav.top .links a:hover{color:#fff;background:rgba(255,255,255,.1)}
 @media(max-width:1120px){nav.top .links{display:none}}
+
+/* atalhos de secao (aparecem quando os links da nav somem) */
+.chipnav{display:none;border-top:1px solid rgba(255,255,255,.09)}
+@media(max-width:1120px){.chipnav{display:block}}
+.chipnav .chips{position:relative;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:9px 24px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.chipnav .chips::-webkit-scrollbar{display:none}
+.chipnav a{flex:none;color:rgba(255,255,255,.7);text-decoration:none;font-size:.78rem;font-weight:600;padding:6px 13px;border-radius:100px;border:1px solid rgba(255,255,255,.16);transition:.18s;white-space:nowrap}
+.chipnav a:hover{color:#fff;border-color:rgba(255,255,255,.34)}
+.chipnav a.on{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1a1205;border-color:transparent}
+.chipnav a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 @media(max-width:560px){nav.top .brand .names{display:none}}
 
 /* ===== LANGUAGE TOGGLE ===== */
@@ -106,7 +116,8 @@ nav.top .links a:hover{color:#fff;background:rgba(255,255,255,.1)}
 /* ===== SECTION HEADERS ===== */
 section{position:relative}
 .sec{padding:78px 0 18px}
-section[id]{scroll-margin-top:96px}
+section[id]{scroll-margin-top:80px}
+@media(max-width:1120px){section[id]{scroll-margin-top:116px}}
 .sec-head{margin-bottom:38px}
 .sec-head .eyebrow{color:var(--gold-deep)}
 .sec-head h2{font-size:clamp(2rem,5.2vw,3.4rem);font-weight:800;line-height:1.02;letter-spacing:-.02em;margin-top:10px}
@@ -170,7 +181,6 @@ section[id]{scroll-margin-top:96px}
 .parkbtn{margin-top:14px;width:100%;border:none;cursor:pointer;font-family:inherit;font-size:.88rem;font-weight:700;padding:12px 16px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1a1205;box-shadow:0 14px 28px -16px rgba(231,161,58,.85);transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:9px}
 .parkbtn:hover{transform:translateY(-2px)}
 .parkbtn:focus-visible{outline:2px solid #fff;outline-offset:3px}
-
 .ny-bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
 @media(max-width:680px){.ny-bottom{grid-template-columns:1fr}}
 .ny-box{background:rgba(255,255,255,.05);border:1px solid var(--line-l);border-radius:18px;padding:22px}
@@ -184,11 +194,14 @@ section[id]{scroll-margin-top:96px}
 .ny-box.pack li::before{content:"❄️";position:absolute;left:0;font-size:.8rem}
 
 /* ===== MODAL DO PARQUE ===== */
-.modal-backdrop{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:18px;background:rgba(5,9,20,.74);backdrop-filter:blur(7px);opacity:0;visibility:hidden;transition:opacity .26s ease,visibility .26s ease}
-.modal-backdrop.is-open{opacity:1;visibility:visible}
+/* visibility com delay: ao ABRIR vira visible na hora (senao o botao de fechar
+   ainda nao e focavel e o teclado fica preso fora do modal);
+   ao FECHAR espera o fade terminar. */
+.modal-backdrop{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:18px;background:rgba(5,9,20,.74);backdrop-filter:blur(7px);opacity:0;visibility:hidden;transition:opacity .26s ease,visibility 0s linear .26s}
+.modal-backdrop.is-open{opacity:1;visibility:visible;transition:opacity .26s ease,visibility 0s linear 0s}
 .modal{width:100%;max-width:1040px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;background:var(--paper);border-radius:22px;box-shadow:0 40px 90px -40px rgba(0,0,0,.8);position:relative;padding:0 0 26px;transform:translateY(16px) scale(.985);transition:transform .3s cubic-bezier(.3,1.15,.5,1)}
 .modal-backdrop.is-open .modal{transform:none}
-.modal-x{position:absolute;top:14px;right:14px;z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.32);color:#fff;font-size:1rem;line-height:1;cursor:pointer;font-family:inherit;transition:.18s;display:grid;place-items:center}
+.modal-x{position:absolute;top:14px;right:14px;z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.32);color:#fff;font-size:1rem;line-height:1;cursor:pointer;font-family:inherit;transition:background .18s ease,transform .18s ease;display:grid;place-items:center}
 .modal-x:hover{background:rgba(0,0,0,.55);transform:rotate(90deg)}
 .modal-x:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .modal .park-banner{border-radius:22px 22px 0 0}
@@ -204,10 +217,10 @@ section[id]{scroll-margin-top:96px}
 .park-banner p{margin-top:12px;max-width:700px;font-size:.96rem;line-height:1.55;opacity:.93;font-weight:300;position:relative}
 .park-banner .row{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:relative}
 .park-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#0c6a62;font-size:.82rem;font-weight:800;padding:8px 15px;border-radius:100px;box-shadow:0 10px 24px -14px rgba(0,0,0,.6);letter-spacing:.02em}
-.guide-link{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:7px 14px;border-radius:100px;font-size:.82rem;font-weight:600;transition:.18s}
+.guide-link{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;padding:7px 14px;border-radius:100px;font-size:.82rem;font-weight:600;transition:background .18s ease}
 .guide-link:hover{background:rgba(255,255,255,.3)}
 .ride-grid{background:var(--cream);border-top:none;padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:14px}
-.ride{border:1px solid var(--line);border-radius:15px;padding:16px 16px 14px;background:var(--paper);position:relative;display:flex;flex-direction:column;transition:.2s;overflow:hidden}
+.ride{border:1px solid var(--line);border-radius:15px;padding:16px 16px 14px;background:var(--paper);position:relative;display:flex;flex-direction:column;transition:transform .2s ease,box-shadow .2s ease;overflow:hidden}
 .ride::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal)}
 .ride:hover{transform:translateY(-3px);box-shadow:var(--shadow-s)}
 .ride-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:7px}
@@ -217,7 +230,7 @@ section[id]{scroll-margin-top:96px}
 .lvl.m{background:rgba(232,146,12,.16);color:#8a5407}
 .lvl.r{background:rgba(226,67,58,.15);color:#b02b23}
 .ride p{color:#566189;font-size:.86rem;line-height:1.45;margin-bottom:14px;flex:1}
-.pov{text-decoration:none;text-align:center;font-weight:700;font-size:.85rem;background:var(--ink);color:#fff;padding:10px;border-radius:10px;transition:.18s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.pov{text-decoration:none;text-align:center;font-weight:700;font-size:.85rem;background:var(--ink);color:#fff;padding:10px;border-radius:10px;transition:background .18s ease;display:inline-flex;align-items:center;justify-content:center;gap:8px}
 .pov:hover{background:var(--teal)}
 .pov svg{width:13px;height:13px;flex:none}
 .park-tip{background:linear-gradient(120deg,#fff,#fdf6e9);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:16px 20px;color:#4a567a;font-size:.95rem;line-height:1.55}
@@ -232,7 +245,7 @@ section[id]{scroll-margin-top:96px}
 .ticket ul{list-style:none;margin:20px auto 22px;display:flex;flex-direction:column;gap:10px;text-align:left;max-width:520px}
 .ticket li{font-size:.9rem;color:#4a567a;line-height:1.45;padding-left:24px;position:relative}
 .ticket li::before{content:"✦";position:absolute;left:4px;top:0;color:var(--gold-deep);font-size:.8rem}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;font-weight:700;font-size:.95rem;padding:13px 24px;border-radius:100px;transition:.2s;cursor:pointer;border:none;font-family:inherit}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;font-weight:700;font-size:.95rem;padding:13px 24px;border-radius:100px;transition:transform .2s ease,box-shadow .2s ease;cursor:pointer;border:none;font-family:inherit}
 .btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1a1205;box-shadow:0 16px 34px -16px rgba(231,161,58,.7);max-width:520px;width:100%}
 .btn.gold:hover{transform:translateY(-2px)}
 .ticket .note{margin-top:20px;max-width:560px;margin-left:auto;margin-right:auto;color:#4a567a;font-size:.9rem;line-height:1.5;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:13px 16px}
@@ -259,6 +272,43 @@ footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradien
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
+/* ===== CARROSSEL NO CELULAR ===== */
+.cdots{display:none;justify-content:center;gap:8px;margin-top:16px}
+.cdots button{width:8px;height:8px;padding:0;border-radius:50%;border:none;cursor:pointer;background:rgba(13,21,48,.22);transition:.2s}
+.city .cdots button{background:rgba(255,255,255,.28)}
+.cdots button.on{background:var(--gold);transform:scale(1.5)}
+.city .cdots button.on{background:var(--accent)}
+.cdots button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(max-width:720px){
+  .cdots{display:flex}
+  .city-days,.flights,.houses{
+    display:flex;gap:14px;
+    overflow-x:auto;overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;scroll-padding-left:24px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+    margin:0 -24px;padding:2px 24px 4px;
+  }
+  .city-days::-webkit-scrollbar,.flights::-webkit-scrollbar,.houses::-webkit-scrollbar{display:none}
+  .dcard,.flight,.house{flex:0 0 84%;min-width:0;scroll-snap-align:start}
+  .city-days:focus-visible,.flights:focus-visible,.houses:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:18px}
+}
+@media(max-width:720px) and (prefers-reduced-motion:reduce){
+  .chipnav .chips{scroll-behavior:auto}
+}
+
+/* ===== ROTEIRO MAIS COMPACTO NO CELULAR ===== */
+@media(max-width:720px){
+  .tl::before{left:15px}
+  .tl-row{gap:14px;padding:6px 0}
+  .tl-dot{width:32px;height:32px;font-size:.78rem;box-shadow:0 0 0 4px var(--paper)}
+  .tl-row.hi .tl-dot{box-shadow:0 0 0 4px var(--paper),0 0 0 6px rgba(231,161,58,.35)}
+  .tl-body{padding:10px 13px}
+  .tl-body .d{font-size:.9rem}
+  .tl-body .c{font-size:.85rem;line-height:1.35}
+  .tl-leg{margin:18px 0 8px}
+  .tl-leg span:first-child{padding:4px 12px 4px 42px}
+}
+
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none}
   .hero .stars,.amb-snow,.scroll-cue{animation:none}
@@ -287,6 +337,17 @@ footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradien
       <span class="thumb" aria-hidden="true"></span>
       <button type="button" data-lang="pt" aria-pressed="true"><span class="fl">🇧🇷</span>PT</button>
       <button type="button" data-lang="en" aria-pressed="false"><span class="fl">🇺🇸</span>EN</button>
+    </div>
+  </div>
+  <div class="chipnav">
+    <div class="chips" id="chips">
+      <a href="#voos" data-i18n="nav.voos">Voos</a>
+      <a href="#roteiro" data-i18n="nav.roteiro">Roteiro</a>
+      <a href="#orlando" data-i18n="nav.orlando">Orlando</a>
+      <a href="#miami" data-i18n="nav.miami">Miami</a>
+      <a href="#newyork" data-i18n="nav.ny">Nova York</a>
+      <a href="#washington" data-i18n="nav.washington">Washington</a>
+      <a href="#casas" data-i18n="nav.casas">Casas</a>
     </div>
   </div>
 </nav>
@@ -321,6 +382,7 @@ footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradien
     <p class="intro" data-i18n="sections.voos.intro"></p>
   </div>
   <div class="flights" id="flights"></div>
+  <div class="cdots" id="dots-flights"></div>
 </div></section>
 
 <!-- ROTEIRO -->
@@ -342,6 +404,7 @@ footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradien
       <p class="intro" data-i18n="cities.orlando.intro"></p>
     </div>
     <div class="city-days" id="days-orlando"></div>
+    <div class="cdots" id="dots-orlando"></div>
   </div>
 </section>
 
@@ -354,6 +417,7 @@ footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradien
       <p class="intro" data-i18n="cities.miami.intro"></p>
     </div>
     <div class="city-days" id="days-miami"></div>
+    <div class="cdots" id="dots-miami"></div>
   </div>
 </section>
 
@@ -366,6 +430,7 @@ footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradien
       <p class="intro" data-i18n="cities.ny.intro"></p>
     </div>
     <div class="city-days" id="days-ny"></div>
+    <div class="cdots" id="dots-ny"></div>
     <div class="ny-bottom">
       <div class="ny-box reserve">
         <h4 data-i18n="cities.ny.reserveTitle"></h4>
@@ -388,6 +453,7 @@ footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradien
       <p class="intro" data-i18n="cities.washington.intro"></p>
     </div>
     <div class="city-days" id="days-washington"></div>
+    <div class="cdots" id="dots-washington"></div>
   </div>
 </section>
 
@@ -399,6 +465,7 @@ footer .seal2{width:46px;height:46px;border-radius:50%;background:radial-gradien
     <p class="intro" data-i18n="sections.casas.intro"></p>
   </div>
   <div class="houses" id="houses"></div>
+  <div class="cdots" id="dots-houses"></div>
 </div></section>
 
 <footer>
@@ -1151,6 +1218,83 @@ function renderHouses(t){
   }).join('');
 }
 
+/* =====================================================================
+   CARROSSEL NO CELULAR
+   Abaixo de 720px os cards viram uma faixa horizontal com swipe.
+   As bolinhas mostram quantos sao e em qual voce esta.
+   ===================================================================== */
+const CAROUSELS = [
+  {box:'flights',          dots:'dots-flights'},
+  {box:'houses',           dots:'dots-houses'},
+  {box:'days-orlando',     dots:'dots-orlando'},
+  {box:'days-miami',       dots:'dots-miami'},
+  {box:'days-ny',          dots:'dots-ny'},
+  {box:'days-washington',  dots:'dots-washington'}
+];
+const mqCarousel = window.matchMedia('(max-width:720px)');
+
+/* posicao de um card dentro da faixa, independente de offsetParent */
+function offsetIn(box, el){
+  return el.getBoundingClientRect().left - box.getBoundingClientRect().left + box.scrollLeft;
+}
+
+function syncDots(box, dots){
+  const cards = Array.prototype.slice.call(box.children);
+  const btns  = Array.prototype.slice.call(dots.children);
+  if(!cards.length || cards.length !== btns.length) return;
+  let best = 0, bd = Infinity;
+  cards.forEach((c,i)=>{
+    const d = Math.abs(offsetIn(box, c) - box.scrollLeft);
+    if(d < bd){ bd = d; best = i; }
+  });
+  btns.forEach((b,i)=>{
+    const on = (i === best);
+    b.classList.toggle('on', on);
+    if(on) b.setAttribute('aria-current','true'); else b.removeAttribute('aria-current');
+  });
+}
+
+function applyCarouselMode(box){
+  if(mqCarousel.matches){
+    box.setAttribute('tabindex','0');
+    box.setAttribute('role','group');
+  } else {
+    box.removeAttribute('tabindex');
+    box.removeAttribute('role');
+    box.scrollLeft = 0;
+  }
+}
+
+function wireCarousel(cfg){
+  const box = $(cfg.box), dots = $(cfg.dots);
+  if(!box || !dots) return;
+  const cards = Array.prototype.slice.call(box.children);
+
+  dots.innerHTML = cards.map((c,i)=>{
+    const t = c.querySelector('h4, .ht, .leg');
+    const label = t ? t.textContent.trim().replace(/\s+/g,' ') : String(i+1);
+    return '<button type="button" aria-label="' + esc(label) + '"></button>';
+  }).join('');
+
+  /* ouvintes so uma vez por faixa - o innerHTML e refeito a cada idioma */
+  if(!box.dataset.carousel){
+    box.dataset.carousel = '1';
+    box.addEventListener('scroll', ()=>{ syncDots(box, dots); }, {passive:true});
+    dots.addEventListener('click', (e)=>{
+      const b = e.target.closest('button');
+      if(!b) return;
+      const i = Array.prototype.indexOf.call(dots.children, b);
+      const card = box.children[i];
+      if(card) box.scrollTo({left: offsetIn(box, card), behavior:'smooth'});
+    });
+  }
+  applyCarouselMode(box);
+  syncDots(box, dots);
+}
+
+function wireCarousels(){ CAROUSELS.forEach(wireCarousel); }
+if(mqCarousel.addEventListener) mqCarousel.addEventListener('change', wireCarousels);
+
 function render(lang){
   const t = I18N[lang] || I18N.pt;
 
@@ -1174,6 +1318,7 @@ function render(lang){
   renderRides(t);
   renderTicket(t);
   renderHouses(t);
+  wireCarousels();
 
   const tg = $('langToggle');
   tg.dataset.active = lang;
@@ -1204,6 +1349,9 @@ function openPark(trigger){
   parkModal.classList.add('is-open');
   parkModal.setAttribute('aria-hidden','false');
   document.body.classList.add('modal-open');
+  /* o modal sai de visibility:hidden; forca o recalculo antes de focar,
+     senao o botao ainda nao e focavel e o teclado fica preso na pagina */
+  void parkModal.offsetHeight;
   $('parkModalClose').focus();
 }
 function closePark(){
@@ -1234,6 +1382,41 @@ parkModal.addEventListener('keydown', (e)=>{
   if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
   else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
 });
+
+/* =====================================================================
+   ATALHOS DE SECAO - destaca o chip da secao em que voce esta
+   ===================================================================== */
+const chipBox = $('chips');
+const chipFor = {};
+Array.prototype.slice.call(chipBox.querySelectorAll('a')).forEach(a=>{
+  chipFor[a.getAttribute('href').slice(1)] = a;
+});
+const SPY_IDS = Object.keys(chipFor);
+
+/* traz o chip aceso para o centro da faixa (rola so a faixa, nunca a pagina) */
+function centerChip(a){
+  const left = a.getBoundingClientRect().left - chipBox.getBoundingClientRect().left + chipBox.scrollLeft;
+  chipBox.scrollTo({left: Math.max(0, left - (chipBox.clientWidth - a.offsetWidth) / 2), behavior:'smooth'});
+}
+
+/* acende o chip da ultima secao que ja passou pela linha logo abaixo da nav */
+let currentChip = null;
+function updateChip(){
+  const line = 132;
+  let found = null;
+  for(let i = 0; i < SPY_IDS.length; i++){
+    const el = document.getElementById(SPY_IDS[i]);
+    if(el && el.getBoundingClientRect().top <= line) found = SPY_IDS[i];
+  }
+  const a = found ? chipFor[found] : null;
+  if(a === currentChip) return;
+  if(currentChip) currentChip.classList.remove('on');
+  currentChip = a;
+  if(a){ a.classList.add('on'); centerChip(a); }
+}
+window.addEventListener('scroll', updateChip, {passive:true});
+window.addEventListener('resize', updateChip);
+updateChip();
 
 /* ---- REVEAL ON SCROLL ---- */
 const io = new IntersectionObserver(es=>{
