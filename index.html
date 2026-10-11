@@ -530,9 +530,9 @@ const STATIC = {
   /* flags por dia de cada cidade: "park" abre o modal, "tbd" = ainda a definir */
   cities: [
     {key:"orlando",    flags:[null, "park", null, null]},
-    {key:"miami",      flags:[null, null, "tbd", null, "tbd", null]},
+    {key:"miami",      flags:[null, null, null, null, null, null]},
     {key:"ny",         flags:[null, null, null, null]},
-    {key:"washington", flags:["tbd", "tbd", null]}
+    {key:"washington", flags:[null, null, null]}
   ],
   rides: [
     {l:"r", u:"https://www.youtube.com/watch?v=lYRxkCrDFIo"},
@@ -613,16 +613,16 @@ const PT_I18N = {
     "🎢 Islands of Adventure — o nosso dia de parque",
     "Dia de compras — Ross, Marshalls e os outlets 🛍️",
     "Volta bem cedo para Miami · Ação de Graças 🦃",
-    "Black Friday e conhecer a cidade 🛍️",
-    "Analisar o roteiro com o Will e a Reg",
-    "Churrasco em família — Brasil e USA 🔥",
-    "Analisar o roteiro com o Will e a Reg",
+    "Vizcaya, Coconut Grove e noite em Little Havana 💃",
+    "Wynwood, Miami Beach e noite em Brickell 🍸",
+    "Domingo em casa — pool party e churrasco 🔥",
+    "Bate-volta a Palm Beach e Fort Lauderdale 🚗",
     "Ida para Nova York e passeio por Midtown",
     "Estátua da Liberdade + Brooklyn",
     "Central Park, mirante e Broadway 🎭",
     "Parques, bibliotecas e Dyker Heights 🎄",
-    "Trem para Washington e montar o roteiro 🚆",
-    "Montar o roteiro — bate-volta a Philadelphia a definir",
+    "Ida para Washington · Capitólio e memoriais 🏛️",
+    "Museus, Casa Branca e Georgetown",
     "Retorno para Nova York + voo de volta ✈️"
   ],
   cities: {
@@ -640,13 +640,13 @@ const PT_I18N = {
     miami: {
       eyebrow: "04 · Ação de Graças",
       h2: "Miami — 6 dias",
-      intro: "A casa do Will e da Reg, o feriado americano em família, a Black Friday e o churrasco Brasil × USA.",
+      intro: "Ação de Graças em casa, a Miami histórica e cubana, arte e Miami Beach, pool party em família e um bate-volta a Palm Beach.",
       days: [
-        {d:"26 nov", h:"Thanksgiving 🦃", items:["Preparos do almoço com a família","Ação de Graças na casa do Will e da Reg","O primeiro feriado americano da turma"], tip:"O dia mais esperado de toda a parte da Flórida."},
-        {d:"27 nov", h:"Black Friday e a cidade", items:["Black Friday — as compras do ano 🛍️","Conhecer Miami com calma"], tip:"Sair cedo: as melhores ofertas somem antes do meio-dia."},
-        {d:"28 nov", h:"Roteiro com o Will e a Reg", items:["Sentar com o Will e a Reg","Analisar e ajustar o roteiro","Definir os passeios de Miami"], tip:"Dia em aberto — o que a turma decidir aqui entra no roteiro."},
-        {d:"29 nov", h:"Churrasco em família 🔥", items:["Churrasco Brasil × USA","Dia de casa, de conversa e de gente"], tip:"O churrasco brasileiro em solo americano — o teste final."},
-        {d:"30 nov", h:"Roteiro com o Will e a Reg", items:["Fechar o roteiro com o Will e a Reg","Últimos ajustes antes de Nova York"], tip:"Último dia em Miami — bom momento para arrumar as malas."},
+        {d:"26 nov", h:"Thanksgiving em casa 🦃", items:["Manhã para chegar, se acomodar e preparar tudo","15:00 · Celebração de Ação de Graças em casa","Jantar, drinks, música e tradições de família"], tip:"O dia mais esperado de toda a parte da Flórida."},
+        {d:"27 nov", h:"A Miami que eles amam", items:["10:30 · Vizcaya Museum & Gardens","12:30 · Almoço e passeio em Coconut Grove","14:30 · Coral Gables — Biltmore e Miracle Mile","16:00 · Pausa em casa","17:45 · Little Havana e Calle Ocho","19:00 · Jantar no Old's Havana 🇨🇺","21:00 · Ball & Chain — música latina e dança 💃"], tip:"O Old's Havana fica a uma caminhada do Ball & Chain."},
+        {d:"28 nov", h:"Arte, Miami Beach e Brickell", items:["11:00 · Wynwood Walls e os murais","12:30 · Almoço no KYU (ou Manta)","14:00 · Miami Design District","16:30 · South Pointe Park","17:15 · Ocean Drive e o Art Deco","18:30 · Volta para casa e se arrumar","20:00 · Jantar no Quinto (EAST Miami)","22:00 · Sugar Rooftop 🍸 (ou Rosa Sky)"], tip:"Noite de Brickell pede roupa arrumada — o Sugar fica no topo do mesmo hotel do Quinto."},
+        {d:"29 nov", h:"Domingo em casa 🔥", items:["Acordar tarde e manhã tranquila","13:00 · Pool party e churrasco","Sabores cubanos e brasileiros, sem hora para acabar"], tip:"Depois de duas noites fora: nada de passeio, só família."},
+        {d:"30 nov", h:"Palm Beach e a costa 🚗", items:["08:30 · Saída de Miami","10:00 · The Breakers Palm Beach","12:00 · Almoço no Seafood Bar (ou Henry's)","13:00 · Worth Avenue","14:30 · Passeio de carro por Palm Beach","16:00 · Las Olas Boulevard","17:15 · Fort Lauderdale Beach","18:30 · Jantar no Louie Bossi's 🍕","20:00 · Volta para Miami"], tip:"Voltar cedo e arrumar as malas: o voo para Nova York sai às 07:31h."},
         {d:"01 dez", h:"Ida para Nova York", items:["Voo MIA → JFK às 07:31h ✈️","Chegada e primeiro passeio por Midtown"], tip:"Voo cedo: dormir com a mala pronta."}
       ]
     },
@@ -669,11 +669,11 @@ const PT_I18N = {
     washington: {
       eyebrow: "06 · Reta final",
       h2: "Washington — 3 dias",
-      intro: "Três dias na capital, chegando de trem de Nova York. O roteiro do que fazer por lá a gente monta na hora.",
+      intro: "Três dias na capital: Capitólio, memoriais, museus e Georgetown. Ir de carro ou de trem desde Nova York ainda está em decisão.",
       days: [
-        {d:"05 dez", h:"Chegada de trem e montar o roteiro", items:["Trem de Nova York para Washington 🚆","Check-in na casa","Montar o roteiro dos próximos dias"], tip:"O roteiro da capital ainda está em aberto — decidir com calma na chegada."},
-        {d:"06 dez", h:"Montar o roteiro", items:["Definir os passeios da capital","Bate-volta a Philadelphia — a definir"], tip:"Philadelphia fica no caminho entre Washington e Nova York — dá para encaixar."},
-        {d:"07 dez", h:"Retorno para Nova York", items:["Volta para Nova York","Voo JFK → São Paulo às 18:35h ✈️"], tip:"Fim de viagem — e já batendo a saudade."}
+        {d:"05 dez", h:"Capitólio e memoriais 🏛️", items:["11:30 · Tour guiado do Capitólio","12:45 · Fachada oeste, com vista do Mall até o obelisco","Suprema Corte e Biblioteca do Congresso, por fora","13:15 · Almoço na Union Station","16:45 · Washington Monument e World War II Memorial","Espelho d'água e Lincoln Memorial","Memoriais da Coreia e do Vietnã","19:30 · Jantar no Union Market"], tip:"Chegar uns 20 minutos antes do tour por causa da segurança — sem comida nem bebida."},
+        {d:"06 dez", h:"Museus, Casa Branca e Georgetown", items:["10:00 · Air and Space Museum (passe reservado) 🚀","12:30 · Almoço nos food trucks do Mall","13:30 · Museu de História Natural 🦕","15:15 · National Archives","16:30 · Casa Branca, com fotos pela Lafayette Square","17:30 · Georgetown Waterfront Park, no Potomac","Jantar e passeio pela M Street e Wisconsin Avenue"], tip:"Nos Archives estão a Declaração de Independência e a Constituição originais — e este ano são 250 anos. Fecha às 17:30."},
+        {d:"07 dez", h:"Retorno para Nova York", items:["Volta para Nova York — de carro ou de trem, ainda em decisão","Voo JFK → São Paulo às 18:35h ✈️"], tip:"Fim de viagem — e já batendo a saudade."}
       ]
     }
   },
@@ -707,10 +707,10 @@ const PT_I18N = {
     note: "💡 <b>Dica:</b> baixe o app <b>Universal Orlando Resort</b> antes de viajar — ele mostra o tempo de fila de cada atração em tempo real e ajuda a montar a ordem do dia."
   },
   houses: [
-    {city:"Miami", tag:"Presente do Will e Reg 🎁", dates:"26 nov – 01 dez", note:"Seis dias em Miami — Thanksgiving, Black Friday e o churrasco em família."},
+    {city:"Miami", tag:"Presente do Will e Reg 🎁", dates:"26 nov – 01 dez", note:"Seis dias em Miami — Thanksgiving, Little Havana, Miami Beach e a pool party em família."},
     {city:"Orlando", tag:"Fechada", dates:"23 – 26 nov", note:"Quatro dias: a chegada, o dia de parque e o dia de compras."},
     {city:"Nova York", tag:"Fechada", dates:"01 – 05 dez", note:"Quatro noites com a cidade toda enfeitada para o Natal."},
-    {city:"Washington", tag:"Fechada", dates:"05 – 07 dez", note:"Base para a capital — e para o bate-volta a Philadelphia, se rolar."}
+    {city:"Washington", tag:"Fechada", dates:"05 – 07 dez", note:"Base para a capital — Capitólio, memoriais, museus e Georgetown."}
   ]
 };
 
@@ -814,16 +814,16 @@ const EN_I18N = {
     "🎢 Islands of Adventure — our one and only park day",
     "Shopping day — Ross, Marshalls, and the outlets 🛍️",
     "Back to Miami bright and early · Thanksgiving 🦃",
-    "Black Friday and getting to know the city 🛍️",
-    "Going over the itinerary with Will and Reg",
-    "Family barbecue — Brazil meets USA 🔥",
-    "Going over the itinerary with Will and Reg",
+    "Vizcaya, Coconut Grove, and a night in Little Havana 💃",
+    "Wynwood, Miami Beach, and a night in Brickell 🍸",
+    "Sunday at home — pool party and BBQ 🔥",
+    "Day trip to Palm Beach and Fort Lauderdale 🚗",
     "Off to New York and a walk through Midtown",
     "Statue of Liberty + Brooklyn",
     "Central Park, an observation deck, and Broadway 🎭",
     "Parks, libraries, and Dyker Heights 🎄",
-    "Train to Washington and mapping out the itinerary 🚆",
-    "Mapping out the itinerary — a Philadelphia day trip, TBD",
+    "Off to Washington · the Capitol and the memorials 🏛️",
+    "Museums, the White House, and Georgetown",
     "Back to New York + our flight home ✈️"
   ],
   "cities": {
@@ -877,54 +877,72 @@ const EN_I18N = {
     "miami": {
       "eyebrow": "04 · Thanksgiving",
       "h2": "Miami — 6 days",
-      "intro": "Will and Reg’s house, the American holiday with family, Black Friday, and the Brazil × USA barbecue.",
+      "intro": "Thanksgiving at home, historic and Cuban Miami, art and Miami Beach, a family pool party, and a day trip to Palm Beach.",
       "days": [
         {
           "d": "Nov 26",
-          "h": "Thanksgiving 🦃",
+          "h": "Thanksgiving at home 🦃",
           "items": [
-            "Lunch prep with the family",
-            "Thanksgiving at Will and Reg’s house",
-            "The crew’s first American holiday"
+            "A morning to arrive, settle in, and get everything ready",
+            "3:00 PM · Thanksgiving celebration at home",
+            "Dinner, drinks, music, and family traditions"
           ],
           "tip": "The most anticipated day of the whole Florida stretch."
         },
         {
           "d": "Nov 27",
-          "h": "Black Friday and the city",
+          "h": "The Miami they love",
           "items": [
-            "Black Friday — the shopping spree of the year 🛍️",
-            "Getting to know Miami at an easy pace"
+            "10:30 AM · Vizcaya Museum & Gardens",
+            "12:30 PM · Lunch and a stroll in Coconut Grove",
+            "2:30 PM · Coral Gables — the Biltmore and Miracle Mile",
+            "4:00 PM · Break at home",
+            "5:45 PM · Little Havana and Calle Ocho",
+            "7:00 PM · Dinner at Old's Havana 🇨🇺",
+            "9:00 PM · Ball & Chain — Latin music and dancing 💃"
           ],
-          "tip": "Head out early: the best deals vanish before noon."
+          "tip": "Old's Havana is an easy walk to Ball & Chain."
         },
         {
           "d": "Nov 28",
-          "h": "Itinerary with Will and Reg",
+          "h": "Art, Miami Beach, and Brickell",
           "items": [
-            "Sit down with Will and Reg",
-            "Go over the itinerary and adjust it",
-            "Settle on the Miami outings"
+            "11:00 AM · Wynwood Walls and the murals",
+            "12:30 PM · Lunch at KYU (or Manta)",
+            "2:00 PM · Miami Design District",
+            "4:30 PM · South Pointe Park",
+            "5:15 PM · Ocean Drive and Art Deco",
+            "6:30 PM · Back home to get ready",
+            "8:00 PM · Dinner at Quinto (EAST Miami)",
+            "10:00 PM · Sugar Rooftop 🍸 (or Rosa Sky)"
           ],
-          "tip": "An open day — whatever the crew decides here goes into the itinerary."
+          "tip": "Brickell night means dressing up — Sugar sits atop the same hotel as Quinto."
         },
         {
           "d": "Nov 29",
-          "h": "Family barbecue 🔥",
+          "h": "Sunday at home 🔥",
           "items": [
-            "Brazil × USA barbecue",
-            "A day of home, of good talk, and of good company"
+            "Sleep in and an easy morning",
+            "1:00 PM · Pool party and BBQ",
+            "Cuban and Brazilian flavors, no fixed end time"
           ],
-          "tip": "Brazilian barbecue on American soil — the final test."
+          "tip": "After two nights out: no sightseeing, just family."
         },
         {
           "d": "Nov 30",
-          "h": "Itinerary with Will and Reg",
+          "h": "Palm Beach and the coast 🚗",
           "items": [
-            "Wrap up the itinerary with Will and Reg",
-            "Last tweaks before New York"
+            "8:30 AM · Leave Miami",
+            "10:00 AM · The Breakers Palm Beach",
+            "12:00 PM · Lunch at the Seafood Bar (or Henry's)",
+            "1:00 PM · Worth Avenue",
+            "2:30 PM · Scenic drive through Palm Beach",
+            "4:00 PM · Las Olas Boulevard",
+            "5:15 PM · Fort Lauderdale Beach",
+            "6:30 PM · Dinner at Louie Bossi's 🍕",
+            "8:00 PM · Back to Miami"
           ],
-          "tip": "Last day in Miami — a good time to pack the bags."
+          "tip": "Head back early and pack: the flight to New York leaves at 7:31 AM."
         },
         {
           "d": "Dec 1",
@@ -1012,32 +1030,42 @@ const EN_I18N = {
     "washington": {
       "eyebrow": "06 · Home stretch",
       "h2": "Washington — 3 days",
-      "intro": "Three days in the capital, arriving by train from New York. We’ll map out what to do there as we go.",
+      "intro": "Three days in the capital: the Capitol, the memorials, the museums, and Georgetown. Whether we drive or take the train from New York is still being decided.",
       "days": [
         {
           "d": "Dec 5",
-          "h": "Arrive by train and map out the itinerary",
+          "h": "The Capitol and the memorials 🏛️",
           "items": [
-            "Train from New York to Washington 🚆",
-            "Check-in at the house",
-            "Map out the itinerary for the next few days"
+            "11:30 AM · Guided tour of the Capitol",
+            "12:45 PM · West Front, with the view down the Mall to the Monument",
+            "Supreme Court and Library of Congress, from the outside",
+            "1:15 PM · Lunch at Union Station",
+            "4:45 PM · Washington Monument and the World War II Memorial",
+            "Reflecting Pool and the Lincoln Memorial",
+            "Korean War and Vietnam memorials",
+            "7:30 PM · Dinner at Union Market"
           ],
-          "tip": "The capital’s itinerary is still wide open — we’ll decide at our own pace once we get there."
+          "tip": "Get there about 20 minutes before the tour for security — no food or drinks."
         },
         {
           "d": "Dec 6",
-          "h": "Map out the itinerary",
+          "h": "Museums, the White House, and Georgetown",
           "items": [
-            "Settle on what to do in the capital",
-            "Day trip to Philadelphia — TBD"
+            "10:00 AM · Air and Space Museum (pass booked) 🚀",
+            "12:30 PM · Lunch at the food trucks along the Mall",
+            "1:30 PM · Natural History Museum 🦕",
+            "3:15 PM · National Archives",
+            "4:30 PM · The White House, with photos from Lafayette Square",
+            "5:30 PM · Georgetown Waterfront Park, on the Potomac",
+            "Dinner and a stroll along M Street and Wisconsin Avenue"
           ],
-          "tip": "Philadelphia is right on the way between Washington and New York — easy to fit in."
+          "tip": "The Archives hold the original Declaration of Independence and Constitution — and this year marks 250 years. Closes at 5:30 PM."
         },
         {
           "d": "Dec 7",
           "h": "Heading back to New York",
           "items": [
-            "Back to New York",
+            "Back to New York — by car or train, still being decided",
             "JFK → São Paulo flight at 6:35 PM ✈️"
           ],
           "tip": "End of the trip — and already missing it."
@@ -1103,7 +1131,7 @@ const EN_I18N = {
       "city": "Miami",
       "tag": "A gift from Will and Reg 🎁",
       "dates": "Nov 26 – Dec 1",
-      "note": "Six days in Miami — Thanksgiving, Black Friday, and the family barbecue."
+      "note": "Six days in Miami — Thanksgiving, Little Havana, Miami Beach, and the family pool party."
     },
     {
       "city": "Orlando",
@@ -1121,7 +1149,7 @@ const EN_I18N = {
       "city": "Washington",
       "tag": "Booked",
       "dates": "Dec 5 – 7",
-      "note": "Home base for the capital — and for the day trip to Philadelphia, if we can swing it."
+      "note": "Home base for the capital — the Capitol, the memorials, the museums, and Georgetown."
     }
   ]
 };
