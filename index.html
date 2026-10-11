@@ -553,7 +553,9 @@ const STATIC = {
   nyReserve: [
     "https://www.statuecitycruises.com",
     "https://www.rockefellercenter.com/buy-tickets",
-    "https://www.playbill.com/shows",
+    "https://www.rockefellercenter.com/tickets/the-rink-at-rockefeller-center",
+    "https://www.moma.org/tickets",
+    "https://www.amnh.org/plan-your-visit/tickets",
     "https://www.dykerheightschristmaslights.com/book-now.php"
   ]
 };
@@ -619,8 +621,8 @@ const PT_I18N = {
     "Bate-volta a Palm Beach e Fort Lauderdale 🚗",
     "Ida para Nova York e passeio por Midtown",
     "Estátua da Liberdade + Brooklyn",
-    "Central Park, mirante e Broadway 🎭",
-    "Parques, bibliotecas e Dyker Heights 🎄",
+    "História Natural, Central Park e Rockefeller ⛸️",
+    "MoMA, Village e Dyker Heights 🎄",
     "Ida para Washington · Capitólio e memoriais 🏛️",
     "Museus, Casa Branca e Georgetown",
     "Retorno para Nova York + voo de volta ✈️"
@@ -653,18 +655,18 @@ const PT_I18N = {
     ny: {
       eyebrow: "05 · Natal",
       h2: "🎄 Nova York — 4 dias",
-      intro: "A cidade inteira virada em luzes, vitrines e árvores gigantes. Quatro dias pensados para entrar no clima sem correria.",
+      intro: "A cidade inteira virada em luzes e árvores gigantes. Quatro dias de cartões-postais, museus e Natal, com a casa em New Jersey.",
       days: [
-        {d:"01 dez", h:"Midtown natalina, sem correria", items:["Check-in","Times Square","Caminhar pela Fifth Avenue","Vitrines de Natal: Saks Fifth Avenue & Macy's Herald Square","Noite no Rockefeller Center 🎄"], tip:"Dia mais leve para entrar no clima da cidade."},
-        {d:"02 dez", h:"Liberdade + Downtown + Brooklyn", items:["Ferry para Statue of Liberty & Ellis Island","Wall Street + Charging Bull","9/11 Memorial","DUMBO + Brooklyn Heights Promenade","Atravessar a Brooklyn Bridge iluminada ✨"], tip:"🍴 Almoço no Katz's Delicatessen — pastrami clássico de NY."},
-        {d:"03 dez", h:"Central Park + Mirante + Broadway", items:["Central Park: Bethesda Terrace, Bow Bridge, Strawberry Fields","Plaza Hotel + chocolate quente ☕","Top of the Rock no pôr do sol ✨","Roosevelt Island Tramway à noite","Broadway 🎭"], tip:"🎭 Musical: Wicked ou The Lion King (checar datas e ingressos)."},
-        {d:"04 dez", h:"Bryant Park + Bibliotecas + Dyker Heights", items:["Bryant Park Winter Village 🎄","New York Public Library","The Morgan Library & Museum","Greenwich & West Village","Friends Apartment Building ☕","Washington Square Park","Dyker Heights à noite 🎄✨"], tip:"As casas de Dyker Heights no Natal são imperdíveis."}
+        {d:"01 dez", h:"Chegada + Midtown", items:["10:30 · Chegada no JFK e malas na casa, em New Jersey ✈️","A partir das 14:00 · Manhattan e Times Square","Lojas e passeio por Midtown 🛍️","Jantar e voltar para descansar"], tip:"Dia mais leve para se adaptar à cidade e ao frio."},
+        {d:"02 dez", h:"Liberdade + Downtown + Brooklyn", items:["Manhã · Ferry para a Estátua da Liberdade 🗽","Ellis Island","Tarde · Wall Street e o Charging Bull","Memorial do 11 de Setembro","DUMBO, com fotos da Brooklyn Bridge","Brooklyn Heights Promenade e o skyline de Manhattan"], tip:"🍴 Katz's Delicatessen para o famoso pastrami — se o horário e o deslocamento permitirem."},
+        {d:"03 dez", h:"História Natural + Central Park + Natal", items:["Manhã · Museu de História Natural 🦖","Cookie da Levain Bakery 🍪","Central Park: Bethesda Terrace e Bow Bridge","Strawberry Fields, se der tempo","Catedral de St. Patrick, na Quinta Avenida","Fim da tarde · Top of the Rock","Noite · Árvore do Rockefeller Center 🎄","Patinação no The Rink ⛸️"], tip:"Central Park mais curto para o dia funcionar. Mirante e patinação reservados antes."},
+        {d:"04 dez", h:"MoMA + Bryant Park + Dyker Heights", items:["Manhã · MoMA — A Noite Estrelada, de Van Gogh 🎨","Almoço no Joe's Pizza 🍕","Tarde · Bryant Park Winter Village 🎄","New York Public Library","Greenwich Village e West Village","Washington Square Park","Foto do prédio de Friends ☕","Noite · Dyker Heights 🎄✨"], tip:"A Morgan Library fica como extra, se o ritmo permitir — o dia já é cheio."}
       ],
       reserveTitle: "🎟️ Reservar antes",
-      reserve: ["Estátua da Liberdade","Top of the Rock","Broadway","Dyker Heights tour (opcional)"],
+      reserve: ["Estátua da Liberdade e Ellis Island","Top of the Rock","Patinação no Rockefeller Center","MoMA","Museu de História Natural","Dyker Heights — tour ou transporte, se precisar"],
       reserveCta: "reservar ↗",
       packTitle: "❄️ Dicas & o que levar",
-      pack: ["Escurece cedo (~16h30)","Faz bastante frio e vento","Segunda pele, luva, gorro e cachecol","Casaco quente e bota confortável"]
+      pack: ["Escurece cedo (~16h30)","Segunda pele, luva, gorro e cachecol","Casaco quente e calçado confortável","Grupo de 8: combinar horários e pontos de encontro","Contar o deslocamento entre New Jersey e Manhattan","Conferir horários das atrações perto da viagem"]
     },
     washington: {
       eyebrow: "06 · Reta final",
@@ -820,8 +822,8 @@ const EN_I18N = {
     "Day trip to Palm Beach and Fort Lauderdale 🚗",
     "Off to New York and a walk through Midtown",
     "Statue of Liberty + Brooklyn",
-    "Central Park, an observation deck, and Broadway 🎭",
-    "Parks, libraries, and Dyker Heights 🎄",
+    "Natural History, Central Park, and Rockefeller Center ⛸️",
+    "MoMA, the Village, and Dyker Heights 🎄",
     "Off to Washington · the Capitol and the memorials 🏛️",
     "Museums, the White House, and Georgetown",
     "Back to New York + our flight home ✈️"
@@ -958,73 +960,81 @@ const EN_I18N = {
     "ny": {
       "eyebrow": "05 · Christmas",
       "h2": "🎄 New York — 4 days",
-      "intro": "The whole city dressed up in lights, window displays, and giant trees. Four days planned to get into the spirit, no rush.",
+      "intro": "The whole city dressed up in lights and giant trees. Four days of postcard sights, museums, and Christmas, with the house in New Jersey.",
       "days": [
         {
           "d": "Dec 1",
-          "h": "Christmassy Midtown, no rush",
+          "h": "Arrival + Midtown",
           "items": [
-            "Check-in",
-            "Times Square",
-            "Stroll down Fifth Avenue",
-            "Christmas window displays: Saks Fifth Avenue & Macy’s Herald Square",
-            "Evening at Rockefeller Center 🎄"
+            "10:30 AM · Land at JFK and drop the bags at the house in New Jersey ✈️",
+            "From 2:00 PM · Manhattan and Times Square",
+            "Shops and a wander through Midtown 🛍️",
+            "Dinner, then home to rest"
           ],
-          "tip": "A lighter day, just to get into the spirit of the city."
+          "tip": "A lighter day to get used to the city and the cold."
         },
         {
           "d": "Dec 2",
           "h": "Liberty + Downtown + Brooklyn",
           "items": [
-            "Ferry to Statue of Liberty & Ellis Island",
-            "Wall Street + Charging Bull",
+            "Morning · Ferry to the Statue of Liberty 🗽",
+            "Ellis Island",
+            "Afternoon · Wall Street and the Charging Bull",
             "9/11 Memorial",
-            "DUMBO + Brooklyn Heights Promenade",
-            "Walk across the Brooklyn Bridge, all lit up ✨"
+            "DUMBO, with photos of the Brooklyn Bridge",
+            "Brooklyn Heights Promenade and the Manhattan skyline"
           ],
-          "tip": "🍴 Lunch at Katz’s Delicatessen — classic NY pastrami."
+          "tip": "🍴 Katz’s Delicatessen for the famous pastrami — if timing and travel allow."
         },
         {
           "d": "Dec 3",
-          "h": "Central Park + Observation Deck + Broadway",
+          "h": "Natural History + Central Park + Christmas",
           "items": [
-            "Central Park: Bethesda Terrace, Bow Bridge, Strawberry Fields",
-            "Plaza Hotel + hot chocolate ☕",
-            "Top of the Rock at sunset ✨",
-            "Roosevelt Island Tramway at night",
-            "Broadway 🎭"
+            "Morning · Natural History Museum 🦖",
+            "A Levain Bakery cookie 🍪",
+            "Central Park: Bethesda Terrace and Bow Bridge",
+            "Strawberry Fields, if there’s time",
+            "St. Patrick’s Cathedral, on Fifth Avenue",
+            "Late afternoon · Top of the Rock",
+            "Evening · The Rockefeller Center tree 🎄",
+            "Ice skating at The Rink ⛸️"
           ],
-          "tip": "🎭 Musical: Wicked or The Lion King (check dates and tickets)."
+          "tip": "Keep Central Park short so the day works. Book the deck and the skating ahead."
         },
         {
           "d": "Dec 4",
-          "h": "Bryant Park + Libraries + Dyker Heights",
+          "h": "MoMA + Bryant Park + Dyker Heights",
           "items": [
-            "Bryant Park Winter Village 🎄",
+            "Morning · MoMA — Van Gogh’s The Starry Night 🎨",
+            "Lunch at Joe’s Pizza 🍕",
+            "Afternoon · Bryant Park Winter Village 🎄",
             "New York Public Library",
-            "The Morgan Library & Museum",
-            "Greenwich & West Village",
-            "Friends Apartment Building ☕",
+            "Greenwich Village and West Village",
             "Washington Square Park",
-            "Dyker Heights at night 🎄✨"
+            "Photo at the Friends building ☕",
+            "Evening · Dyker Heights 🎄✨"
           ],
-          "tip": "The Dyker Heights houses at Christmas are a must-see."
+          "tip": "The Morgan Library is an extra if the pace allows — the day is already full."
         }
       ],
       "reserveTitle": "🎟️ Book ahead",
       "reserve": [
-        "Statue of Liberty",
+        "Statue of Liberty and Ellis Island",
         "Top of the Rock",
-        "Broadway",
-        "Dyker Heights tour (optional)"
+        "Ice skating at Rockefeller Center",
+        "MoMA",
+        "Natural History Museum",
+        "Dyker Heights — tour or transport, if needed"
       ],
       "reserveCta": "book ↗",
       "packTitle": "❄️ Tips & what to pack",
       "pack": [
         "Gets dark early (~4:30 PM)",
-        "Pretty cold and windy",
         "Base layer, gloves, beanie, and scarf",
-        "Warm coat and comfy boots"
+        "Warm coat and comfy shoes",
+        "Group of 8: agree on meeting times and spots",
+        "Allow for travel time between New Jersey and Manhattan",
+        "Check attraction hours close to the trip"
       ]
     },
     "washington": {
