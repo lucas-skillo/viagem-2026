@@ -116,8 +116,7 @@ nav.top .links a:hover{color:#fff;background:rgba(255,255,255,.1)}
 /* ===== SECTION HEADERS ===== */
 section{position:relative}
 .sec{padding:78px 0 18px}
-section[id]{scroll-margin-top:80px}
-@media(max-width:1120px){section[id]{scroll-margin-top:116px}}
+section[id]{scroll-margin-top:var(--nav-h,60px)}
 .sec-head{margin-bottom:38px}
 .sec-head .eyebrow{color:var(--gold-deep)}
 .sec-head h2{font-size:clamp(2rem,5.2vw,3.4rem);font-weight:800;line-height:1.02;letter-spacing:-.02em;margin-top:10px}
@@ -1424,6 +1423,12 @@ parkModal.addEventListener('keydown', (e)=>{
 /* =====================================================================
    ATALHOS DE SECAO - destaca o chip da secao em que voce esta
    ===================================================================== */
+/* as ancoras param logo abaixo da nav, com a altura real dela (sem sobrar faixa da secao anterior) */
+const navTop = document.querySelector('nav.top');
+const setNavH = () => document.documentElement.style.setProperty('--nav-h', navTop.getBoundingClientRect().height + 'px');
+setNavH();
+new ResizeObserver(setNavH).observe(navTop);
+
 const chipBox = $('chips');
 const chipFor = {};
 Array.prototype.slice.call(chipBox.querySelectorAll('a')).forEach(a=>{
